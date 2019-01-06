@@ -10,8 +10,12 @@ Integration tool, which performs 2 tasks:
 
 ## Prerequisites
 
-* Install Visual C++ 2017 redistributables;
+* Install Visual C++ 2017 redistributables (64 bit version):
+  Latest downloads are available at https://support.microsoft.com/en-ca/help/2977003/the-latest-supported-visual-c-downloads
+  Direct link: https://aka.ms/vs/15/release/vc_redist.x64.exe
+
 * Install / Configure PostgreSQL database:
+  * Download page: https://www.postgresql.org/download/windows/ 
   * Create a user which will be used to access the database from OPC UA Data Logger;
 database. Default user name/password in the OPC UA Data Logger's configuration file are **uarest**/**uarest**.
   * Create database (default name is **test**); and assign user **uarest** as its owner. when OPC UA Data Logger starts first time, it will create required tables in this database. 
@@ -50,12 +54,30 @@ The following below screenshot illustrates typical GUI:
 ## Configuring Grafana
 
 * Install **Grafana** from https://grafana.com/
-* Install **SimpleJson** data source plugin.
+* Install **SimpleJson** data source plugin (instructions are available at https://grafana.com/plugins/grafana-simple-json-datasource/installation)
 * Add data source of **SimpleJson** type, and configure it to connect to the OPC UA Data Logger endpoint (http://loclhost:8989/grafana)
 * Add new dashboard.
 * Add panels to the created dashboard, and configure to get timeseries data from added SimpleJson data source.
 
 ![Grafana Screenshot](https://raw.githubusercontent.com/onewayautomation/OPC-UA-Data-Logger/master/Grafana-Screenshot.png)
+
+### Using PostgreSQL data source.
+It is possible also to get logged data values from PostgreSQL database directly, 
+using PostgreSQL data source plugin for Grafana (installation is not required, included into Grafana by default).
+Example of the SQL quesry can be found below:
+
+>` SELECT
+  $__time(time),
+  value
+FROM
+  values
+WHERE
+  $__timeFilter(time) and sourceid='1'
+`
+
+Here **time**, **value** and **sourceid** are column names in the **values** table. 
+You can figure out corresponding to the OPC UA variable **sourceid** from 
+Logged Variables data grid on the configuration GUI.
 
 Soon the video with more detailed instructions will be posted on youtube.
 
