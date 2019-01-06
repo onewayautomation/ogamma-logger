@@ -44,6 +44,9 @@ database.
 If a record has option **Historize** set to true, then OPC UA Data Logger will not log it. When historical data 
 is requested via REST API for those variables, historical values for it will be read from OPC UA Server. 
 
+The following below screenshot illustrates typical GUI:
+![Configuration GUI Screenshot](https://raw.githubusercontent.com/onewayautomation/OPC-UA-Data-Logger/master/Config-Gui-Screenshot.png)
+
 ## Configuring Grafana
 
 * Install **Grafana** from https://grafana.com/
