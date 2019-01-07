@@ -10,6 +10,9 @@ Integration tool, which performs 2 tasks:
 
 ## Prerequisites
 
+* Windows PC. 
+  If you woudl like to try it on other OS, please contact me at adress ravil at onewayautomation.com, or create feature request issue here in GitHub. 
+
 * Install Visual C++ 2017 redistributables (64 bit version):
   Latest downloads are available at https://support.microsoft.com/en-ca/help/2977003/the-latest-supported-visual-c-downloads
   Direct link: https://aka.ms/vs/15/release/vc_redist.x64.exe
@@ -29,7 +32,14 @@ database. Default user name/password in the OPC UA Data Logger's configuration f
 
 ## Running of the OPC UA Data Logger.
 
-From the installation folder, start application **OpcUaLogger.exe**
+From the installation folder, start application **OpcUaLogger.exe**. 
+Please note that at the very first start it might take some time to generate OPC UA Application Instance Certificate.
+
+If you don't have PostgreSQL installed on the PC where you are running OPC UA Data Logger, 
+then it might fail to start because cannot find PostgreSQL client DLLs, or their dependency - Visual C++ 2013 redistributables. 
+Those DLLs for your convenience are included into zip file ![Dependency DLLs](https://raw.githubusercontent.com/onewayautomation/OPC-UA-Data-Logger/master/binaries.zip)
+
+Alternatively, Visual C++ 2013 redistributables can be downloaded from Microsoft web site: http://download.microsoft.com/download/0/5/6/056dcda9-d667-4e27-8001-8a0c6971d6b1/vcredist_x64.exe
 
 ## Configuration of connections to OPC UA Servers and selection of OPC UA variables to monitor (log into the database).
 
@@ -54,8 +64,10 @@ The following below screenshot illustrates typical GUI:
 ## Configuring Grafana
 
 * Install **Grafana** from https://grafana.com/
+  * Instructions on Grafana web page suggest to use **wget** tool to download the installer. 
+  If you don't have wget tool installed, then you can download it from here: https://eternallybored.org/misc/wget/
 * Install **SimpleJson** data source plugin (instructions are available at https://grafana.com/plugins/grafana-simple-json-datasource/installation)
-* Add data source of **SimpleJson** type, and configure it to connect to the OPC UA Data Logger endpoint (http://loclhost:8989/grafana)
+* Add data source of **SimpleJson** type, and configure it to connect to the OPC UA Data Logger endpoint (http://localhost:8989/grafana)
 * Add new dashboard.
 * Add panels to the created dashboard, and configure to get timeseries data from added SimpleJson data source.
 
