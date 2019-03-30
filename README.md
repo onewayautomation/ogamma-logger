@@ -11,35 +11,32 @@ Integration tool, which performs 2 tasks:
 ## Prerequisites
 
 * Windows PC. 
-  If you woudl like to try it on other OS, please contact me at adress ravil at onewayautomation.com, or create feature request issue here in GitHub. 
+  If you would like to try it on other OS, please contact me at adress ravil at onewayautomation.com, or create feature request issue here in GitHub. 
 
 * Install Visual C++ 2017 redistributables (64 bit version):
   Latest downloads are available at https://support.microsoft.com/en-ca/help/2977003/the-latest-supported-visual-c-downloads
+  
   Direct link: https://aka.ms/vs/15/release/vc_redist.x64.exe
+* Install Visual C++ 2013 redistributables (required by PostgreSQL library), can be downloaded from Microsoft web site: http://download.microsoft.com/download/0/5/6/056dcda9-d667-4e27-8001-8a0c6971d6b1/vcredist_x64.exe
 
 * Install / Configure PostgreSQL database:
   * Download page: https://www.postgresql.org/download/windows/ 
-  * Create a user which will be used to access the database from OPC UA Data Logger;
-database. Default user name/password in the OPC UA Data Logger's configuration file are **uarest**/**uarest**.
-  * Create database (default name is **test**); and assign user **uarest** as its owner. when OPC UA Data Logger starts first time, it will create required tables in this database. 
+  * Create a user which will be used to access the database from OPC UA Data Logger. Default user name/password in the OPC UA Data Logger's configuration file are **uarest**/**uarest**.
+  * Create database (default name is **test**); and assign user **uarest** as its owner. When OPC UA Data Logger starts first time, it will create required tables in this database. 
   Note that user credentials and database connection parameters can be changed later in the **config.json** file. 
  
 
 ## Installation and initial configuration.
 
 * Download file **opcua-logger.zip** and unzip. 
-* If required, modify http port number (default number is 8989), and settings to connect to the PostgreSQL database. 
+* If required, modify settings in the **config.json** file: http port number (default number is 8989), and settings to connect to the PostgreSQL database. 
 
 ## Running of the OPC UA Data Logger.
 
-From the installation folder, start application **OpcUaLogger.exe**. 
+Open Windows comman line console, navigate to the folder where OPC UA Data Logger files are unzipped, and start application **OpcUaLogger.exe**. 
 Please note that at the very first start it might take some time to generate OPC UA Application Instance Certificate.
-
-If you don't have PostgreSQL installed on the PC where you are running OPC UA Data Logger, 
-then it might fail to start because cannot find PostgreSQL client DLLs, or their dependency - Visual C++ 2013 redistributables. 
-Those DLLs for your convenience are included into zip file ![Dependency DLLs](https://raw.githubusercontent.com/onewayautomation/OPC-UA-Data-Logger/master/binaries.zip)
-
-Alternatively, Visual C++ 2013 redistributables can be downloaded from Microsoft web site: http://download.microsoft.com/download/0/5/6/056dcda9-d667-4e27-8001-8a0c6971d6b1/vcredist_x64.exe
+At the first start, it will also create tables in the PostgreSQL database.
+The application has built-in web server to support web based GUI to configure it, so it will listen to http port. Windows operating system will pop-up dialog window to asking for permission to listen on the port, you will need allow it.
 
 ## Configuration of connections to OPC UA Servers and selection of OPC UA variables to monitor (log into the database).
 
