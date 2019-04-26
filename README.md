@@ -29,6 +29,7 @@ Integration tool, which performs 2 tasks:
 ## Installation and initial configuration.
 
 * Download file **opcua-logger.zip** and unzip. 
+  Note that this file is stored using Git LFS, and if you clone or download whole repository, zip file will not be valid (its size will be only few handred bytes). Therefore click on the file link, and when it is opened on new page, click on "Download" button to get its full local copy.  
 * If required, modify settings in the **config.json** file: http port number (default number is 8989), and settings to connect to the PostgreSQL database. 
 
 ## Running of the OPC UA Data Logger.
