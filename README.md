@@ -11,7 +11,7 @@ Integration tool, which performs 2 tasks:
 ## Prerequisites
 
 * Windows PC. 
-  If you would like to try it on other OS, please contact me at adress ravil at onewayautomation.com, or create feature request issue here in GitHub. 
+  If you would like to try it on other OS, please contact me at the address ravil at onewayautomation.com, or create feature request issue here in GitHub. 
 
 * Install Visual C++ 2017 redistributables (64 bit version):
   Latest downloads are available at https://support.microsoft.com/en-ca/help/2977003/the-latest-supported-visual-c-downloads
@@ -28,10 +28,7 @@ Integration tool, which performs 2 tasks:
 
 ## Installation and initial configuration.
 
-* Download file **opcua-logger.zip** and unzip. 
-  Note that this file is stored using Git LFS, and when you clone or download the repository, instead whole zip file only pointer to it will be cloned (its size will be only few handred bytes). Threfore, after cloning navigate to the repository folder and run command ``git lfs pull`` to pull whole zip file.
-  Alternatively, you can click on the file link, and when it is opened on new page, click on "Download" button to get its full local copy.  
-  And shorter way: clone by command ``git lfs clone https://github.com/onewayautomation/OPC-UA-Data-Logger.git`` to get whole zip file during cloning.
+* Download zip file from https://onewayautomation.com/opcua-binaries/opcua-logger-0.2.4.zip and unzip.
 * If required, modify settings in the **config.json** file: http port number (default number is 8989), and settings to connect to the PostgreSQL database. 
 
 ## Running of the OPC UA Data Logger.
