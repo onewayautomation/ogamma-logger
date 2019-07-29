@@ -6,7 +6,36 @@ Integration tool, which performs 2 tasks:
 # Context Diagram
 ![OPC UA Data Logger - Context Diagram](https://raw.githubusercontent.com/onewayautomation/OPC-UA-Data-Logger/master/ContextDiagram.png)
 
-# Getting Started.
+# Getting Started with Docker image.
+
+Easiest way to start using the OPC UA Data Logger is to pull Docker image: https://cloud.docker.com/u/onewayautomation/repository/docker/onewayautomation/opcuadatalogger. Please note that this image has only OPC UA Data Logger, so for complete setup it is not enough.
+
+File ``docker/docker-compose.yml`` allows to pull OPC UA Data Logger image and additionally all required dependency images:
+* Database (TimescaleDB);
+* PgAdmin, to manage database;
+* Grafana, optional, to visualize data;
+* Sample OPC UA Server from Microsoft.
+
+## Prerequisites.
+
+There is only one: Docker Desktop, available to download here https://www.docker.com/products/docker-desktop. It can be installed in Windows as well as in Linux machines.
+
+## To setup all service components and run them:
+
+* Pull file ``docker/docker-compose.yml`` from this repository;
+* Open shell terminal (PowerShell on Windoes, or bash in Linux);
+* Navigate to the folder where docker-compose.yml is located;
+* Run command ``docker-compose up``.
+
+This command will pull all images from Docker Hub (and might take few or more minutes, but this step happens only once, then you run this command at the very first time), and start all required services.
+
+After that:
+* Web GUI for OPC UA Data Logger will be available at http://localhost:4880;
+* Database TimescaleDB - at localhost:4832. (Default user credentials can be found in docker-compose.yml file).
+* PgAdmin - at http://localhost:4888; 
+* Grafana - at https://localhost:4830
+
+# Gettings started with Windows distoribution package.
 
 ## Prerequisites
 
@@ -46,7 +75,7 @@ The application has built-in web server to support web based GUI to configure it
 
 ## Configuration of connections to OPC UA Servers and selection of OPC UA variables to monitor (log into the database).
 
-Open web browser, and navigate to address http://localhost:8989
+Open web browser, and navigate to address http://localhost:4880
 
 In the left side panel, click on **Add** button and add new connection. Note that currently web page needs to be refreshed in order to refresh the **Address Space** tree after adding/editing/deleting of an entry for OPC UA Server connection.
 
@@ -69,7 +98,7 @@ You can skip this step if visualization using Grafana is not required.
   * Instructions on Grafana web page suggest to use **wget** tool to download the installer. 
   If you don't have wget tool installed, then you can download it from here: https://eternallybored.org/misc/wget/
 * Install **SimpleJson** data source plugin (instructions are available at https://grafana.com/plugins/grafana-simple-json-datasource/installation)
-* Add data source of **SimpleJson** type, and configure it to connect to the OPC UA Data Logger endpoint (http://localhost:8989/grafana)
+* Add data source of **SimpleJson** type, and configure it to connect to the OPC UA Data Logger endpoint (http://localhost:4880/grafana)
 * Add new dashboard.
 * Add panels to the created dashboard, and configure to get timeseries data from added SimpleJson data source.
 

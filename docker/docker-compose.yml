@@ -1,0 +1,121 @@
+version: '3'
+services:
+
+# Required Service: OPC UA Data Logger from One-Way Automation.
+# To re-build this service at start-up, run command:
+# docker-compose up -d --build --no-deps opcuadatalogger
+  opcuadatalogger:
+    image: onewayautomation/opcuadatalogger:latest
+    ports:
+# Web GUI port.    
+    - "4880:4880"
+# Just in case, SSH port.
+    - "4822:22"
+# Note that host name is used in Application Instance Certificate, as well as in Application Description.
+# If they do not match, then server will not accept connection in secured mode.
+# To keep it persistent between container restarts, shoudl be defined.
+    hostname: opcuadatalogger
+    volumes:
+# Folder with customer specific data. Stores configuration files, log files, PKI (certificates).
+    - ./data:/home/user/opcualogger/data
+# Optional. public-html can be mapped for development setup.
+# It can be modified at production too, for example to change look and feel.
+#    - ./public_html:/home/user/opcualogger/public_html
+    networks:
+      - opcualogger
+    depends_on:
+      - "tsdb"
+      
+# Required service: TimescaleDB, version of PostgreSQL, optimized to store time-series data.
+# It is required to store values collected by OPC UA Data Logger from OPC UA Servers.
+  tsdb:
+    image: timescale/timescaledb
+#If following below database conenciton settings are changed, they need to be changed in ./data/config.json files too.
+    environment:
+      - POSTGRES_USER=uarest
+      - POSTGRES_PASSWORD=uarest
+      - POSTGRES_DB=opcualoggerdb
+    volumes:
+# Volume to persist data bases:    
+      - opcualogger-tsdb-data:/var/lib/postgresql/data
+    ports:
+# Port to access database from other clients:          
+        - "4832:5432"
+    networks:
+      - opcualogger
+
+# Optional service: PgAdmin, web GUI to manage PostgreSQL/timescaleDB database.
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@yourdomain.com
+      - PGADMIN_DEFAULT_PASSWORD=admin
+# To enable https. uncomment next line. If it is enabled, then certificates must be suppiled. 
+# Refer to https://hub.docker.com/r/dpage/pgadmin4 for more details on how to setup certificates and enable https.
+#      - PGADMIN_ENABLE_TLS
+      - PGADMIN_LISTEN_PORT=80
+      
+    volumes:
+      - opcualogger-pgadmin:/var/lib/pgadmin
+      
+    ports:
+      - "4888:80"
+      
+    networks:
+      - opcualogger
+      
+# Optional service: Grafana, can be used to visualize data.     
+  grafana:
+    image: grafana/grafana
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+# Optional SimpleJson data source, installed in case if you want to retrieve data through OPC UA Data Logger's REST API.
+# Other possible option is to use PostgreSQL data source to read data stored in PostgreSQL data base.
+      - GF_INSTALL_PLUGINS=grafana-simple-json-datasource
+    ports:
+# Port to access     
+      - "4830:3000"
+    volumes:
+# To persist Grafana configuration data: 
+      - opcualogger-grafana:/var/lib/grafana
+    networks:
+      - opcualogger 
+      
+ # Optional service, Test OPC UA Server from Microsoft.
+  opcplc:
+    image: mcr.microsoft.com/iotedge/opc-plc:1.0.1-linux-amd64 
+# Note that host name is important, because it is used in the OPC UA Apllication Instance Certificate, and in Endpoint URLs.
+# If host name is not defined, then OPC UA clients might not be able to connect.
+    hostname: opcplc
+    ports:
+      - "50000:50000"
+# Next command instructs OCP UA Server to trust to any OPC UA Client's certificate:      
+    command: --aa
+    networks:
+      - opcualogger     
+
+# Optional service, another demo OPC UA Server. Uncomment lines below to enable it:
+#  testserver:
+#        image: hansgschossmann/iot-edge-opc-publisher-testserver:latest
+#        container_name: testserver
+#        hostname: testserver
+#        ports:
+#            - "62541:62541"
+#        command: --aa
+#        networks:
+#            - opcualogger 
+        
+#  open62541:
+#    image: spmohan77/open62541:x86
+#    command: ./server
+#    networks:
+#      - opcualogger 
+
+networks:
+  opcualogger:
+    
+volumes:
+#  opcuadatalogger-config-data: {}
+  opcualogger-tsdb-data: {}
+  opcualogger-grafana: {}
+  opcualogger-pgadmin: {}
