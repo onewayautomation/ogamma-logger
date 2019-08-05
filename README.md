@@ -1,16 +1,23 @@
-# OPC-UA-Data-Logger
-Integration tool, which performs 2 tasks:
-1. Collects data from OPC UA Servers and stores it in PostgreSQL database (which might have TimescaleDB extension installed).
-2. Acts as a back-end for Grafana SimpleJson data source plugin.
+# *ogamma* Visual Logger for OPC
+
+*ogamma* Visual Logger for OPC is an integration tool, which performs 2 tasks:
+
+* Collects data from OPC UA Servers and stores it in TimescaleDB (PostgreSQL database optimized to store time-series data). Regular version of PostgreSQL can be used too.
+
+* Acts as a back-end for Grafana SimpleJson data source plugin. It can fetch data directly from OPC UA Servers, or from PostgreSQL. 
+
+Each instance of *ogamma* Visual Logger can implement both tasks, or only one of them.
+
+Note that to enable all the features third party components are required.  The easiest way to setup and run *ogamma* Visual Logger and dependency services is to use Dockaer images, which can be easily pulled and then started with single command ``docker-compose up``, by using of the ``docker-compose.yml`` file which is available at this repository: https://github.com/onewayautomation/ogamma-logger/blob/master/docker/docker-compose.yml
 
 # Context Diagram
-![OPC UA Data Logger - Context Diagram](https://raw.githubusercontent.com/onewayautomation/OPC-UA-Data-Logger/master/ContextDiagram.png)
+![*ogamma* Visual Logger - Context Diagram](https://raw.githubusercontent.com/onewayautomation/ogamma-logger/master/ContextDiagram.png)
 
 # Getting Started with Docker image.
 
-Easiest way to start using the OPC UA Data Logger is to pull Docker image: https://cloud.docker.com/u/onewayautomation/repository/docker/onewayautomation/opcuadatalogger. Please note that this image has only OPC UA Data Logger, so for complete setup it is not enough.
+Docker image is available at: https://cloud.docker.com/u/onewayautomation/repository/docker/onewayautomation/ogamma-logger.
 
-File ``docker/docker-compose.yml`` allows to pull OPC UA Data Logger image and additionally all required dependency images:
+File ``docker/docker-compose.yml`` allows to pull *ogamma* Visual Logger image and additionally all required dependency images:
 * Database (TimescaleDB);
 * PgAdmin, to manage database;
 * Grafana, optional, to visualize data;
@@ -30,10 +37,10 @@ There is only one: Docker Desktop, available to download here https://www.docker
 This command will pull all images from Docker Hub (and might take few or more minutes, but this step happens only once, then you run this command at the very first time), and start all required services.
 
 After that:
-* Web GUI for OPC UA Data Logger will be available at http://localhost:4880;
-* Database TimescaleDB - at localhost:4832. (Default user credentials can be found in docker-compose.yml file).
-* PgAdmin - at http://localhost:4888; 
-* Grafana - at https://localhost:4830
+* Web GUI for *ogamma* Visual Logger will be available at http://localhost:4880;
+* Database TimescaleDB - at localhost:5432. (Default user credentials can be found in docker-compose.yml file).
+* PgAdmin - at http://localhost:80;
+* Grafana - at https://localhost:3000
 
 # Gettings started with Windows distribution package.
 
@@ -51,12 +58,12 @@ After that:
 
 * Install / Configure PostgreSQL database.
 
-  * If you have Docker, then you can use Docker compose file ``docker\timescaledb\docker-compose.yaml`` to start container with TimescaleDB (PostgreSQL extended to support time-series). Just navigate to this folder, and run ``docker-compose up``. Default values of user name, password and port number of the PostgreSQL server match with settings in the OPC UA Data Logger configuration file (by default ``config.json``). Change them according to your requirements.
+  * If you have Docker, then you can use Docker compose file ``docker\timescaledb\docker-compose.yaml`` to start container with TimescaleDB (PostgreSQL extended to support time-series). Just navigate to this folder, and run ``docker-compose up``. Default values of user name, password and port number of the PostgreSQL server match with settings in the *ogamma* Visual Logger configuration file (by default ``config.json``). Change them according to your requirements.
 
   * Install PostgreSQL manually.
     * Download installer from page: https://www.postgresql.org/download/windows/ Versions 10 and 11 were tested and should work.
-    * Create a user which will be used to access the database from OPC UA Data Logger. Default user name/password in the OPC UA Data Logger's configuration file are **uarest**/**uarest**.
-    * Create database (default name is **test**); and assign user **uarest** as its owner. When OPC UA Data Logger starts first time, it will create required tables in this database. 
+    * Create a user which will be used to access the database from *ogamma* Visual Logger. Default user name/password in the *ogamma* Visual Logger's configuration file are **ogamma**/**ogamma**.
+    * Create database (default name is **ogammalogger**); and assign user **ogamma** as its owner. Or you can grant rights to create database to the user **ogamma**, and the table will be created, when the *ogamma* Visual Logger starts very first time. It will also create required tables in this database. 
   
 	Note that user credentials and database connection parameters can be changed later in the **config.json** file. 
  
@@ -64,18 +71,19 @@ After that:
 ## Installation and initial configuration.
 
 * Download zip file from https://onewayautomation.com/opcua-binaries/opcua-logger-0.3.0.zip and unzip.
-* If required, modify settings in the **config.json** file: http port number (default number is 8989), and settings to connect to the PostgreSQL database. 
 
-## Running of the OPC UA Data Logger.
+* If required, modify settings in the **config.json** file: http port number (default number is 4880), and settings to connect to the PostgreSQL database. 
 
-Open Windows comman line console, navigate to the folder where OPC UA Data Logger files are unzipped, and start application **OpcUaLogger.exe**. 
+## Running of the *ogamma* Visual Logger.
+
+Open Windows comman line console, navigate to the folder where *ogamma* Visual Logger files are unzipped, and start application **OpcUaLogger.exe**. 
 At the very first start, it will create tables in the PostgreSQL database. Before connecting to the frist OPC UA server (after adding it from GUI and attempt to browse), it will also generate OPC UA Application Instance Certificate, which might take some time.
 
 The application has built-in web server to support web based GUI to configure it, so it will listen to http port. Windows operating system will pop-up dialog window to asking for permission to listen on the port, you will need allow it.
 
 ## Configuration of connections to OPC UA Servers and selection of OPC UA variables to monitor (log into the database).
 
-Open web browser, and navigate to address http://localhost:8989
+Open web browser, and navigate to address http://localhost:4880
 
 In the left side panel, click on **Add** button and add new connection. Note that currently web page needs to be refreshed in order to refresh the **Address Space** tree after adding/editing/deleting of an entry for OPC UA Server connection.
 
