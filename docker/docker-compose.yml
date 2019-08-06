@@ -15,7 +15,6 @@ services:
       - '${HOST_NAME:-opcuaserver.com}:${HOST_IP_ADDRESS:-75.152.105.54}'
     depends_on:
       - tsdb
-    priviliged: true
   tsdb:
     image: timescale/timescaledb
     environment:
