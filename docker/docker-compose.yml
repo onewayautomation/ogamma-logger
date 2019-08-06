@@ -1,16 +1,16 @@
 version: '3'
 services:
-  ogammalogger:
-    image: 'onewayautomation/ogamma-logger:latest'
+  ogamma-logger:
+    image: 'ogamma/logger:latest'
     ports:
       - '4880:4880'
       - '4822:22'
-    hostname: ogammalogger
+    hostname: ogamma-logger
     volumes:
-      - './data:/home/user/ogamma-logger/data'
-      - './public_html:/home/user/ogamma-logger/public_html'
+      - './data:/home/ogamma/logger/data'
+      - './public_html:/home/ogamma/logger/public_html'
     networks:
-      - ogammalogger
+      - ogamma-logger
     extra_hosts:
       - '${HOST_NAME:-opcuaserver.com}:${HOST_IP_ADDRESS:-75.152.105.54}'
     depends_on:
@@ -22,11 +22,11 @@ services:
       - POSTGRES_PASSWORD=ogamma
       - POSTGRES_DB=ogammalogger
     volumes:
-      - 'ogammalogger-tsdb-data:/var/lib/postgresql/data'
+      - 'ogamma-logger-tsdb-data:/var/lib/postgresql/data'
     ports:
       - '5432:5432'
     networks:
-      - ogammalogger
+      - ogamma-logger
   grafana:
     image: grafana/grafana
     environment:
@@ -35,9 +35,9 @@ services:
     ports:
       - '3000:3000'
     volumes:
-      - 'ogammalogger-grafana:/var/lib/grafana'
+      - 'ogamma-logger-grafana:/var/lib/grafana'
     networks:
-      - ogammalogger
+      - ogamma-logger
   opcplc:
     image: 'mcr.microsoft.com/iotedge/opc-plc:1.0.1-linux-amd64'
     hostname: opcplc
@@ -45,24 +45,24 @@ services:
       - '50000:50000'
     command: '--aa'
     networks:
-      - ogammalogger
+      - ogamma-logger
 
   pgadmin:
     image: dpage/pgadmin4
     environment:
-      - PGADMIN_DEFAULT_EMAIL=admin@yourdomain.com
+      - PGADMIN_DEFAULT_EMAIL=admin@ogamma.io
       - PGADMIN_DEFAULT_PASSWORD=admin
       - PGADMIN_LISTEN_PORT=80
     volumes:
-      - ogammalogger-pgadmin:/var/lib/pgadmin
+      - ogamma-logger-pgadmin:/var/lib/pgadmin
     ports:
       - "80:80"
     networks:
-      - ogammalogger
+      - ogamma-logger
 
 networks:
-  ogammalogger: null
+  ogamma-logger: null
 volumes:
-  ogammalogger-tsdb-data: {}
-  ogammalogger-grafana: {}
-  ogammalogger-pgadmin: {}
+  ogamma-logger-tsdb-data: {}
+  ogamma-logger-grafana: {}
+  ogamma-logger-pgadmin: {}
