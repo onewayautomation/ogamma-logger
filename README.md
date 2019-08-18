@@ -39,7 +39,7 @@ This command will pull all images from Docker Hub (and might take few or more mi
 After that:
 * Web GUI for *ogamma* Visual Logger will be available at http://localhost:4880;
 * Database TimescaleDB - at localhost:5432. (Default user credentials can be found in docker-compose.yml file).
-* PgAdmin - at http://localhost:80;
+* PgAdmin - at http://localhost:4888;
 * Grafana - at https://localhost:3000
 
 # Distribution packages for Windows and Linux Ubuntu 18.04
