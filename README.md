@@ -1,12 +1,13 @@
 # *ogamma* Visual Logger for OPC
 
-*ogamma* Visual Logger for OPC is an integration tool, which performs 2 tasks:
+*ogamma* Visual Logger for OPC is an integration tool to:
+* **Collect** data from OPC UA Servers;
+* **Store** that data in TimescaleDB (PostgreSQL database optimized to store time-series data). Regular version of PostgreSQL can be used too.
+* **Visualize** data using Grafana, acting as a REST back-end for its SimpleJson data source plugin. It can fetch real time or historical data directly from OPC UA Servers, or from PostgreSQL.
+* **Analyze** data using SQL queries.
+Each instance of *ogamma* Visual Logger can implement only one role or all of them.
 
-* Collects data from OPC UA Servers and stores it in TimescaleDB (PostgreSQL database optimized to store time-series data). Regular version of PostgreSQL can be used too.
-
-* Acts as a back-end for Grafana SimpleJson data source plugin. It can fetch data directly from OPC UA Servers, or from PostgreSQL. 
-
-Each instance of *ogamma* Visual Logger can implement both tasks, or only one of them.
+Multiple instances can run in parallel in different roles, making horizontal scaling easy.
 
 Note that to enable all the features third party components are required.  The easiest way to setup and run *ogamma* Visual Logger and dependency services is to use Dockaer images, which can be easily pulled and then started with single command ``docker-compose up``, by using of the ``docker-compose.yml`` file which is available at this repository: https://github.com/onewayautomation/ogamma-logger/blob/master/docker/docker-compose.yml
 
