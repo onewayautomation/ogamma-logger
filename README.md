@@ -45,7 +45,7 @@ After that:
 
 # Distribution packages for Windows and Linux Ubuntu 18.04
 
-For links to donwload installation packages please refer to section ``Deploy`` of the online User Manual: https://onewayautomation.com/visual-logger-docs/html/deploy.html
+For links to download installation packages please refer to section ``Deploy`` of the online User Manual: https://onewayautomation.com/visual-logger-docs/html/deploy.html
 
 # User Manual
 
