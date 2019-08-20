@@ -16,7 +16,7 @@ Note that to enable all the features third party components are required.  The e
 
 # Getting Started with Docker image.
 
-Docker image is available at: https://cloud.docker.com/u/ogamma/repository/docker/ogamma/logger.
+Docker image is available at: https://hub.docker.com/r/ogamma/logger.
 
 File ``docker/docker-compose.yml`` allows to pull *ogamma* Visual Logger image and additionally all required dependency images:
 * Database (TimescaleDB);
