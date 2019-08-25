@@ -9,7 +9,7 @@ Each instance of *ogamma* Visual Logger can implement only one role or all of th
 
 Multiple instances can run in parallel in different roles, making horizontal scaling easy.
 
-Note that to enable all the features third party components are required.  The easiest way to setup and run *ogamma* Visual Logger and dependency services is to use Dockaer images, which can be easily pulled and then started with single command ``docker-compose up``, by using of the ``docker-compose.yml`` file which is available at this repository: https://github.com/onewayautomation/ogamma-logger/blob/master/docker/docker-compose.yml
+Note that to enable all the features third party components are required.  The easiest way to setup and run *ogamma* Visual Logger and dependency services is to use Docker images, which can be easily pulled and then started with single command ``docker-compose up``, by using of the ``docker-compose.yml`` file which is available at this repository: https://github.com/onewayautomation/ogamma-logger/blob/master/docker/docker-compose.yml
 
 # Context Diagram
 ![*ogamma* Visual Logger - Context Diagram](https://raw.githubusercontent.com/onewayautomation/ogamma-logger/master/ContextDiagram.png)
@@ -31,7 +31,7 @@ There is only one: Docker Desktop, available to download here https://www.docker
 ## To setup all service components and run them:
 
 * Pull file ``docker/docker-compose.yml`` from this repository;
-* Open shell terminal (PowerShell on Windoes, or bash in Linux);
+* Open shell terminal (PowerShell on Windows, or bash in Linux);
 * Navigate to the folder where docker-compose.yml is located;
 * Run command ``docker-compose up``.
 
