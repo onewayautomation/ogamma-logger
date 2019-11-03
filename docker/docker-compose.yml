@@ -15,6 +15,41 @@ services:
       - '${HOST_NAME:-opcuaserver.com}:${HOST_IP_ADDRESS:-75.152.105.54}'
     depends_on:
       - tsdb
+  influxdb:
+    image: influxdb
+      environment:
+        - INFLUXDB_DB=ogammadb
+        - INFLUXDB_ADMIN_ENABLED=true
+        - INFLUXDB_ADMIN_USER=admin
+        - INFLUXDB_ADMIN_PASSWORD=admin
+        - INFLUXDB_USER=ogamma
+        - INFLUXDB_USER_PASSWORD=ogamma
+        - INFLUXDB_HTTP_ENABLED=true
+        - INFLUXDB_HTTP_AUTH_ENABLED=false
+      volumes:
+        - 'ogamma-logger-influxdb-db://var/lib/influxdb'
+      ports:
+        - '8086:8086'
+      networks:
+        - ogamma-logger
+    timeseriesadmin:
+      image: timeseriesadmin/timeseriesadmin
+      ports:
+        - '8085:80'
+      networks:
+        - ogamma-logger
+    influxdb2:
+      image: quay.io/influxdb/influxdb:2.0.0-alpha
+      command: >
+        bash -c "chmod 774 /opt/start_and_init.sh
+        && /opt/start_and_init.sh"
+      volumes:
+        - 'ogamma-logger-influxdb2-db:/root/.influxdbv2'
+        - './opt2:/opt'        
+      ports:
+        - '9999:9999'
+      networks:
+        - ogamma-logger        
   tsdb:
     image: timescale/timescaledb
     environment:

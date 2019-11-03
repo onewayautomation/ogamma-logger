@@ -7,3 +7,4 @@
 /opcua-logger-0.3.2.zip
 /ogamma-logger-0.4.1.zip
 *.zip
+/docker/data

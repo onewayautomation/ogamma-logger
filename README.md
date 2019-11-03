@@ -43,7 +43,7 @@ After that:
 * PgAdmin - at http://localhost:4888;
 * Grafana - at http://localhost:3000
 
-# Distribution packages for Windows and Linux Ubuntu 18.04
+# Distribution packages for Windows and Linux (Ubuntu 18.04 and Debian  Stretch).
 
 For links to download installation packages please refer to section ``Deploy`` of the online User Manual: https://onewayautomation.com/visual-logger-docs/html/deploy.html
 
