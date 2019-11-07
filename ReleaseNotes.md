@@ -1,3 +1,8 @@
+Version 0.5.1 2019-Nov-06
+-------------------------
+
+Fixed issue: was not connecting to InfluxDB in secured mode (https://github.com/onewayautomation/ogamma-logger/issues/6)
+
 Version 0.5.0 2019-Nov-02
 -------------------------
 
