@@ -1,3 +1,10 @@
+Version 0.5.2 2019-Nov-09
+-------------------------
+
+* Added support for UserName identity token type on connections to OPC UA Servers;
+* Added support for OPC UA deadband, so now data changes can be reported only when change of the value is greater than defined by deadband settings. 
+* Re-build with the latest version of the OPC UA SDK, so now it can connect to OPC UA Servers running within containers, when Visual Logger is running outside of container, using host machines' name in endpoint URL.
+
 Version 0.5.1 2019-Nov-06
 -------------------------
 
