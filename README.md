@@ -30,18 +30,22 @@ There is only one: Docker Desktop, available to download here https://www.docker
 
 ## To setup all service components and run them:
 
-* Pull file ``docker/docker-compose.yml`` from this repository;
+* Pull this repository to some local folder;
 * Open shell terminal (PowerShell on Windows, or bash in Linux);
-* Navigate to the folder where docker-compose.yml is located;
+* Navigate to the folder ``docker`` where file ``docker-compose.yml`` is located;
 * Run command ``docker-compose up``.
 
-This command will pull all images from Docker Hub (and might take few or more minutes, but this step happens only once, then you run this command at the very first time), and start all required services.
+All container images from Docker Hub will be pulled (this might take few or more minutes, but this step happens only once, when you run this command at the very first time), and all required services will be started.
 
 After that:
 * Web GUI for *ogamma* Visual Logger will be available at http://localhost:4880;
 * Database TimescaleDB - at localhost:5432. (Default user credentials can be found in docker-compose.yml file).
 * PgAdmin - at http://localhost:4888;
 * Grafana - at http://localhost:3000
+* InfluxDB v 2.0 - at http://localhost:9999
+* InfluxDB v 1.7 - at localhost:8086.
+
+By default, TimescaleDB is used as timeseries database. In order to use InfluxDB, configuration file shoudl be modified accordingly.
 
 # Distribution packages for Windows and Linux (Ubuntu 18.04 and Debian  Stretch).
 
