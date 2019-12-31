@@ -2,7 +2,11 @@
 
 *ogamma* Visual Logger for OPC is an integration tool to:
 * **Collect** data from OPC UA Servers;
-* **Store** that data in TimescaleDB (PostgreSQL database optimized to store time-series data). Regular version of PostgreSQL can be used too.
+* **Store** that data in time-series database:
+  *  ``TimescaleDB`` (PostgreSQL database optimized to store time-series data);
+  *   ``PostgreSQL`` regular version;
+  *   ``InfluxDB (versions 1.7 or 2.0);
+  *   ``Apache Kafka``.
 * **Visualize** data using Grafana, acting as a REST back-end for its SimpleJson data source plugin. It can fetch real time or historical data directly from OPC UA Servers, or from PostgreSQL.
 * **Analyze** data using SQL queries.
 Each instance of *ogamma* Visual Logger can implement only one role or all of them.
@@ -19,8 +23,8 @@ Note that to enable all the features third party components are required.  The e
 Docker image is available at: https://hub.docker.com/r/ogamma/logger.
 
 File ``docker/docker-compose.yml`` allows to pull *ogamma* Visual Logger image and additionally all required dependency images:
-* Database (TimescaleDB);
-* PgAdmin, to manage database;
+* Databases (TimescaleDB, InfluxDB versions 1.7 and 2.0, Apache Kafka);
+* PgAdmin, to manage database PostgreSQL;
 * Grafana, optional, to visualize data;
 * Sample OPC UA Server from Microsoft.
 
@@ -44,8 +48,9 @@ After that:
 * Grafana - at http://localhost:3000
 * InfluxDB v 2.0 - at http://localhost:9999
 * InfluxDB v 1.7 - at localhost:8086.
+* Apache Kafka - at localhost:9092
 
-By default, TimescaleDB is used as timeseries database. In order to use InfluxDB, configuration file shoudl be modified accordingly.
+By default, TimescaleDB is used as timeseries database. In order to use InfluxDB or Kafka, configuration file should be modified accordingly.
 
 # Distribution packages for Windows and Linux (Ubuntu 18.04 and Debian  Stretch).
 
@@ -55,5 +60,6 @@ For links to download installation packages please refer to section ``Deploy`` o
 
 For more information, please refer to online User Manual available at https://onewayautomation.com/visual-logger-docs/html/index.html
 
+You can see Visual Logger in action in youtube video at https://www.youtube.com/watch?v=mY9Wh8wAKZg&t=215s, where it is used to explain OPC UA terms such as publishing interval, sampling interval and queue size for monitored items.
 
 Introduction video with more detailed instructions is available on youtube at https://youtu.be/yZdsyVz7hw0 (for older version, needs update).
