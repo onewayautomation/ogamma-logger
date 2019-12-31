@@ -1,3 +1,15 @@
+Version 0.6.0 2019-Dec-28
+-------------------------
+
+* Added support for Apache Kafka.   
+  Tested with different Kafka clusters:
+  * Cloud instances, managed by https://www.confluent.io/confluent-cloud and running at following providers:
+    * Amazon Web Services;
+    * Microsoft Azure;
+    * Google Cloud Platform. 
+  * Running locally in Docker container (image https://hub.docker.com/r/bitnami/kafka)
+* Parsing of json configuration file modified: now single line and muti-line comments are allowed.
+
 Version 0.5.2 2019-Nov-09
 -------------------------
 

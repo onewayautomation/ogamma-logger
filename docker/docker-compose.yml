@@ -17,39 +17,39 @@ services:
       - tsdb
   influxdb:
     image: influxdb
-    environment:
-      - INFLUXDB_DB=ogammadb
-      - INFLUXDB_ADMIN_ENABLED=true
-      - INFLUXDB_ADMIN_USER=admin
-      - INFLUXDB_ADMIN_PASSWORD=admin
-      - INFLUXDB_USER=ogamma
-      - INFLUXDB_USER_PASSWORD=ogamma
-      - INFLUXDB_HTTP_ENABLED=true
-      - INFLUXDB_HTTP_AUTH_ENABLED=false
-    volumes:
+      environment:
+        - INFLUXDB_DB=ogammadb
+        - INFLUXDB_ADMIN_ENABLED=true
+        - INFLUXDB_ADMIN_USER=admin
+        - INFLUXDB_ADMIN_PASSWORD=admin
+        - INFLUXDB_USER=ogamma
+        - INFLUXDB_USER_PASSWORD=ogamma
+        - INFLUXDB_HTTP_ENABLED=true
+        - INFLUXDB_HTTP_AUTH_ENABLED=false
+      volumes:
       - 'ogamma-logger-influxdb-data://var/lib/influxdb'
-    ports:
-      - '8086:8086'
-    networks:
-     - ogamma-logger
-  timeseriesadmin:
-    image: timeseriesadmin/timeseriesadmin
-    ports:
-      - '8085:80'
-    networks:
-      - ogamma-logger
-  influxdb2:
-    image: quay.io/influxdb/influxdb:2.0.0-alpha
-    command: >
-      bash -c "chmod 774 /opt/start_and_init.sh
-      && /opt/start_and_init.sh"
-    volumes:
-      - 'ogamma-logger-influxdb2-data:/root/.influxdbv2'
-      - './opt2:/opt'        
-    ports:
-      - '9999:9999'
-    networks:
-      - ogamma-logger        
+      ports:
+        - '8086:8086'
+      networks:
+        - ogamma-logger
+    timeseriesadmin:
+      image: timeseriesadmin/timeseriesadmin
+      ports:
+        - '8085:80'
+      networks:
+        - ogamma-logger
+    influxdb2:
+      image: quay.io/influxdb/influxdb:2.0.0-alpha
+      command: >
+        bash -c "chmod 774 /opt/start_and_init.sh
+        && /opt/start_and_init.sh"
+      volumes:
+        - 'ogamma-logger-influxdb2-data:/root/.influxdbv2'
+        - './opt2:/opt'        
+      ports:
+        - '9999:9999'
+      networks:
+        - ogamma-logger        
   tsdb:
     image: timescale/timescaledb
     environment:
@@ -95,6 +95,36 @@ services:
     networks:
       - ogamma-logger
 
+  zookeeper:
+    image: 'bitnami/zookeeper:3'
+    ports:
+      - '2181:2181'
+    volumes:
+      - 'zookeeper_data:/bitnami'
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+    networks:
+      - ogamma-logger
+  kafka:
+    image: 'bitnami/kafka:2'
+    ports:
+      - '9092:9092'
+      - '29092:29092'
+    hostname: kafka
+    volumes:
+      - 'kafka_data:/bitnami'
+    environment:
+      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+      - ALLOW_PLAINTEXT_LISTENER=yes
+      - KAFKA_BROKER_USER=user
+      - KAFKA_BROKER_PASSWORD=bitnami
+      - KAFKA_CFG_LISTENERS=PLAINTEXT://kafka:9092,SASL_PLAINTEXT://kafka:29092
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092,SASL_PLAINTEXT://kafka:29092
+    depends_on:
+      - zookeeper
+    networks:
+      - ogamma-logger
+
 networks:
   ogamma-logger: null
 volumes:
@@ -103,3 +133,7 @@ volumes:
   ogamma-logger-pgadmin: {}
   ogamma-logger-influxdb-data: {}
   ogamma-logger-influxdb2-data: {}
+  zookeeper_data:
+    driver: local
+  kafka_data:
+    driver: local
