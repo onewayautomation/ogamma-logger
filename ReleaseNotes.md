@@ -1,3 +1,7 @@
+Version 0.6.1 2020-Jan-01
+-------------------------
+* Maintenance release. Fixed runtime error issue (occurring when some fields in the Logged Variables table are edited).
+
 Version 0.6.0 2019-Dec-28
 -------------------------
 
@@ -9,6 +13,9 @@ Version 0.6.0 2019-Dec-28
     * Google Cloud Platform. 
   * Running locally in Docker container (image https://hub.docker.com/r/bitnami/kafka)
 * Parsing of json configuration file modified: now single line and muti-line comments are allowed.
+* Windows version is now built with newer version of Visual Studio (2019), therefore version 2019 of Visual C++ redistributables are required to be installed.
+* Newer version of dependency libraries are used.
+* Size of log files is reduceed from 16 Mb to 8 Mb, for faster downloading with Internet browser.
 
 Version 0.5.2 2019-Nov-09
 -------------------------
