@@ -1,4 +1,15 @@
+Verison 0.8.3 2020-Feb-29
+-------------------------
+
+
+* Fixed issue: Application crashes at attempt to activate or re-activate license.
+* Fixed issue: Instance configuration changes sometimes not saved or not applied without restart.
+* To be consistent with older versions, for InfluxDb modified values set by button ``Reset to defaults`` to the same settings as in versions prior 0.8.1 (i.e. ``measurement`` will be set to ``d`` and tag will be set to ``n=[variable id]``).
+* Improvements in logging messages formatting and runtime error handling.
+* Ubuntu executable binary is built without debug info to reduce size.
+
 Version 0.8.2 2020-Feb-26
+-------------------------
 
 * Web server port number and number of threads now can be changed at runtime via menu ``Settings/Instances``.
 * Fixed issue: application crashes if configuration database type is changed at runtime.
