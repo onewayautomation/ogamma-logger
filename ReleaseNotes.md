@@ -1,4 +1,14 @@
-Verison 0.8.3 2020-Feb-29
+Version 0.8.4 2020-Mar-03
+-------------------------
+
+* Fixed issue: when there are multiple OPC UA Server connections configured in the address space, and there are multiple variable groups  with variables, and all of them are collapsed, and when group selection is changed, this causes infinite calls from browser to the backend. Can also cause application crash.
+* Fixed issue: upgrade from older versions (prior 0.8.1) (Ubuntu and Docker versions) with configuration database of SQLite type does not completely upgrade tables, and does not report error.
+* Upgraded some dependencies (web framework and ODB library) to newer versions.
+* Docker image changed to stop container when application process stops.
+* To support upgrades from older versions, when InfluxdB settings are loaded from ./data/config.json file, its mapping settings configured to be the same as in older versions (i.e. ``measurement`` will be set to ``d`` and tag will be set to ``n=[variable id]``).
+
+
+Version 0.8.3 2020-Feb-29
 -------------------------
 
 
