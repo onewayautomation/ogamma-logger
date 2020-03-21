@@ -39,7 +39,8 @@ services:
     networks:
       - ogamma-logger
   influxdb2:
-    image: quay.io/influxdb/influxdb:2.0.0-alpha
+#    image: quay.io/influxdb/influxdb:2.0.0-alpha
+    image: quay.io/influxdb/influxdb:2.0.0-beta
     command: >
       bash -c "chmod 774 /opt/start_and_init.sh
       && /opt/start_and_init.sh"

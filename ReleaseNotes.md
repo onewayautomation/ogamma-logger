@@ -1,3 +1,37 @@
+Known issues.
+=============
+
+1. When InfluxDB time-series data is used to store data, and value in the field ``Database specific settings/json``, property ``precision`` value is set to either ``us`` (for microsecond) or ``ns`` (for nanosecond), data is written, but cannot be read back. It seems that the issue is on InfluxDb side: it works fine in the instance of InfluxDB hosted by InfluxData, but does not work with Docker image version quay.io/influxdb/influxdb:2.0.0-beta.
+2. Passwords stored in configuration settings file and database, as well as transferred between web browser and backend as plain text. This will be fixed in the first production release.
+3. When ``Refresh Data`` field in the ``Logged Variables`` table is set to automatic refresh mode, it is not possible to edit records in that table. Workaround is to turn data refreshing off before editing of records.
+4. Table ``Logged Variables`` has too many columns and not all of them fit well into the screen, and horizontal scrolling is not available, which causes problem viewing/editing them. Workaround: use ``Column Chooser`` button in the right top corner of the table and select columns which need to be visible or hidden (usually not all columns need to be visible).
+
+Release History.
+================
+
+Version 0.8.6 2020-Mar-21
+-------------------------
+
+* Fixed issue: in some cases size of sent OPC UA message chunks exceeds negotiated limit, which causes closing of connection by the server side.
+* Fixed issue: if target OPC UA server has multiple endpoints with UserName type Identity token, wrong security policy can be selected for password encryption, which causes failure of ActivateSessoin call with "User Identity token invalid" error.
+* Fixed issue: fields in the OPC UA applicaton instance certificate does not match with ApplicationDescription structure sent to the server on CreateSession request, which causes connection failure if the server is configured to reject such requests.
+* Fixed issue: if server returns in FindServers or GetEndpoints response endpoint URL with IP address different than in the original request and which is not accessible from network where ogamma Visual Logger instance is running, connection is not possible. This might happen for example if UA Server is accessed via VPN, or runnign in Docker container with IP address which is not accesible from external machines. To fix this issue, in-accessible IP address in the endpoint URL is substituted by original request's IP address. If server returns host name, connection is established too.
+* Default value for number of threads in web server increased from 1 to 4, for better responsiveness.
+* Fixed issue: application crashes when OPC UA Server or TSDB or Instance seetings are changed.
+* Using newer version of the OPC UA Client SDK, with fixes for crash and deadlock issues. Also it uses larger OPC UA message chunk sizes by default.
+* Revised and added more log messages for easier troubleshooting and diagnosys of possible issues.
+* Earliest date for start of the 1 month trial period with enabled Enterprise Edition features in Community Edition of the product is moved from April 1, 2020 to May 1, 2020.
+* Added experimental support for writing of values to OPC UA Server (by changing values in the ``Value`` field in the ``Logged Varaibles`` table).
+* Fixed issue: if Apache Kafka is used as TSDB, values for fields ``Topic Name Generation Mode`` and ``Key Name Generation Mode`` set in the GUI ignored, instead values set in the ``Database specific settings / Json `` are used. Now values set in the Json fieid will be ignored.
+* Fixed issue: when Apache Kafka is used as TSDB by the instance, saving changes of that TSDB record settings causes application crash.
+* In the ``Logged Variables`` table value of the Refresh Data selector widget now is saved between browser sessions. 
+* Fixed issue: Ubuntu version crashes due to incorrect using of licensing library.
+
+Version 0.8.5 2020-Mar-05
+-------------------------
+
+* Fixed issue: application log file size grows greater than set by the max. file size option.
+
 Version 0.8.4 2020-Mar-03
 -------------------------
 
