@@ -9,13 +9,20 @@ Known issues.
 Release History.
 ================
 
+Version 0.8.7 2020-Mar-30
+-------------------------
+
+* Fixed issue: connection to the OPC UA Server is not restored after network connectivity issue.
+* Fixed issue: when connection with OPC UA server is lost, ``Status`` column values in the ``Logged Variables`` table aren't changed to ``Bad``.
+* Fixed issue: memory leak (was caused by in-memory debug logging accidentally left turned on).
+
 Version 0.8.6 2020-Mar-21
 -------------------------
 
 * Fixed issue: in some cases size of sent OPC UA message chunks exceeds negotiated limit, which causes closing of connection by the server side.
 * Fixed issue: if target OPC UA server has multiple endpoints with UserName type Identity token, wrong security policy can be selected for password encryption, which causes failure of ActivateSessoin call with "User Identity token invalid" error.
 * Fixed issue: fields in the OPC UA applicaton instance certificate does not match with ApplicationDescription structure sent to the server on CreateSession request, which causes connection failure if the server is configured to reject such requests.
-* Fixed issue: if server returns in FindServers or GetEndpoints response endpoint URL with IP address different than in the original request and which is not accessible from network where ogamma Visual Logger instance is running, connection is not possible. This might happen for example if UA Server is accessed via VPN, or runnign in Docker container with IP address which is not accesible from external machines. To fix this issue, in-accessible IP address in the endpoint URL is substituted by original request's IP address. If server returns host name, connection is established too.
+* Fixed issue: if server returns in FindServers or GetEndpoints response endpoint URL with IP address different than in the original request and which is not accessible from network where ogamma Visual Logger instance is running, connection is not possible. This might happen for example if UA Server is accessed via VPN, or running in Docker container with IP address which is not accesible from external machines. To fix this issue, in-accessible IP address in the endpoint URL is substituted by original request's IP address. If server returns host name, connection is established too.
 * Default value for number of threads in web server increased from 1 to 4, for better responsiveness.
 * Fixed issue: application crashes when OPC UA Server or TSDB or Instance seetings are changed.
 * Using newer version of the OPC UA Client SDK, with fixes for crash and deadlock issues. Also it uses larger OPC UA message chunk sizes by default.
