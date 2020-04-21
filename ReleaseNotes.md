@@ -2,12 +2,20 @@ Known issues.
 =============
 
 1. When InfluxDB time-series data is used to store data, and value in the field ``Database specific settings/json``, property ``precision`` value is set to either ``us`` (for microsecond) or ``ns`` (for nanosecond), data is written, but cannot be read back. It seems that the issue is on InfluxDb side: it works fine in the instance of InfluxDB hosted by InfluxData, but does not work with Docker image version quay.io/influxdb/influxdb:2.0.0-beta.
-2. Passwords stored in configuration settings file and database, as well as transferred between web browser and backend as plain text. This will be fixed in the first production release.
-3. When ``Refresh Data`` field in the ``Logged Variables`` table is set to automatic refresh mode, it is not possible to edit records in that table. Workaround is to turn data refreshing off before editing of records.
-4. Table ``Logged Variables`` has too many columns and not all of them fit well into the screen, and horizontal scrolling is not available, which causes problem viewing/editing them. Workaround: use ``Column Chooser`` button in the right top corner of the table and select columns which need to be visible or hidden (usually not all columns need to be visible).
+2. When ``Refresh Data`` field in the ``Logged Variables`` table is set to automatic refresh mode, it is not possible to edit records in that table. Workaround is to turn data refreshing off before editing of records.
+3. Table ``Logged Variables`` has too many columns and not all of them fit well into the screen, and horizontal scrolling is not available, which causes problem viewing/editing them. Workaround: use ``Column Chooser`` button in the right top corner of the table and select columns which need to be visible or hidden (usually not all columns need to be visible).
 
 Release History.
 ================
+
+Version 0.9.0 2020-Apr-20
+-------------------------
+
+* More memory leaks fixed.
+* Added support for https.
+* Passwords in settings, used to connect to the configuration database or to time-series databases, now stored in encrypted fromat.
+* Added user authentication feature to access configuration GUI, using simple built-in identity provider.
+* Some cosmetic changes in GUI (added button to change width of the Address Space panel, separated buttons used to change OPC UA Server connection settings from Log button, added icons to main menu items).
 
 Version 0.8.7 2020-Mar-30
 -------------------------
