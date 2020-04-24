@@ -12,9 +12,9 @@ services:
       - ogamma-logger
       
   ogamma-logger:
-    image: 'ogamma/logger:latest'
+    image: 'ogamma/logger-dev:latest'
     environment:
-      - OVL_CONFIG_FILE=./data/config.json
+      - OVL_CONFIG_FILE=./data/config1.json
     ports:
       - '4880:4880'
       - '4822:22'
@@ -28,6 +28,25 @@ services:
       - '${HOST_NAME:-opcuaserver.com}:${HOST_IP_ADDRESS:-75.152.105.54}'
     depends_on:
       - tsdb
+      
+  ogamma-logger2:
+    image: 'ogamma/logger-dev:latest'
+    environment:
+      - OVL_CONFIG_FILE=./data/config2.json
+    ports:
+      - '4881:4881'
+      - '4823:22'
+    hostname: ogamma-logger
+    volumes:
+      - './data:/home/ogamma/logger/data'
+
+    networks:
+      - ogamma-logger
+    extra_hosts:
+      - '${HOST_NAME:-opcuaserver.com}:${HOST_IP_ADDRESS:-75.152.105.54}'
+    depends_on:
+      - tsdb
+
   influxdb:
     image: influxdb
     environment:
