@@ -4,9 +4,21 @@ Known issues.
 1. When InfluxDB time-series data is used to store data, and value in the field ``Database specific settings/json``, property ``precision`` value is set to either ``us`` (for microsecond) or ``ns`` (for nanosecond), data is written, but cannot be read back. It seems that the issue is on InfluxDb side: it works fine in the instance of InfluxDB hosted by InfluxData, but does not work with Docker image version quay.io/influxdb/influxdb:2.0.0-beta.
 2. When ``Refresh Data`` field in the ``Logged Variables`` table is set to automatic refresh mode, it is not possible to edit records in that table. Workaround is to turn data refreshing off before editing of records.
 3. Table ``Logged Variables`` has too many columns and not all of them fit well into the screen, and horizontal scrolling is not available, which causes problem viewing/editing them. Workaround: use ``Column Chooser`` button in the right top corner of the table and select columns which need to be visible or hidden (usually not all columns need to be visible).
+4. When OPC UA Server connection settings or logged variables settings are changed, in order to apply them, connections to all OPC UA Servers are closed and re-opened, subscriptions and monitored items are re-created. When an application instance has large number of server connections and logged variables, this might be inconvenient.
 
 Release History.
 ================
+
+
+Version 0.9.1 2020-Apr-24
+-------------------------
+
+* Improved offline license activation workflow: now generated offline activation file can be downlaoded via configuration GUI, and licence file can be uploaded via GUI too.
+* Optimized license re-activation: now after entering activation key GUI is adjusted accordingly to expected action: activation or re-activation.
+* Fixed error ``index out of range error`` reported by logging subsystem.
+* Modifications in licensing to support Standard, Enterprise and Academic editions.
+* In docker-compose.yml file added one more container: ``portainer/portainer``, the tool with web GUI to manage Docker environments.
+* Added support to pass name of configuration file in environment variable ``OVL_CONFIG_FILE``, which simplifies running multiple docker containers with *ogamma* Visual Logger for OPC.
 
 Version 0.9.0 2020-Apr-20
 -------------------------
