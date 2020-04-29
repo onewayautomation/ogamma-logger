@@ -10,15 +10,20 @@ Release History.
 ================
 
 
-Version 0.9.1 2020-Apr-24
+Version 0.9.1 2020-Apr-27
 -------------------------
 
 * Improved offline license activation workflow: now generated offline activation file can be downlaoded via configuration GUI, and licence file can be uploaded via GUI too.
 * Optimized license re-activation: now after entering activation key GUI is adjusted accordingly to expected action: activation or re-activation.
 * Fixed error ``index out of range error`` reported by logging subsystem.
 * Modifications in licensing to support Standard, Enterprise and Academic editions.
-* In docker-compose.yml file added one more container: ``portainer/portainer``, the tool with web GUI to manage Docker environments.
+* In docker-compose.yml file added one more container: ``portainer/portainer``, the tool with web GUI to manage Docker environments. Portainer GUI is available at port 9000.
 * Added support to pass name of configuration file in environment variable ``OVL_CONFIG_FILE``, which simplifies running multiple docker containers with *ogamma* Visual Logger for OPC.
+* Added column ``Log to TSDB`` into the table ``Variable Groups``, for group of variables which should not be logged into time-series database by default. The aim is to simplify creation of records in the ``Logged Variables`` table which are used to serve queries from Grafana to read real time data directly from OPC UA Server.
+* Adjusted feature ``Refresh Data`` to display last read values for variables, which are not logged into TSDB. (They are read directly from OPC UA Server to fulfill queries from Grafana).
+* Rebuilt with newer version of the OPC UA SDK, with the following change: Message sequence numbers start from 1 after disconnection (to solve issue with CodeSys OPC UA Server).
+* Fixed issue "ActivateSession request might fail when connections to multiple OPC UA Servers are created, due to using wrong identity token policy id".
+* Fixed issue with high (~ 10% at low load) CPU usage.
 
 Version 0.9.0 2020-Apr-20
 -------------------------
