@@ -9,6 +9,12 @@ Known issues.
 Release History.
 ================
 
+Version 1.0.0 2020-Apr-29
+-------------------------
+
+* First production release.
+* Role ``Collector Agent`` now can be disabled/enabled in dialog window used to edit application instances settings.  
+* Fixed issue: If real time value of a variable is empty, it is displayed in Logged Variables table, column "value" as value "true" of boolean type.
 
 Version 0.9.1 2020-Apr-27
 -------------------------
