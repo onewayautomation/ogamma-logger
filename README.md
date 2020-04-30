@@ -1,7 +1,7 @@
 # *ogamma* Visual Logger for OPC
 
 *ogamma* Visual Logger for OPC is an integration tool to:
-* **Collect** data from OPC UA Servers;
+* **Collect** data from OPC UA Servers, as well as from classic OPC DA servers using additional wrapper application;
 * **Store** that data in time-series database:
   * ``TimescaleDB`` (PostgreSQL database optimized to store time-series data);
   * ``PostgreSQL`` regular version;
