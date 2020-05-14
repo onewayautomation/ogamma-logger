@@ -9,6 +9,7 @@
   * ``Apache Kafka``.
 * **Visualize** data using Grafana, acting as a REST back-end for its SimpleJson data source plugin. It can fetch real time or historical data directly from OPC UA Servers, or from PostgreSQL.
 * **Analyze** data using SQL queries.
+
 Each instance of *ogamma* Visual Logger can implement only one role or all of them.
 
 Multiple instances can run in parallel in different roles, making horizontal scaling easy.
