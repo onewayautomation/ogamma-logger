@@ -5,9 +5,20 @@ Known issues.
 2. When ``Refresh Data`` field in the ``Logged Variables`` table is set to automatic refresh mode, it is not possible to edit records in that table. Workaround is to turn data refreshing off before editing of records.
 3. Table ``Logged Variables`` has too many columns and not all of them fit well into the screen, and horizontal scrolling is not available, which causes problem viewing/editing them. Workaround: use ``Column Chooser`` button in the right top corner of the table and select columns which need to be visible or hidden (usually not all columns need to be visible).
 4. When OPC UA Server connection settings or logged variables settings are changed, in order to apply them, connections to all OPC UA Servers are closed and re-opened, subscriptions and monitored items are re-created. When an application instance has large number of server connections and logged variables, this might be inconvenient.
+5. When communication with the time-series database is slow or broken, and there are Grafana sessions querying data via *ogamma* Visual Logger's REST endpoint, this can cause issues with configuration GUI responsiveness. As a workaround, separate instance can be created to serve REST endpoint, or number of threads in the same instance can be increased (option ``Web Server Settings / Number of threads`` in the ``Instance Settings`` dialog window).
 
 Release History.
 ================
+
+Version 1.1.0 2020-Jun-06
+-------------------------
+
+* Added support to store data in Microsoft SQL as a time-series database.
+* Added support to store data in MySQL as a time-series database.
+* Added support to store data in SQLite as a time-series database.
+* Default configuration database type and time-series database type in all distribution packages (Windows, Ubuntu, Docker) is set to SQLite type, so the instance is ready to use immediately without installing of additional database components.
+* Improved handling of connection interruptions with the time-series database of PostgreSQL/TimescaleDB type.
+* Fixed bug: in the case when a time-series database type is PostgreSQL, data values are written twice (was introduced in version 0.8.1).
 
 Version 1.0.1 2020-May-13
 -------------------------
@@ -20,7 +31,7 @@ Version 1.0.1 2020-May-13
 * Fixed issue: writing values to TimescaleDB/PostgreSQL or Apache Kafka might fail if data value has source timestamp not set or status code is bad.
 * Licensing conditions for Community Edition changed: 
   * now on instances of the application which are activated after May 14, 2020 maximum number of logged variables is reduced to 64 after end of 1 month trial period. Existing installations activated before May 14, 2020 have limit as it was before: up to 256 variables.
-  * periodic license validation with connection to the license server over the Internet is required. 
+  * periodic license validation with connection to the license server over the Internet is required. The date when the license was last time validated and the date before which the next validation should be performed are displayed in the dialog window opened via menu License / Status.
  
 
 Version 1.0.0 2020-Apr-29
