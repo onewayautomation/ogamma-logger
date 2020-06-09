@@ -6,7 +6,11 @@
   * ``TimescaleDB`` (PostgreSQL database optimized to store time-series data);
   * ``PostgreSQL`` regular version;
   * ``InfluxDB`` (versions 1.7 or 2.0);
-  * ``Apache Kafka``.
+  * ``Apache Kafka``;
+  * ``Microsoft SQL Server``;
+  * ``MySQL``;
+  * ``SQLite``.
+
 * **Visualize** data using Grafana, acting as a REST back-end for its SimpleJson data source plugin. It can fetch real time or historical data directly from OPC UA Servers, or from PostgreSQL.
 * **Analyze** data using SQL queries.
 
