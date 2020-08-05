@@ -4,6 +4,7 @@ services:
 # Portainer can be used to manage containers remotely over web GUI.
   portainer:
     image: 'portainer/portainer'
+    restart: always
     ports:
       - '9000:9000'
     volumes:
@@ -15,14 +16,14 @@ services:
       
   ogamma-logger:
     image: 'ogamma/logger:latest'
-
+    restart: always
 # By default configuration file ./data/config is used. Can be changed by environment variable.    
     environment:
       - OVL_CONFIG_FILE=./data/config.json
 
     ports:
       - '4880:4880'
-      - '4822:22'
+#      - '4822:22'
       
     hostname: ogamma-logger
     volumes:
@@ -32,10 +33,8 @@ services:
       - ogamma-logger
     extra_hosts:
       - '${HOST_NAME:-opcuaserver.com}:${HOST_IP_ADDRESS:-75.152.105.54}'
-    depends_on:
-      - tsdb
 
-# Example of second instance configuration:
+# Example of the second instance configuration:
 # ogamma-logger2:
 #   image: 'ogamma/logger:latest'
 #   environment:
@@ -46,16 +45,15 @@ services:
 #   hostname: ogamma-logger
 #   volumes:
 #     - './data:/home/ogamma/logger/data'
-
-    networks:
-      - ogamma-logger
-    extra_hosts:
-      - '${HOST_NAME:-opcuaserver.com}:${HOST_IP_ADDRESS:-75.152.105.54}'
-    depends_on:
-      - tsdb
+#
+#    networks:
+#      - ogamma-logger
+#    extra_hosts:
+#      - '${HOST_NAME:-opcuaserver.com}:${HOST_IP_ADDRESS:-75.152.105.54}'
 
   influxdb:
     image: influxdb
+    restart: always
     environment:
       - INFLUXDB_DB=ogammadb
       - INFLUXDB_ADMIN_ENABLED=true
@@ -71,12 +69,7 @@ services:
       - '8086:8086'
     networks:
       - ogamma-logger
-  timeseriesadmin:
-    image: timeseriesadmin/timeseriesadmin
-    ports:
-      - '8085:80'
-    networks:
-      - ogamma-logger
+      
   influxdb2:
 #    image: quay.io/influxdb/influxdb:2.0.0-alpha
     image: quay.io/influxdb/influxdb:2.0.0-beta
@@ -89,7 +82,21 @@ services:
     ports:
       - '9999:9999'
     networks:
-      - ogamma-logger        
+      - ogamma-logger
+     
+  grafana:
+    image: grafana/grafana
+    restart: always
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_INSTALL_PLUGINS=grafana-simple-json-datasource,grafana-influxdb-flux-datasource,natel-discrete-panel
+    ports:
+      - '3000:3000'
+    volumes:
+      - 'ogamma-logger-grafana:/var/lib/grafana'
+    networks:
+      - ogamma-logger
+      
   tsdb:
     image: timescale/timescaledb
     environment:
@@ -102,17 +109,14 @@ services:
       - '5432:5432'
     networks:
       - ogamma-logger
-  grafana:
-    image: grafana/grafana
-    environment:
-      - GF_SECURITY_ADMIN_PASSWORD=admin
-      - GF_INSTALL_PLUGINS=grafana-simple-json-datasource
+      
+  timeseriesadmin:
+    image: timeseriesadmin/timeseriesadmin
     ports:
-      - '3000:3000'
-    volumes:
-      - 'ogamma-logger-grafana:/var/lib/grafana'
+      - '8085:80'
     networks:
-      - ogamma-logger
+      - ogamma-logger   
+
   opcplc:
     image: 'mcr.microsoft.com/iotedge/opc-plc:1.0.1-linux-amd64'
     hostname: opcplc

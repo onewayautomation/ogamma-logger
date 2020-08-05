@@ -9,10 +9,15 @@
   * ``Apache Kafka``;
   * ``Microsoft SQL Server``;
   * ``MySQL``;
-  * ``SQLite``.
+  * ``SQLite``;
+  * ``MQTT Brokers``. Using MQTT protocol, data can be published to any Cloud/IoT platform providing access over MQTT such as:
+    * Generic MQTT broker (for example, Eclipse Mosquito).
+    * Microsoft Azure IoT Hub;
+    * AWS IoT Broker;
+    * Google Cloud IoT Core MQTT Bridge;
 
 * **Visualize** data using Grafana, acting as a REST back-end for its SimpleJson data source plugin. It can fetch real time or historical data directly from OPC UA Servers, or from PostgreSQL.
-* **Analyze** data using SQL queries.
+* **Analyze** data using query language (specific to type of the used TSDB).
 
 Each instance of *ogamma* Visual Logger can implement only one role or all of them.
 

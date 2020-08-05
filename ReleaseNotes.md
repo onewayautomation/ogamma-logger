@@ -10,6 +10,28 @@ Known issues.
 Release History.
 ================
 
+Version 1.2.0 2020-Aug-04
+-------------------------
+
+* Added support to publish data to MQTT Broker. Verified with the following MQTT Brokers:
+  * Eclipse Mosquitto
+  * Microsoft Azure IoT Hub
+  * AWS IoT Broker
+  * Google Cloud IoT Core MQTT Bridge.
+
+* Modified logic on connections to SQL family of TSDB databases: now if an attempt to check if the database exists and/or create it fails, this error is ignored. This allows us to connect with a user account with restricted permissions.
+* Upgraded to use the newer version of the licensing library. As a result, installations with the older versions will require reactivation of the license key. The same keys should be re-used. 
+
+Version 1.1.1 2020-Jun-22
+-------------------------
+
+* Added support to store data in MemSQL database (uses the same client library as MySQL, with connection settings specific for MemSQL). 
+* Added new feature: now all children variables from the node in the address space tree panel can be added using context menu. Note that the parent node should be expanded first.
+* Improved performance on adding large number of variables from the address space.
+* Fixed connectivity issue happening when OPC UA messages are large and split into chunks. One use case when it was happening is when number of logged variables per server connection exceeds 1000 or more tags.
+* Fixed re-connection issue (in some cases was not able to establish connection to OPC UA Server after communication failure).
+
+
 Version 1.1.0 2020-Jun-06
 -------------------------
 
@@ -44,7 +66,7 @@ Version 1.0.0 2020-Apr-29
 Version 0.9.1 2020-Apr-27
 -------------------------
 
-* Improved offline license activation workflow: now generated offline activation file can be downlaoded via configuration GUI, and licence file can be uploaded via GUI too.
+* Improved offline license activation workflow: now generated offline activation file can be downloaded via configuration GUI, and licence file can be uploaded via GUI too.
 * Optimized license re-activation: now after entering activation key GUI is adjusted accordingly to expected action: activation or re-activation.
 * Fixed error ``index out of range error`` reported by logging subsystem.
 * Modifications in licensing to support Standard, Enterprise and Academic editions.
