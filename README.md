@@ -26,7 +26,7 @@ Multiple instances can run in parallel in different roles, making horizontal sca
 Note that to enable all the features third party components are required.  The easiest way to setup and run *ogamma* Visual Logger and dependency services is to use Docker images, which can be easily pulled and then started with single command ``docker-compose up``, by using of the ``docker-compose.yml`` file which is available at this repository: https://github.com/onewayautomation/ogamma-logger/blob/master/docker/docker-compose.yml
 
 # Context Diagram
-![*ogamma* Visual Logger - Context Diagram](https://raw.githubusercontent.com/onewayautomation/ogamma-logger/master/ContextDiagram.png)
+![*ogamma* Visual Logger - Context Diagram](https://onewayautomation.com/images/ContextDiagram.png)
 
 # Getting Started with Docker image.
 
