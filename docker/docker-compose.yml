@@ -1,7 +1,10 @@
 version: '3'
 services:
+
+# Portainer can be used to manage containers remotely over web GUI.
   portainer:
     image: 'portainer/portainer'
+    restart: always
     ports:
       - '9000:9000'
     volumes:
@@ -13,29 +16,16 @@ services:
       
   ogamma-logger:
     image: 'ogamma/logger-dev:latest'
+    restart: always
+# By default configuration file ./data/config is used. Can be changed by environment variable.    
     environment:
-      - OVL_CONFIG_FILE=./data/config1.json
+      - OVL_CONFIG_FILE=./data/config.json
+
     ports:
       - '4880:4880'
-      - '4822:22'
-    hostname: ogamma-logger
-    volumes:
-      - './data:/home/ogamma/logger/data'
-
-    networks:
-      - ogamma-logger
-    extra_hosts:
-      - '${HOST_NAME:-opcuaserver.com}:${HOST_IP_ADDRESS:-75.152.105.54}'
-    depends_on:
-      - tsdb
+# for troubleshooting SSH port can be exposed.      
+#      - '4822:22'
       
-  ogamma-logger2:
-    image: 'ogamma/logger-dev:latest'
-    environment:
-      - OVL_CONFIG_FILE=./data/config2.json
-    ports:
-      - '4881:4881'
-      - '4823:22'
     hostname: ogamma-logger
     volumes:
       - './data:/home/ogamma/logger/data'
@@ -44,11 +34,27 @@ services:
       - ogamma-logger
     extra_hosts:
       - '${HOST_NAME:-opcuaserver.com}:${HOST_IP_ADDRESS:-75.152.105.54}'
-    depends_on:
-      - tsdb
+
+# Example of the second instance configuration:
+# ogamma-logger2:
+#   image: 'ogamma/logger:latest'
+#   environment:
+#     - OVL_CONFIG_FILE=./data/config2.json
+#   ports:
+#     - '4881:4881'
+#     - '4823:22'
+#   hostname: ogamma-logger
+#   volumes:
+#     - './data:/home/ogamma/logger/data'
+#
+#    networks:
+#      - ogamma-logger
+#    extra_hosts:
+#      - '${HOST_NAME:-opcuaserver.com}:${HOST_IP_ADDRESS:-75.152.105.54}'
 
   influxdb:
     image: influxdb
+    restart: always
     environment:
       - INFLUXDB_DB=ogammadb
       - INFLUXDB_ADMIN_ENABLED=true
@@ -64,12 +70,7 @@ services:
       - '8086:8086'
     networks:
       - ogamma-logger
-  timeseriesadmin:
-    image: timeseriesadmin/timeseriesadmin
-    ports:
-      - '8085:80'
-    networks:
-      - ogamma-logger
+      
   influxdb2:
 #    image: quay.io/influxdb/influxdb:2.0.0-alpha
     image: quay.io/influxdb/influxdb:2.0.0-beta
@@ -82,9 +83,23 @@ services:
     ports:
       - '9999:9999'
     networks:
-      - ogamma-logger        
+      - ogamma-logger
+     
+  grafana:
+    image: grafana/grafana
+    restart: always
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_INSTALL_PLUGINS=grafana-simple-json-datasource,grafana-influxdb-flux-datasource,natel-discrete-panel
+    ports:
+      - '3000:3000'
+    volumes:
+      - 'ogamma-logger-grafana:/var/lib/grafana'
+    networks:
+      - ogamma-logger
+      
   tsdb:
-    image: timescale/timescaledb
+    image: timescale/timescaledb:latest-pg11
     environment:
       - POSTGRES_USER=ogamma
       - POSTGRES_PASSWORD=ogamma
@@ -95,17 +110,14 @@ services:
       - '5432:5432'
     networks:
       - ogamma-logger
-  grafana:
-    image: grafana/grafana
-    environment:
-      - GF_SECURITY_ADMIN_PASSWORD=admin
-      - GF_INSTALL_PLUGINS=grafana-simple-json-datasource
+      
+  timeseriesadmin:
+    image: timeseriesadmin/timeseriesadmin
     ports:
-      - '3000:3000'
-    volumes:
-      - 'ogamma-logger-grafana:/var/lib/grafana'
+      - '8085:80'
     networks:
-      - ogamma-logger
+      - ogamma-logger   
+
   opcplc:
     image: 'mcr.microsoft.com/iotedge/opc-plc:1.0.1-linux-amd64'
     hostname: opcplc
@@ -147,12 +159,13 @@ services:
     volumes:
       - 'kafka_data:/bitnami'
     environment:
-      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
-      - ALLOW_PLAINTEXT_LISTENER=yes
       - KAFKA_BROKER_USER=user
       - KAFKA_BROKER_PASSWORD=bitnami
-      - KAFKA_CFG_LISTENERS=PLAINTEXT://kafka:9092,SASL_PLAINTEXT://kafka:29092
-      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092,SASL_PLAINTEXT://kafka:29092
+      - KAFKA_BROKER_ID=1
+      - KAFKA_LISTENERS=PLAINTEXT://:9092
+      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+      - ALLOW_PLAINTEXT_LISTENER=yes
     depends_on:
       - zookeeper
     networks:

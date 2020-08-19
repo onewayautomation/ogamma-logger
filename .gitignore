@@ -10,3 +10,6 @@
 /docker/data
 docker/opt2/influxdb2_initialized.txt
 /.vs
+binaries/msodbcsql.msi
+KnownIssues.md
+binaries/.wget-hsts
