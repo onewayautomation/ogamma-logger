@@ -10,6 +10,11 @@ Known issues.
 Release History.
 ================
 
+Version 1.2.1 2020-Aug-18
+-------------------------
+
+* Fixed issue: The field ``Key Name Generation Mode`` is not visible when it should be according to the selected TSDB type in the Time-Series database configuration dialog window.
+
 Version 1.2.0 2020-Aug-04
 -------------------------
 
