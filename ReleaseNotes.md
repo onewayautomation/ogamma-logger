@@ -5,20 +5,94 @@ Known issues.
 2. When ``Refresh Data`` field in the ``Logged Variables`` table is set to automatic refresh mode, it is not possible to edit records in that table. Workaround is to turn data refreshing off before editing of records.
 3. Table ``Logged Variables`` has too many columns and not all of them fit well into the screen, and horizontal scrolling is not available, which causes problem viewing/editing them. Workaround: use ``Column Chooser`` button in the right top corner of the table and select columns which need to be visible or hidden (usually not all columns need to be visible).
 4. When OPC UA Server connection settings or logged variables settings are changed, in order to apply them, connections to all OPC UA Servers are closed and re-opened, subscriptions and monitored items are re-created. When an application instance has large number of server connections and logged variables, this might be inconvenient.
+5. When communication with the time-series database is slow or broken, and there are Grafana sessions querying data via *ogamma* Visual Logger's REST endpoint, this can cause issues with configuration GUI responsiveness. As a workaround, separate instance can be created to serve REST endpoint, or number of threads in the same instance can be increased (option ``Web Server Settings / Number of threads`` in the ``Instance Settings`` dialog window).
+6. Reading of historical data from Apache Kafka type database (at processing of Grafana requests) can be slow when within the requested time range there are large number of records for variables with the same topic and partition as topic and partition for the variable for which data is being requested. The reason for this is because although they might have different keys, it is not possible to filter records by a key value, they are filtered in Kafka broker only by topic name and partition. So records for multiple keys are read, and then from them records with desired key value are selected, which takes considerable time.
 
 Release History.
 ================
 
-
-Version 0.9.1 2020-Apr-24
+Version 1.2.1 2020-Sep 7
 -------------------------
 
-* Improved offline license activation workflow: now generated offline activation file can be downlaoded via configuration GUI, and licence file can be uploaded via GUI too.
+* Fixed issue: The field ``Key Name Generation Mode`` is not visible when it should be according to the selected TSDB type in the Time-Series database configuration dialog window.
+* Modified how default key value is generated for TSDB type ``Apache Kafka``: removed part ``n=`` from it.
+* For TSDB types ``InfluxDB 2.0`` and ``InfluxDB 1.7`` added new option in JSON field: ``numberOfConnections``, to increase performance of writing values to the target database. As a result, now it is possible to write 100,000 values per second and more to the instance of InfluxDB database hosted in cloud, from instance of ogamma Visual Logger for OPC running in local netwrork.
+* For TSDS of InfluxDB type (all versions) improved handling of communication errors and fixed issue with invalid timestamps (which was causing InfluxDB return error 400, Bad Request).
+* Minor change in the Login dialog window: now pressing Enter key when either Login or Password field is in focus is equivalent to clicking on the Login button.
+* Added new feature to display some statistical data about application performance, accessible via menu ``Tools / Statistics``. 
+* Minor improvement in the dialog window ``Time-sereis Database configuration Settings``: when a new record is being edited, and in the field ``Type`` database type is selected, other fields are assigned default values, so no need to click on the button ``Reset to defaults``.
+* For MQTT type databases, disabled using of the option ``persistType`` in the JSON field. As a result, the same in-memory buffer meachanizm is used for this type of database too, as for others.
+* For Apache Kafka type databases, into the Json field added option ``Producer /  message.send.max.retries`` with default value 0, to eliminate retries by the underlying library (retries can be handled at the application level).
+* Fixed issue: when time-series database type is ``Apache Kafka``, values for the field ``partition`` in the ``Logged Variables`` table are not read correctly after editing them.
+* For InxluxDB 2.0 type database now connection token value can be saved in the ``password`` field, in encrypted format. Before it was saved in the Json field's option ``token``.
+ 
+Version 1.2.0 2020-Aug-04
+-------------------------
+
+* Added support to publish data to MQTT Broker. Verified with the following MQTT Brokers:
+  * Eclipse Mosquitto
+  * Microsoft Azure IoT Hub
+  * AWS IoT Broker
+  * Google Cloud IoT Core MQTT Bridge.
+
+* Modified logic on connections to SQL family of TSDB databases: now if an attempt to check if the database exists and/or create it fails, this error is ignored. This allows us to connect with a user account with restricted permissions.
+* Upgraded to use the newer version of the licensing library. As a result, installations with the older versions will require reactivation of the license key. The same keys should be re-used. 
+
+Version 1.1.1 2020-Jun-22
+-------------------------
+
+* Added support to store data in MemSQL database (uses the same client library as MySQL, with connection settings specific for MemSQL). 
+* Added new feature: now all children variables from the node in the address space tree panel can be added using context menu. Note that the parent node should be expanded first.
+* Improved performance on adding large number of variables from the address space.
+* Fixed connectivity issue happening when OPC UA messages are large and split into chunks. One use case when it was happening is when number of logged variables per server connection exceeds 1000 or more tags.
+* Fixed re-connection issue (in some cases was not able to establish connection to OPC UA Server after communication failure).
+
+
+Version 1.1.0 2020-Jun-06
+-------------------------
+
+* Added support to store data in Microsoft SQL as a time-series database.
+* Added support to store data in MySQL as a time-series database.
+* Added support to store data in SQLite as a time-series database.
+* Default configuration database type and time-series database type in all distribution packages (Windows, Ubuntu, Docker) is set to SQLite type, so the instance is ready to use immediately without installing of additional database components.
+* Improved handling of connection interruptions with the time-series database of PostgreSQL/TimescaleDB type.
+* Fixed bug: in the case when a time-series database type is PostgreSQL, data values are written twice (was introduced in version 0.8.1).
+
+Version 1.0.1 2020-May-13
+-------------------------
+
+* Fixed issue: ActivateSession call fails at attempt to connect to KepServerEX, if connection security mode none-secured is used in combination with username/password type of user identity token.
+* Fixed issue: Failes to connect to the configuration database of type PostgreSQL in encrypted mode;
+* Fixed issue: Failes to connect to the time-series database of type PostgreSQL(TimescaleDB) in encrypted mode;
+* Significantly improved performance of writing values to the time-series database when it's type is ``PostgreSQL``. As a result, now TimescaleDB/PostgreSQL database can be located not only in the local network, but also in the cloud too.
+* Added feature to download application instance certificate as well as CA certificates and CRL via menu Settings / Download Certificate.
+* Fixed issue: writing values to TimescaleDB/PostgreSQL or Apache Kafka might fail if data value has source timestamp not set or status code is bad.
+* Licensing conditions for Community Edition changed: 
+  * now on instances of the application which are activated after May 14, 2020 maximum number of logged variables is reduced to 64 after end of 1 month trial period. Existing installations activated before May 14, 2020 have limit as it was before: up to 256 variables.
+  * periodic license validation with connection to the license server over the Internet is required. The date when the license was last time validated and the date before which the next validation should be performed are displayed in the dialog window opened via menu License / Status.
+ 
+
+Version 1.0.0 2020-Apr-29
+-------------------------
+
+* First production release.
+* Role ``Collector Agent`` now can be disabled/enabled in dialog window used to edit application instances settings.  
+* Fixed issue: If real time value of a variable is empty, it is displayed in Logged Variables table, column "value" as value "true" of boolean type.
+
+Version 0.9.1 2020-Apr-27
+-------------------------
+
+* Improved offline license activation workflow: now generated offline activation file can be downloaded via configuration GUI, and licence file can be uploaded via GUI too.
 * Optimized license re-activation: now after entering activation key GUI is adjusted accordingly to expected action: activation or re-activation.
 * Fixed error ``index out of range error`` reported by logging subsystem.
 * Modifications in licensing to support Standard, Enterprise and Academic editions.
-* In docker-compose.yml file added one more container: ``portainer/portainer``, the tool with web GUI to manage Docker environments.
+* In docker-compose.yml file added one more container: ``portainer/portainer``, the tool with web GUI to manage Docker environments. Portainer GUI is available at port 9000.
 * Added support to pass name of configuration file in environment variable ``OVL_CONFIG_FILE``, which simplifies running multiple docker containers with *ogamma* Visual Logger for OPC.
+* Added column ``Log to TSDB`` into the table ``Variable Groups``, for group of variables which should not be logged into time-series database by default. The aim is to simplify creation of records in the ``Logged Variables`` table which are used to serve queries from Grafana to read real time data directly from OPC UA Server.
+* Adjusted feature ``Refresh Data`` to display last read values for variables, which are not logged into TSDB. (They are read directly from OPC UA Server to fulfill queries from Grafana).
+* Rebuilt with newer version of the OPC UA SDK, with the following change: Message sequence numbers start from 1 after disconnection (to solve issue with CodeSys OPC UA Server).
+* Fixed issue "ActivateSession request might fail when connections to multiple OPC UA Servers are created, due to using wrong identity token policy id".
+* Fixed issue with high (~ 10% at low load) CPU usage.
 
 Version 0.9.0 2020-Apr-20
 -------------------------
