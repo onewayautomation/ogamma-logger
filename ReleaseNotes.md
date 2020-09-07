@@ -6,15 +6,26 @@ Known issues.
 3. Table ``Logged Variables`` has too many columns and not all of them fit well into the screen, and horizontal scrolling is not available, which causes problem viewing/editing them. Workaround: use ``Column Chooser`` button in the right top corner of the table and select columns which need to be visible or hidden (usually not all columns need to be visible).
 4. When OPC UA Server connection settings or logged variables settings are changed, in order to apply them, connections to all OPC UA Servers are closed and re-opened, subscriptions and monitored items are re-created. When an application instance has large number of server connections and logged variables, this might be inconvenient.
 5. When communication with the time-series database is slow or broken, and there are Grafana sessions querying data via *ogamma* Visual Logger's REST endpoint, this can cause issues with configuration GUI responsiveness. As a workaround, separate instance can be created to serve REST endpoint, or number of threads in the same instance can be increased (option ``Web Server Settings / Number of threads`` in the ``Instance Settings`` dialog window).
+6. Reading of historical data from Apache Kafka type database (at processing of Grafana requests) can be slow when within the requested time range there are large number of records for variables with the same topic and partition as topic and partition for the variable for which data is being requested. The reason for this is because although they might have different keys, it is not possible to filter records by a key value, they are filtered in Kafka broker only by topic name and partition. So records for multiple keys are read, and then from them records with desired key value are selected, which takes considerable time.
 
 Release History.
 ================
 
-Version 1.2.1 2020-Aug-18
+Version 1.2.1 2020-Sep 7
 -------------------------
 
 * Fixed issue: The field ``Key Name Generation Mode`` is not visible when it should be according to the selected TSDB type in the Time-Series database configuration dialog window.
-
+* Modified how default key value is generated for TSDB type ``Apache Kafka``: removed part ``n=`` from it.
+* For TSDB types ``InfluxDB 2.0`` and ``InfluxDB 1.7`` added new option in JSON field: ``numberOfConnections``, to increase performance of writing values to the target database. As a result, now it is possible to write 100,000 values per second and more to the instance of InfluxDB database hosted in cloud, from instance of ogamma Visual Logger for OPC running in local netwrork.
+* For TSDS of InfluxDB type (all versions) improved handling of communication errors and fixed issue with invalid timestamps (which was causing InfluxDB return error 400, Bad Request).
+* Minor change in the Login dialog window: now pressing Enter key when either Login or Password field is in focus is equivalent to clicking on the Login button.
+* Added new feature to display some statistical data about application performance, accessible via menu ``Tools / Statistics``. 
+* Minor improvement in the dialog window ``Time-sereis Database configuration Settings``: when a new record is being edited, and in the field ``Type`` database type is selected, other fields are assigned default values, so no need to click on the button ``Reset to defaults``.
+* For MQTT type databases, disabled using of the option ``persistType`` in the JSON field. As a result, the same in-memory buffer meachanizm is used for this type of database too, as for others.
+* For Apache Kafka type databases, into the Json field added option ``Producer /  message.send.max.retries`` with default value 0, to eliminate retries by the underlying library (retries can be handled at the application level).
+* Fixed issue: when time-series database type is ``Apache Kafka``, values for the field ``partition`` in the ``Logged Variables`` table are not read correctly after editing them.
+* For InxluxDB 2.0 type database now connection token value can be saved in the ``password`` field, in encrypted format. Before it was saved in the Json field's option ``token``.
+ 
 Version 1.2.0 2020-Aug-04
 -------------------------
 
