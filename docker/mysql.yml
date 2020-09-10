@@ -1,0 +1,23 @@
+version: '3'
+services:
+
+# MySQL database
+   
+  mysql:
+    image: 'mysql'
+    ports:
+      - '3306:3306'
+    hostname: mysql
+#    volumes:
+#      - './data://var/lib/mysql'
+    environment:
+      - MYSQL_ROOT_PASSWORD=ogamma123 #TODO
+
+    command: --default-authentication-plugin=mysql_native_password
+    
+    networks:
+      - ogamma-logger
+      
+networks:
+  ogamma-logger: null
+volumes:

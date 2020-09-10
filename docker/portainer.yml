@@ -1,0 +1,18 @@
+version: '3'
+services:
+# Portainer can be used to manage containers remotely over web GUI.
+  portainer:
+    image: 'portainer/portainer'
+    restart: always
+    ports:
+      - '9000:9000'
+    volumes:
+      - 'portainer_data:/data'
+      - '/var/run/docker.sock:/var/run/docker.sock'
+      
+    networks:
+      - ogamma-logger
+networks:
+  ogamma-logger: null
+volumes:
+  portainer_data: {}

@@ -1,0 +1,35 @@
+version: '3'
+services:
+# TimescaleDB (PostgreSQL, optimized to store time-series data).
+  tsdb:
+    image: timescale/timescaledb:latest-pg11
+    environment:
+      - POSTGRES_USER=ogamma
+      - POSTGRES_PASSWORD=ogamma
+      - POSTGRES_DB=ogammalogger
+    volumes:
+      - 'ogamma-logger-tsdb-data:/var/lib/postgresql/data'
+    ports:
+      - '5432:5432'
+    networks:
+      - ogamma-logger
+      
+# Web based management tool.       
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@ogamma.io
+      - PGADMIN_DEFAULT_PASSWORD=admin
+      - PGADMIN_LISTEN_PORT=4888
+    volumes:
+      - ogamma-logger-pgadmin:/var/lib/pgadmin
+    ports:
+      - "4888:4888"
+    networks:
+      - ogamma-logger      
+
+networks:
+  ogamma-logger: null
+volumes:
+  ogamma-logger-tsdb-data: {}
+  ogamma-logger-pgadmin: {}

@@ -1,0 +1,20 @@
+version: '3'
+services:
+
+#InfluxDB version 2.0    
+  influxdb2:
+    image: quay.io/influxdb/influxdb:2.0.0-beta
+    command: >
+      bash -c "chmod 774 /opt/start_and_init.sh
+      && /opt/start_and_init.sh"
+    volumes:
+      - 'ogamma-logger-influxdb2-data:/root/.influxdbv2'
+      - './opt2:/opt'        
+    ports:
+      - '9999:9999'
+    networks:
+      - ogamma-logger
+networks:
+  ogamma-logger: null
+volumes:
+  ogamma-logger-influxdb2-data: {}

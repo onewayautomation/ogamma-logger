@@ -1,0 +1,19 @@
+version: '3'
+services:
+#Grafana    
+  grafana:
+    image: grafana/grafana
+    restart: always
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_INSTALL_PLUGINS=grafana-simple-json-datasource,grafana-influxdb-flux-datasource,natel-discrete-panel
+    ports:
+      - '3000:3000'
+    volumes:
+      - 'ogamma-logger-grafana:/var/lib/grafana'
+    networks:
+      - ogamma-logger
+networks:
+  ogamma-logger: null
+volumes:
+  ogamma-logger-grafana: {}

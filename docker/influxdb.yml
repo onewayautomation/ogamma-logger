@@ -1,0 +1,33 @@
+version: '3'
+services:
+# InfluxdB version 1.X (prior 2.0)
+  influxdb:
+    image: influxdb
+    restart: always
+    environment:
+      - INFLUXDB_DB=ogammadb
+      - INFLUXDB_ADMIN_ENABLED=true
+      - INFLUXDB_ADMIN_USER=admin
+      - INFLUXDB_ADMIN_PASSWORD=admin
+      - INFLUXDB_USER=ogamma
+      - INFLUXDB_USER_PASSWORD=ogamma
+      - INFLUXDB_HTTP_ENABLED=true
+      - INFLUXDB_HTTP_AUTH_ENABLED=false
+    volumes:
+      - 'ogamma-logger-influxdb-data://var/lib/influxdb'
+    ports:
+      - '8086:8086'
+    networks:
+      - ogamma-logger
+      
+# Web based management tool for InfluxDB 
+  timeseriesadmin:
+    image: timeseriesadmin/timeseriesadmin
+    ports:
+      - '8085:80'
+    networks:
+      - ogamma-logger   
+networks:
+  ogamma-logger: null
+volumes:
+  ogamma-logger-influxdb-data: {}
