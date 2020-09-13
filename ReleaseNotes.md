@@ -11,19 +11,31 @@ Known issues.
 Release History.
 ================
 
+Version 1.2.2 2020-Sep-12
+-------------------------
+
+* Modified default settings in the Json field for Apache Kafka type database connection configuration:
+
+  * metadata.broker.list - now by default set to empty value. Values from fields Host and Port will be used as a connection URL. If this option is not empty, then its value will be used as connection URL, and values of fields Host and Port will be ignored.
+  * batch.num.messages - removed. In Producer configuration, value of the field ``Write Batch Size`` is used for it. If this option is defined, then it is used, and value of the field ``Write Batch Size`` will be ignored. In consumer configuration, value of the field ``Read Batch Size`` used for it.
+  * queue.buffering.max.ms - removed. Value of the field ``Max Write Interval`` will be used.
+
+* Some default values for time-series database configuration settings changed to match with values set in Docker containers.
+* docker-compose.yml file in product's GitHub repository is split into multiple files, so now it is possible to run selected subset of containers by changing arguments passed to the docker-compose command.
+
 Version 1.2.1 2020-Sep 7
 -------------------------
 
 * Fixed issue: The field ``Key Name Generation Mode`` is not visible when it should be according to the selected TSDB type in the Time-Series database configuration dialog window.
 * Modified how default key value is generated for TSDB type ``Apache Kafka``: removed part ``n=`` from it.
-* For TSDB types ``InfluxDB 2.0`` and ``InfluxDB 1.7`` added new option in JSON field: ``numberOfConnections``, to increase performance of writing values to the target database. As a result, now it is possible to write 100,000 values per second and more to the instance of InfluxDB database hosted in cloud, from instance of ogamma Visual Logger for OPC running in local netwrork.
+* For TSDB types ``InfluxDB 2.0`` and ``InfluxDB 1.7`` added new option in JSON field: ``numberOfConnections``, to increase performance of writing values to the target database. As a result, now it is possible to write 100,000 values per second and more to the instance of InfluxDB database hosted in cloud, from instance of ogamma Visual Logger for OPC running in local network.
 * For TSDS of InfluxDB type (all versions) improved handling of communication errors and fixed issue with invalid timestamps (which was causing InfluxDB return error 400, Bad Request).
 * Minor change in the Login dialog window: now pressing Enter key when either Login or Password field is in focus is equivalent to clicking on the Login button.
 * Added new feature to display some statistical data about application performance, accessible via menu ``Tools / Statistics``. 
-* Minor improvement in the dialog window ``Time-sereis Database configuration Settings``: when a new record is being edited, and in the field ``Type`` database type is selected, other fields are assigned default values, so no need to click on the button ``Reset to defaults``.
+* Minor improvement in the dialog window ``Time-sereis Database Configuration Settings``: when a new record is being edited, and in the field ``Type`` database type is selected, other fields are assigned default values, so no need to click on the button ``Reset to defaults``.
 * For MQTT type databases, disabled using of the option ``persistType`` in the JSON field. As a result, the same in-memory buffer meachanizm is used for this type of database too, as for others.
 * For Apache Kafka type databases, into the Json field added option ``Producer /  message.send.max.retries`` with default value 0, to eliminate retries by the underlying library (retries can be handled at the application level).
-* Fixed issue: when time-series database type is ``Apache Kafka``, values for the field ``partition`` in the ``Logged Variables`` table are not read correctly after editing them.
+* Fixed issue: when time-series database type is ``Apache Kafka``, values for the column ``partition`` in the ``Logged Variables`` table are not read correctly after editing them.
 * For InxluxDB 2.0 type database now connection token value can be saved in the ``password`` field, in encrypted format. Before it was saved in the Json field's option ``token``.
  
 Version 1.2.0 2020-Aug-04

@@ -20,4 +20,4 @@ services:
       
 networks:
   ogamma-logger: null
-volumes:
+
