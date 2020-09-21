@@ -2,7 +2,7 @@ version: '3'
 services:
 # InfluxdB version 1.X (prior 2.0)
   influxdb:
-    image: influxdb
+    image: influxdb:1.8.2
     restart: always
     environment:
       - INFLUXDB_DB=ogammadb
@@ -22,7 +22,7 @@ services:
       
 # Web based management tool for InfluxDB 
   timeseriesadmin:
-    image: timeseriesadmin/timeseriesadmin
+    image: timeseriesadmin/timeseriesadmin:0.1.12
     ports:
       - '8085:80'
     networks:

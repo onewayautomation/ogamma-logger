@@ -2,7 +2,7 @@ version: '3'
 services:
  # Example of the second instance configuration:
  ogamma-logger2:
-   image: 'ogamma/logger:latest'
+   image: 'ogamma/logger:1.2.3'
    environment:
      - OVL_CONFIG_FILE=./data/config2.json
    ports:

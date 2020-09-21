@@ -11,6 +11,20 @@ Known issues.
 Release History.
 ================
 
+Version 1.2.3 2020-Sep-21
+-------------------------
+
+* Added new time-Series Database of ``Confluent`` type, used to connect to instances of Confluent Cloud or Confluent Enterprise.
+* Re-built with the latest version of the C++ OPC UA Client SDK, with the following changes/fixes:
+
+  * If an OPC UA Server returns ServiceFault response for the CloseSecureChannelRequest, it is not considered as an error anymore.
+  * Fixed connectivity issue happening when OPC UA Server in the GetEndpoints response returns endpoint URL with host name which is not accessible from the machine where ogamma Visual Logger is running. For example, this might happen when the OPC UA server running in a docker container returns that container's host name in the endpoint URL. Now in such cases that host name is replaced by host name or IP address used in the original endpoint URL used to call the GetEndpoints service.
+
+* Into the GitHub repository of the ogamma Visual Logger for OPC added file docker/kafka.yml, used to run Apache Kafka in a Docker container.
+* Modified docker-compose configuration files in product's GitHub page: now they use specific versions of Docker images used in internal tests, instead of latest versions. This is done to eliminate cases when newer versions of images due to changes cause issues on interoperability with ogamma Visual Logger for OPC.
+* Default key values for Apache Kafka is modified to empty string (before was "Unknown"). This behaviour can be changed by defining of the option ``default_key_value`` in the Json field.
+* Updated User Manual: added section for Confluent, and some editing.
+
 Version 1.2.2 2020-Sep-12
 -------------------------
 
@@ -36,7 +50,7 @@ Version 1.2.1 2020-Sep 7
 * For MQTT type databases, disabled using of the option ``persistType`` in the JSON field. As a result, the same in-memory buffer meachanizm is used for this type of database too, as for others.
 * For Apache Kafka type databases, into the Json field added option ``Producer /  message.send.max.retries`` with default value 0, to eliminate retries by the underlying library (retries can be handled at the application level).
 * Fixed issue: when time-series database type is ``Apache Kafka``, values for the column ``partition`` in the ``Logged Variables`` table are not read correctly after editing them.
-* For InxluxDB 2.0 type database now connection token value can be saved in the ``password`` field, in encrypted format. Before it was saved in the Json field's option ``token``.
+* For InxluxDB 2.0 type database now connection token value can be saved in the ``Password`` field, in encrypted format. Before it was saved in the Json field's option ``token``. 
  
 Version 1.2.0 2020-Aug-04
 -------------------------

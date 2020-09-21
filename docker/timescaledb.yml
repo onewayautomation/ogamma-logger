@@ -2,7 +2,7 @@ version: '3'
 services:
 # TimescaleDB (PostgreSQL, optimized to store time-series data).
   tsdb:
-    image: timescale/timescaledb:latest-pg11
+    image: timescale/timescaledb:1.7.4-pg11
     environment:
       - POSTGRES_USER=ogamma
       - POSTGRES_PASSWORD=ogamma
@@ -16,7 +16,7 @@ services:
       
 # Web based management tool.       
   pgadmin:
-    image: dpage/pgadmin4
+    image: dpage/pgadmin4:4.26
     environment:
       - PGADMIN_DEFAULT_EMAIL=admin@ogamma.io
       - PGADMIN_DEFAULT_PASSWORD=admin

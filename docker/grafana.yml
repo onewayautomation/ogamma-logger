@@ -2,7 +2,7 @@ version: '3'
 services:
 #Grafana    
   grafana:
-    image: grafana/grafana
+    image: grafana/grafana:7.1.5
     restart: always
     environment:
       - GF_SECURITY_ADMIN_PASSWORD=admin

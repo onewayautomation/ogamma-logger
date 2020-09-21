@@ -2,13 +2,16 @@ version: '3'
 services:
 # Demo OPC UA Server
   opcplc:
-    image: 'mcr.microsoft.com/iotedge/opc-plc:1.0.1-linux-amd64'
+    image: 'mcr.microsoft.com/iotedge/opc-plc:1.1.6'
+    #image: 'mcr.microsoft.com/iotedge/opc-plc:1.0.1-linux-amd64'
     hostname: opcplc
     ports:
       - '50000:50000'
-    command: '--aa'
+    command: '--autoaccept'
     networks:
       - ogamma-logger
+    volumes:
+      - './data/opcplc/pki:/app/pki'
 
 networks:
   ogamma-logger: null

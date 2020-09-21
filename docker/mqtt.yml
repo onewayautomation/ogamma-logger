@@ -2,7 +2,7 @@ version: '3'
 services:
 # MQTT Broker Eclipse Mosquitto   
   mqtt:
-    image: 'eclipse-mosquitto'
+    image: 'eclipse-mosquitto:1.6.12'
     ports:
       - '1883:1883'
       - '9001:9001'
