@@ -5,7 +5,8 @@
 * **Store** that data in time-series database:
   * ``TimescaleDB`` (PostgreSQL database optimized to store time-series data);
   * ``PostgreSQL`` regular version;
-  * ``InfluxDB`` (versions 1.7 or 2.0);
+  * ``InfluxDB`` (versions 1.7, 1.8 or 2.0);
+  * ``Confluent: Cloud and Enterprise``;
   * ``Apache Kafka``;
   * ``Microsoft SQL Server``;
   * ``MySQL``;

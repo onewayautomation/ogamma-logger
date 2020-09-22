@@ -23,6 +23,7 @@ Version 1.2.3 2020-Sep-21
 * Into the GitHub repository of the ogamma Visual Logger for OPC added file docker/kafka.yml, used to run Apache Kafka in a Docker container.
 * Modified docker-compose configuration files in product's GitHub page: now they use specific versions of Docker images used in internal tests, instead of latest versions. This is done to eliminate cases when newer versions of images due to changes cause issues on interoperability with ogamma Visual Logger for OPC.
 * Default key values for Apache Kafka is modified to empty string (before was "Unknown"). This behaviour can be changed by defining of the option ``default_key_value`` in the Json field.
+* Fixed issue: writing variable values from Logged Variables table is handled as configuration change (i.e. OVL reconnects to the OPC UA Server).
 * Updated User Manual: added section for Confluent, and some editing.
 
 Version 1.2.2 2020-Sep-12
