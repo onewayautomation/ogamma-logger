@@ -11,6 +11,15 @@ Known issues.
 Release History.
 ================
 
+Version 1.2.4 2020-Oct-19
+-------------------------
+
+* Fixed issue: Application crashes when receives POST request on in-complete OData URL.
+* Fixed issue: Writing to InfluxDB stops when the numeric type variable's value, converted to float type, becomes equal to the special value ``infinity``.
+* Added support to write special values for numeric type variables: ``min``, ``max``, ``inf``, ``nan``.
+* For InfluxDB improved precision of written values: now numeric values are written as 64-bit float, before they were written as 32-bit float. 
+* For InfluxDB, added configuration option which allows writing of numeric values of integer type without conversion to 64 bit float. 
+
 Version 1.2.3 2020-Sep-21
 -------------------------
 
