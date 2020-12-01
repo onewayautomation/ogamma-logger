@@ -11,6 +11,26 @@ Known issues.
 Release History.
 ================
 
+Version 1.2.5 2020-Nov-30
+-------------------------
+
+* Fixed connectivity issues:
+  
+  * incorrect Endpoint URL was used in TCP binary Hello and CreateSession messages, which was causing some servers to refuse the connection.
+  * communication layer improved to handle tampered network packets.
+  * automatic reconnection feature improved.
+
+* Fixed bug: field clientDescription / productUri was not set in the Create Session request.
+* User Manual is updated, and now, additionally to the online version, it is included in the distribution packages, for easy access from local networks without access to the Internet.
+* For MQTT type database fixed runtime exception happening in the case when the configuration is modified during unstable connection with the broker.
+* For InfluxDb, Kafka, Confluent, and MQTT type databases revised how mapping from OPC UA to measurement/topic name/tags/keys is implemented: added new selections ``Use JSON option ...`` and ``Use OPC UA Node Id``. It is recommended to check the current mapping implementation before upgrading to this version and create a full backup, and after the upgrade verify that mapping is correct. Refer to the User Manual for complete mapping details.
+* For InfluxDb type database added JSON option ``allowSpaceInMeasurementAndTags`` which allows InfluxDB measurement and tags to have space symbol.
+* For InfluxDB string type values added escaping of special symbols.
+* InfluxDB field names for value, data type and status made configurable using new JSON options ``fieldKeyNumericValue``, ``fieldKeyStringValue``, ``fieldKeyStatus``, ``fieldKeyDataType``.
+* InfluxDB default tag key name (``n``) is made configurable, using JSON option ``defaultTagName``.
+* Updated to use the newer version of the JavaScript front-end library.
+
+
 Version 1.2.4 2020-Oct-19
 -------------------------
 
