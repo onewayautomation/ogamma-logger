@@ -7,9 +7,39 @@ Known issues.
 4. When OPC UA Server connection settings or logged variables settings are changed, in order to apply them, connections to all OPC UA Servers are closed and re-opened, subscriptions and monitored items are re-created. When an application instance has large number of server connections and logged variables, this might be inconvenient.
 5. When communication with the time-series database is slow or broken, and there are Grafana sessions querying data via *ogamma* Visual Logger's REST endpoint, this can cause issues with configuration GUI responsiveness. As a workaround, separate instance can be created to serve REST endpoint, or number of threads in the same instance can be increased (option ``Web Server Settings / Number of threads`` in the ``Instance Settings`` dialog window).
 6. Reading of historical data from Apache Kafka type database (at processing of Grafana requests) can be slow when within the requested time range there are large number of records for variables with the same topic and partition as topic and partition for the variable for which data is being requested. The reason for this is because although they might have different keys, it is not possible to filter records by a key value, they are filtered in Kafka broker only by topic name and partition. So records for multiple keys are read, and then from them records with desired key value are selected, which takes considerable time.
+7. In the time-series database configuration settings dialog window, when the value of the field Type is changed, it is not applied. Workaround: repeat the selection one more time.
 
 Release History.
 ================
+
+Version 2.0.2 2021-Jan-26
+-------------------------
+
+* Fixed issue: downloading CA CRL fails (via menu ``Settings/Download Certificate/CA CRL``).
+* Fixed issue: application might crash when writing to InfluxDB database repeatedly fails if JSON option ``numberOfConnections`` is greater than 1.
+
+Version 2.0.1 2021-Jan-18
+--------------------------
+
+* Fixed issue: cannot connect to the InfluxDB database in secured mode.
+* Fixed issue: InfluxDB custom tag values (``Variable Tag`` column values defined in the ``Logged Variables`` table) are not applied if Tags Generation Mode is not set to ``Use JSON option "tagsTemplate"``.
+
+Version 2.0.0 2021-Jan-14
+-------------------------
+
+* Store and forward feature changed: now instead of in-memory buffer, file-system based local storage is used as a buffer. As a result, when connection with the target time-series database is lost, usage of RAM is not increased, data is stored in local buffer and therefroe data is not lost in case of restarts.
+* Added support for certificate trust lists management (new menu command ``Settings / Certificates Management``. As a result, after upgrade to this version, connections to servers in secured mode would initialially fail. To allow connections, trust to the server certificate needs to be configured.
+* Added feature to view server certificate if it is not trusted or cannot be validated, and add it to the trusted certificates list.
+* Added feature to set precision of float data values stored in PostgreSQL and TimescaleDB databases (now can be stored as 64 or 32 bit float).
+* Fixed issue: when the connection is restored after disconnection due to communication error, periodical secure channel renewal stops.
+* Fixed issue with duplicate records when SQLite is used as a time-series database.
+* Improved JSON editor used to edit other settings in TSDB condfiguration dialog.
+* In the Server node settings dialog window added button ``Edit Advanced Options``, which opens separate dialog window to modify advanced confifuration settings, including certificate validation rules.
+* For time-series databases for which topic name or measurement are applicable (InfluxDB, Confluent, Apache Kafka, MQTT), modified logic how JSON option topicName or meaasurement is applied: now they will be used only if the field ``Measurement Generation Mode`` is set to ``Use JSON option measurement`` (for InfluxDB), or field ``Topic Name Generation Mode`` is set to Use JSON option topicName (for others). It is recommended to revise time-series database settings before and after upgrade.
+* Logged Variables table: modified scroll mode to support horizontal scrolling. Note: to enable it in upgraded versions, browser cache needs to be cleared.
+* Logged Variables table: added column ``Variable Tag``, where variable-specific values can be entered, and then it can be referenced from ``tagsTemplate`` option by placeholder ``[VariableTag]`` to compose InfluxDB tags. The column ``Tags`` is not editable now, it will present composed values of the tags.
+* Fixed issue: connection to the server fails in secured mode if number of monitored items is large.
+* Dependency libraries updated to newer versions.
 
 Version 1.2.5 2020-Nov-30
 -------------------------
