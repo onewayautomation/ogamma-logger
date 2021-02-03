@@ -8,7 +8,7 @@ services:
       bash -c "chmod 774 /opt/start_and_init.sh && /opt/start_and_init.sh"
     volumes:
       - 'ogamma-logger-influxdb2.0.3-data:/root/.influxdbv2'
-      - './opt2:/opt'
+      - './opt2.0.3:/opt'
     ports:
       - '8016:8086'
     networks:
