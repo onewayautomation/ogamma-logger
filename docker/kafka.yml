@@ -32,7 +32,10 @@ services:
       - zookeeper
     networks:
       - ogamma-logger
-      
+
+networks:
+  ogamma-logger: null
+  
 volumes:
   zookeeper_data:
     driver: local

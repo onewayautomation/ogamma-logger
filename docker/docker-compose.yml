@@ -2,7 +2,7 @@ version: '3'
 services:
       
   ogamma-logger:
-    image: 'ogamma/logger:2.0.2'
+    image: 'ogamma/logger:2.1.0'
     restart: always
 # By default configuration file ./data/config is used. Can be changed by environment variable.    
     environment:
@@ -10,9 +10,6 @@ services:
 
     ports:
       - '4880:4880'
-# for troubleshooting SSH port can be exposed.      
-#      - '4822:22'
-      
     hostname: ogamma-logger
     volumes:
       - './data:/home/ogamma/logger/data'

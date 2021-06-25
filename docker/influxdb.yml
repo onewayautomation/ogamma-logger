@@ -1,8 +1,7 @@
 version: '3'
 services:
-# InfluxdB version 1.X (prior 2.0)
   influxdb:
-    image: influxdb:1.8.2
+    image: influxdb:1.8.6
     restart: always
     environment:
       - INFLUXDB_DB=ogammadb
@@ -14,9 +13,9 @@ services:
       - INFLUXDB_HTTP_ENABLED=true
       - INFLUXDB_HTTP_AUTH_ENABLED=false
     volumes:
-      - 'ogamma-logger-influxdb-data://var/lib/influxdb'
+      - 'ogamma-logger-influxdb-data:/var/lib/influxdb'
     ports:
-      - '8086:8086'
+      - '8084:8086'
     networks:
       - ogamma-logger
       
