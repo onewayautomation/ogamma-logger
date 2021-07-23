@@ -16,7 +16,7 @@ services:
       
 # Web based management tool.       
   pgadmin:
-    image: dpage/pgadmin4:4.26
+    image: dpage/pgadmin4:5.5
     environment:
       - PGADMIN_DEFAULT_EMAIL=admin@ogamma.io
       - PGADMIN_DEFAULT_PASSWORD=admin
