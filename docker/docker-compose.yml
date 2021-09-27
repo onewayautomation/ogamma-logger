@@ -2,7 +2,7 @@ version: '3'
 services:
       
   ogamma-logger:
-    image: 'ogamma/logger:2.1.3'
+    image: 'ogamma/logger:2.1.4'
     restart: always
 # By default configuration file ./data/config is used. Can be changed by environment variable.    
     environment:
