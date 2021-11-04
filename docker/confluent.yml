@@ -1,11 +1,7 @@
-version: '3'
+version: '2'
 services:
-# Confluent Platform services (Apache Kafka and other accompanying utilities/tools), 
-# created following the Quick Start Guide page from Confluent:
-# https://docs.confluent.io/current/quickstart/ce-docker-quickstart.html
-
   zookeeper:
-    image: confluentinc/cp-zookeeper:5.5.1
+    image: confluentinc/cp-zookeeper:6.2.1
     hostname: zookeeper
     container_name: zookeeper
     ports:
@@ -15,9 +11,8 @@ services:
       ZOOKEEPER_TICK_TIME: 2000
     networks:
       - ogamma-logger
-      
   broker:
-    image: confluentinc/cp-server:5.5.1
+    image: confluentinc/cp-server:6.2.1
     hostname: broker
     container_name: broker
     depends_on:
@@ -25,7 +20,6 @@ services:
     ports:
       - "9092:9092"
       - "9101:9101"
-      - "29092:29092"
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
@@ -35,60 +29,37 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
       KAFKA_CONFLUENT_LICENSE_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_CONFLUENT_BALANCER_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
       KAFKA_JMX_PORT: 9101
+      KAFKA_JMX_HOSTNAME: broker
+      KAFKA_CONFLUENT_SCHEMA_REGISTRY_URL: http://schema-registry:8081
       CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: broker:29092
-      CONFLUENT_METRICS_REPORTER_ZOOKEEPER_CONNECT: zookeeper:2181
       CONFLUENT_METRICS_REPORTER_TOPIC_REPLICAS: 1
       CONFLUENT_METRICS_ENABLE: 'true'
       CONFLUENT_SUPPORT_CUSTOMER_ID: 'anonymous'
     networks:
       - ogamma-logger
-  
-  
-  kafka:
-    image: confluentinc/cp-kafka:5.5.3
-    container_name: kafka
-    hostname: kafka
-    ports:
-    - "9992:9092"
-    restart: always
-    environment:
-      KAFKA_ADVERTISED_LISTENERS: LISTENER_DOCKER_INTERNAL://kafka:19092,LISTENER_DOCKER_EXTERNAL://${DOCKER_HOST_IP:-127.0.0.1}:9092
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: LISTENER_DOCKER_INTERNAL:PLAINTEXT,LISTENER_DOCKER_EXTERNAL:PLAINTEXT
-      KAFKA_INTER_BROKER_LISTENER_NAME: LISTENER_DOCKER_INTERNAL
-      KAFKA_ZOOKEEPER_CONNECT: "zookeeper:2181"
-      KAFKA_BROKER_ID: 2
-      KAFKA_LOG4J_LOGGERS: "kafka.controller=INFO,kafka.producer.async.DefaultEventHandler=INFO,state.change.logger=INFO"
-      KAFKA_DEFAULT_REPLICATION_FACTOR: 1
-      KAFKA_NUM_PARTITIONS: 3
-      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-      
-    networks:
-      - ogamma-logger
   schema-registry:
-    image: confluentinc/cp-schema-registry:5.5.1
+    image: confluentinc/cp-schema-registry:6.2.1
     hostname: schema-registry
     container_name: schema-registry
     depends_on:
-      - zookeeper
       - broker
     ports:
       - "8081:8081"
     environment:
       SCHEMA_REGISTRY_HOST_NAME: schema-registry
-      SCHEMA_REGISTRY_KAFKASTORE_CONNECTION_URL: 'zookeeper:2181'
-    
+      SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: 'broker:29092'
+      SCHEMA_REGISTRY_LISTENERS: http://0.0.0.0:8081
     networks:
       - ogamma-logger
-
   connect:
-    image: cnfldemos/cp-server-connect-datagen:0.3.2-5.5.0
+    image: cnfldemos/cp-server-connect-datagen:0.5.0-6.2.1
     hostname: connect
     container_name: connect
     depends_on:
-      - zookeeper
       - broker
       - schema-registry
     ports:
@@ -108,34 +79,30 @@ services:
       CONNECT_KEY_CONVERTER: org.apache.kafka.connect.storage.StringConverter
       CONNECT_VALUE_CONVERTER: io.confluent.connect.avro.AvroConverter
       CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_URL: http://schema-registry:8081
-      CONNECT_INTERNAL_KEY_CONVERTER: "org.apache.kafka.connect.json.JsonConverter"
-      CONNECT_INTERNAL_VALUE_CONVERTER: "org.apache.kafka.connect.json.JsonConverter"
-      CONNECT_ZOOKEEPER_CONNECT: 'zookeeper:2181'
       # CLASSPATH required due to CC-2422
-      CLASSPATH: /usr/share/java/monitoring-interceptors/monitoring-interceptors-5.5.1.jar
+      CLASSPATH: /usr/share/java/monitoring-interceptors/monitoring-interceptors-6.2.1.jar
       CONNECT_PRODUCER_INTERCEPTOR_CLASSES: "io.confluent.monitoring.clients.interceptor.MonitoringProducerInterceptor"
       CONNECT_CONSUMER_INTERCEPTOR_CLASSES: "io.confluent.monitoring.clients.interceptor.MonitoringConsumerInterceptor"
       CONNECT_PLUGIN_PATH: "/usr/share/java,/usr/share/confluent-hub-components"
       CONNECT_LOG4J_LOGGERS: org.apache.zookeeper=ERROR,org.I0Itec.zkclient=ERROR,org.reflections=ERROR
     networks:
       - ogamma-logger
-      
   control-center:
-    image: confluentinc/cp-enterprise-control-center:5.5.1
+    image: confluentinc/cp-enterprise-control-center:6.2.1
     hostname: control-center
     container_name: control-center
     depends_on:
-      - zookeeper
       - broker
       - schema-registry
       - connect
       - ksqldb-server
     ports:
       - "9021:9021"
+    networks:
+      - ogamma-logger      
     environment:
       CONTROL_CENTER_BOOTSTRAP_SERVERS: 'broker:29092'
-      CONTROL_CENTER_ZOOKEEPER_CONNECT: 'zookeeper:2181'
-      CONTROL_CENTER_CONNECT_CLUSTER: 'connect:8083'
+      CONTROL_CENTER_CONNECT_CONNECT-DEFAULT_CLUSTER: 'connect:8083'
       CONTROL_CENTER_KSQL_KSQLDB1_URL: "http://ksqldb-server:8088"
       CONTROL_CENTER_KSQL_KSQLDB1_ADVERTISED_URL: "http://localhost:8088"
       CONTROL_CENTER_SCHEMA_REGISTRY_URL: "http://schema-registry:8081"
@@ -147,7 +114,7 @@ services:
     networks:
       - ogamma-logger
   ksqldb-server:
-    image: confluentinc/cp-ksqldb-server:5.5.1
+    image: confluentinc/cp-ksqldb-server:6.2.1
     hostname: ksqldb-server
     container_name: ksqldb-server
     depends_on:
@@ -165,10 +132,13 @@ services:
       KSQL_PRODUCER_INTERCEPTOR_CLASSES: "io.confluent.monitoring.clients.interceptor.MonitoringProducerInterceptor"
       KSQL_CONSUMER_INTERCEPTOR_CLASSES: "io.confluent.monitoring.clients.interceptor.MonitoringConsumerInterceptor"
       KSQL_KSQL_CONNECT_URL: "http://connect:8083"
+      KSQL_KSQL_LOGGING_PROCESSING_TOPIC_REPLICATION_FACTOR: 1
+      KSQL_KSQL_LOGGING_PROCESSING_TOPIC_AUTO_CREATE: 'true'
+      KSQL_KSQL_LOGGING_PROCESSING_STREAM_AUTO_CREATE: 'true'
     networks:
       - ogamma-logger
   ksqldb-cli:
-    image: confluentinc/cp-ksqldb-cli:5.5.1
+    image: confluentinc/cp-ksqldb-cli:6.2.1
     container_name: ksqldb-cli
     depends_on:
       - broker
@@ -179,7 +149,7 @@ services:
     networks:
       - ogamma-logger
   ksql-datagen:
-    image: confluentinc/ksqldb-examples:5.5.1
+    image: confluentinc/ksqldb-examples:6.2.1
     hostname: ksql-datagen
     container_name: ksql-datagen
     depends_on:
@@ -202,9 +172,8 @@ services:
     networks:
       - ogamma-logger
   rest-proxy:
-    image: confluentinc/cp-kafka-rest:5.5.1
+    image: confluentinc/cp-kafka-rest:6.2.1
     depends_on:
-      - zookeeper
       - broker
       - schema-registry
     ports:
@@ -216,13 +185,8 @@ services:
       KAFKA_REST_BOOTSTRAP_SERVERS: 'broker:29092'
       KAFKA_REST_LISTENERS: "http://0.0.0.0:8082"
       KAFKA_REST_SCHEMA_REGISTRY_URL: 'http://schema-registry:8081'
+
     networks:
-      - ogamma-logger      
-      
+      - ogamma-logger
 networks:
   ogamma-logger: null
-volumes:
-  zookeeper_data:
-    driver: local
-  kafka_data:
-    driver: local
