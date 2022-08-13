@@ -8,14 +8,14 @@ import shutil
 
 # Before running of the script, set test options below as required:
 
-collectorConfigurationName = 'Magellan Test Configuration'
+collectorConfigurationName = 'Test Configuration'
  
 # Name of the SQLite database file where configuration is created. Required option.
 # Can be existing file. If existing file, and recrteadeDb is true, then will be overritten by the souirce file. If recreateDb is false, then will be used as is.
 # Note that if this file is configured to be used by OVL, then the OVL process must be stopped before and running this script.
 
 # destinationDatabase = '../data/config.db'
-destinationDatabase = 'D:/ovl-workshop/ogamma-logger/docker/data/config.db'
+destinationDatabase = '../docker/data/config.db'
 
 # template database, which can be sued as a base. Optional. This can be empty database ot database with some settings already created.
 sourceDatabase = './config-template.db'
@@ -165,6 +165,7 @@ def main():
   serverOptions = getServerJsonOptions(serverOptionsFileName, serverHostName, serverIpAddress)
   
   # create a database connection
+  print("Opening database file at {}".format(destinationDatabase));
   conn = createConnection(destinationDatabase)
   with conn:
     index = 0
