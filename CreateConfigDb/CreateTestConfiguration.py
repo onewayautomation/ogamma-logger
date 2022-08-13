@@ -52,7 +52,6 @@ numberOfVariables = 100
 samplingInterval=1000
 publishingInterval=1000
 
-
 # Function to get server advanced options:
 def getServerJsonOptions(fileName, hostName = "", ipAddress = ""):
   f = open(fileName, "r")
@@ -140,6 +139,10 @@ def main():
   global collectorConfigurationName
   global serverOptionsFileName
 
+
+  totalservers = 0
+  totalVariables = 0
+
   queueSize = round(publishingInterval / samplingInterval + 2)
 	
   # Read advanced OPC UA server connection options from file.
@@ -191,7 +194,7 @@ def main():
                 )
 
       serverId = createServer(conn, collectorConfigurationId, server)
-
+      totalservers = totalservers + 1
       variableIndex=0
       
       while variableIndex < numberOfVariables:
@@ -219,10 +222,13 @@ def main():
           )
         createVariable(conn, loggingVariable)
         variableIndex = variableIndex + 1
+        totalVariables = totalVariables + 1
 
       serverPortNumber = serverPortNumber + 1
 
   conn.commit()
 
+  print("Created {} server records and {} logged variable records\n".format(totalservers, totalVariables))
+  
 if __name__ == '__main__':
   main()
