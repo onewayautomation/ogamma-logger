@@ -34,7 +34,7 @@ Note that to enable all the features third party components are required.  The e
 Docker image is available at: https://hub.docker.com/r/ogamma/logger.
 
 File ``docker/docker-compose.yml`` allows to pull *ogamma* Visual Logger image and additionally all required dependency images:
-* Databases (TimescaleDB, InfluxDB versions 1.7 and 2.0, Apache Kafka);
+* Databases (TimescaleDB, InfluxDB versions 1.x and 2.x, Apache Kafka);
 * PgAdmin, to manage database PostgreSQL;
 * Grafana, optional, to visualize data;
 * Sample OPC UA Server from Microsoft.
@@ -57,8 +57,8 @@ After that:
 * Database TimescaleDB - at localhost:5432. (Default user credentials can be found in docker-compose.yml file).
 * PgAdmin - at http://localhost:4888;
 * Grafana - at http://localhost:3000
-* InfluxDB v 2.0 - at http://localhost:9999
-* InfluxDB v 1.7 - at localhost:8086.
+* InfluxDB v 2.0 - at http://localhost:8086
+* InfluxDB v 1.7 - at localhost:8084.
 * Apache Kafka - at localhost:9092
 
 By default, TimescaleDB is used as timeseries database. In order to use InfluxDB or Kafka, configuration file should be modified accordingly.
