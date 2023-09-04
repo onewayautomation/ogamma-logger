@@ -1,8 +1,8 @@
-version: '3'
+version: '2'
 services:
       
   ogamma-logger:
-    image: 'ogamma/logger:2.2.2'
+    image: 'ogamma/logger:3.0.0'
     restart: always
     
     environment:    
@@ -20,8 +20,6 @@ services:
 
     networks:
       - ogamma-logger
-    extra_hosts:
-      - '${HOST_NAME:-opcuaserver.com}:${HOST_IP_ADDRESS:-75.152.105.54}'
  
 networks:
   ogamma-logger: null
