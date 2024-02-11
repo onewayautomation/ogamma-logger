@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {background-color: white;   justify-content: center;
+  align-items: center;}
+h1   {color: #333399; text-align: center}
+h2   {color: blue; text-align: center}
+
+
+
+
+li {text-align: left; color: #333399}
+.product-item {
+    border: solid 2px #ddd;
+    border-width: 3px,3px,3px,3px;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 10px;
+    display: inline-block;
+    background-color: #ddd;
+		color: #333399
+    /* min-height: 80px; */
+    width: 30%;
+    max-width: 20em;
+    min-width: 15em;
+    text-align: center;
+    -webkit-transition: all 0.4s ease-out;
+    transition: all 0.4s ease-out;
+}
+.products-list {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    flex-direction: row;
+    -ms-flex-wrap: Â wrap;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 15px, 15px, 15px, 15px;
+		justify-content: center
+}
+p    {color: #333399; text-align: center}
+
+a {color: #006666;}
+a:link { 
+  text-decoration: none; 
+} 
+a:visited { 
+  text-decoration: none; 
+} 
+a:hover { 
+  text-decoration: none; 
+} 
+a:active { 
+  text-decoration: none; 
+}
+a:hover {color: #00b3b3;}
+p.linktext:hover { color: #00b3b3}
+li:hover { color: #00b3b3}
+div.linkdiv {width: 100%; height: 100%;}
+div.product-item:hover {color: #00b3b3; background-color: #eee; } 
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #dfdfdf;
+  text-align: center;
+}
+.header {
+	padding-top:2px;
+	min-height: 40px;
+  width: 100%;
+  background-color: #dfdfdf;
+  text-align: right;
+	flex-direction: row;
+}
+</style>
+</head>
+<body>
+<div class="header">
+
+	<p class="header">
+		<a href = "https://onewayautomation.com/visual-logger-docs/html/index.html" target="_blank">Online User Manual</a>
+		&nbsp|&nbsp
+		<a href = "mailto:support@onewayautomation.com">Contact support</a>
+		&nbsp&nbsp&nbsp&nbsp&nbsp
+	</p>
+
+</div>
+<h1>oBox main configuration page.</h1>
+<p>This is main configuration page. To configure installed components, click on the links below.</p>
+<div class="products-list">
+	<div class="product-item">
+		<a href="/keycloak">
+			<div class="linkdiv">
+				<h3>Manage User Authentication and Authorization</h3>
+				<p class="linktext">Use Keycloak which provides interface to manage user authentication and authorization.</p>
+			</div>
+		</a>
+  </div>
+</div>
+<div class="products-list">
+	<div class="product-item">
+		<a href="/devicegateway">
+			<div class="linkdiv">
+				<h3>Connect to Industrial Data Sources</h3>
+				<p class="linktext" >Connect to PLCs and other industrial data sources using Takebishi Device Gateway and make them accessible via OPC UA Server interface.</p>
+			</div>	
+		</a>
+  </div>
+	<div class="product-item">
+		<a href="/forge/">
+			<div class="linkdiv">
+				<h3>Model your Unified Namespace</h3>
+				<p class="linktext">
+					Use ProsysOPC UA Forge to build your Unified Namespace.  
+					<ul>
+						<li>Connect to OPC UA servers</li>
+						<li>Harmonize data using information modeling and normalization</li>
+						<li>Provide access to the resulting address space over interfaces: OPC UA Server, REST, OPC UA Pub/Sub
+					</ul>
+				</p>
+			</div>
+		</a>
+  </div>
+	<div class="product-item">
+		<a href="/ovl">
+			<div class="linkdiv">
+				<h3>Store and Forward data to databases</h3>
+				<p class="linktext">Use ogamma Visual Logger for OPC to collect data from OPC UA Servers and store and forward it to the database of your choice.</p>
+			</div>
+		</a>
+  </div>
+	<div class="product-item">
+		<a href="/influxdb2">
+			<div class="linkdiv">
+				<h3>Use InfluxDB as a historian</h3>
+				<p class="linktext">Use popular time-series database InfluxDB version 2 or 3 to forward data.</p>
+			</div>
+		</a>
+  </div>
+	<div class="product-item">
+		<a href="/timeseriesadmin">
+			<div class="linkdiv">
+				<h3>Use InfluxDB version 1.8 as a historian</h3>
+				<p class="linktext">Use popular time-series database InfluxDB version 1.8 to forward data.</p>
+			</div>
+		</a>
+  </div>	
+	<div class="product-item">
+		<a href="/grafana">
+			<div class="linkdiv">
+				<h3>Visualize your data</h3>
+				<p class="linktext">Use Grafana to visualize real-time and historical data in dashboards.</p>
+			</div>
+		</a>
+  </div>	
+	<div>
+</div>
+<div class="footer">
+  <p><a href="https://www.onewayautomation.com" target="_blank">Copyright 2024, One-Way Automation Inc.</a></p>
+</div>
+</body>
+</html>
+
