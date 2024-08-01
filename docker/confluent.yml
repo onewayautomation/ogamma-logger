@@ -1,7 +1,6 @@
-version: '2'
 services:
   zookeeper:
-    image: confluentinc/cp-zookeeper:6.2.1
+    image: confluentinc/cp-zookeeper:7.6.0
     hostname: zookeeper
     container_name: zookeeper
     ports:
@@ -12,7 +11,7 @@ services:
     networks:
       - ogamma-logger
   broker:
-    image: confluentinc/cp-server:6.2.1
+    image: confluentinc/cp-server:7.6.0
     hostname: broker
     container_name: broker
     depends_on:
@@ -42,7 +41,7 @@ services:
     networks:
       - ogamma-logger
   schema-registry:
-    image: confluentinc/cp-schema-registry:6.2.1
+    image: confluentinc/cp-schema-registry:7.6.0
     hostname: schema-registry
     container_name: schema-registry
     depends_on:
@@ -56,7 +55,7 @@ services:
     networks:
       - ogamma-logger
   connect:
-    image: cnfldemos/cp-server-connect-datagen:0.5.0-6.2.1
+    image: cnfldemos/cp-server-connect-datagen:0.6.4-7.6.0
     hostname: connect
     container_name: connect
     depends_on:
@@ -88,7 +87,7 @@ services:
     networks:
       - ogamma-logger
   control-center:
-    image: confluentinc/cp-enterprise-control-center:6.2.1
+    image: confluentinc/cp-enterprise-control-center:7.6.0
     hostname: control-center
     container_name: control-center
     depends_on:
@@ -114,7 +113,7 @@ services:
     networks:
       - ogamma-logger
   ksqldb-server:
-    image: confluentinc/cp-ksqldb-server:6.2.1
+    image: confluentinc/cp-ksqldb-server:7.6.0
     hostname: ksqldb-server
     container_name: ksqldb-server
     depends_on:
@@ -138,7 +137,7 @@ services:
     networks:
       - ogamma-logger
   ksqldb-cli:
-    image: confluentinc/cp-ksqldb-cli:6.2.1
+    image: confluentinc/cp-ksqldb-cli:7.6.0
     container_name: ksqldb-cli
     depends_on:
       - broker
@@ -149,7 +148,7 @@ services:
     networks:
       - ogamma-logger
   ksql-datagen:
-    image: confluentinc/ksqldb-examples:6.2.1
+    image: confluentinc/ksqldb-examples:7.6.0
     hostname: ksql-datagen
     container_name: ksql-datagen
     depends_on:
@@ -172,7 +171,7 @@ services:
     networks:
       - ogamma-logger
   rest-proxy:
-    image: confluentinc/cp-kafka-rest:6.2.1
+    image: confluentinc/cp-kafka-rest:7.6.0
     depends_on:
       - broker
       - schema-registry
