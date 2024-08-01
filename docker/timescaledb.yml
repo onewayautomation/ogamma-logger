@@ -1,8 +1,9 @@
-version: '3'
+root@v2544153:/home/nbutakov/ogamma-logger/docker# vim timescaledb.yml
+
 services:
 # TimescaleDB (PostgreSQL, optimized to store time-series data).
   tsdb:
-    image: timescale/timescaledb:1.7.4-pg11
+    image: timescale/timescaledb:latest-pg16
     environment:
       - POSTGRES_USER=ogamma
       - POSTGRES_PASSWORD=ogamma
@@ -13,10 +14,10 @@ services:
       - '5432:5432'
     networks:
       - ogamma-logger
-      
+
 # Web based management tool.       
   pgadmin:
-    image: dpage/pgadmin4:5.5
+    image: dpage/pgadmin4:latest
     environment:
       - PGADMIN_DEFAULT_EMAIL=admin@ogamma.io
       - PGADMIN_DEFAULT_PASSWORD=admin
@@ -26,7 +27,7 @@ services:
     ports:
       - "4888:4888"
     networks:
-      - ogamma-logger      
+      - ogamma-logger
 
 networks:
   ogamma-logger: null
