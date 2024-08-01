@@ -1,5 +1,3 @@
-root@v2544153:/home/nbutakov/ogamma-logger/docker# vim timescaledb.yml
-
 services:
 # TimescaleDB (PostgreSQL, optimized to store time-series data).
   tsdb:
