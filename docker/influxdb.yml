@@ -1,7 +1,6 @@
-version: '3'
 services:
   influxdb:
-    image: influxdb:1.8.6
+    image: influxdb:latest
     restart: always
     environment:
       - INFLUXDB_DB=ogammadb
@@ -18,14 +17,14 @@ services:
       - '8084:8086'
     networks:
       - ogamma-logger
-      
+
 # Web based management tool for InfluxDB 
   timeseriesadmin:
-    image: timeseriesadmin/timeseriesadmin:0.1.12
+    image: timeseriesadmin/timeseriesadmin:latest
     ports:
       - '8085:80'
     networks:
-      - ogamma-logger   
+      - ogamma-logger
 networks:
   ogamma-logger: null
 volumes:
