@@ -1,6 +1,6 @@
 services:
   influxdb:
-    image: influxdb:latest
+    image: influxdb:2.7.8
     restart: always
     environment:
       - INFLUXDB_DB=ogammadb
