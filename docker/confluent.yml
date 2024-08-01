@@ -97,8 +97,6 @@ services:
       - ksqldb-server
     ports:
       - "9021:9021"
-    networks:
-      - ogamma-logger      
     environment:
       CONTROL_CENTER_BOOTSTRAP_SERVERS: 'broker:29092'
       CONTROL_CENTER_CONNECT_CONNECT-DEFAULT_CLUSTER: 'connect:8083'
