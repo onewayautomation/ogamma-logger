@@ -1,7 +1,7 @@
 services:
 # Portainer can be used to manage containers remotely over web GUI.
   portainer:
-    image: 'portainer/portainer:latest'
+    image: 'portainer/portainer:1.25.0'
     restart: always
     ports:
       - '9000:9000'
