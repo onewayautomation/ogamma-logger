@@ -1,4 +1,3 @@
-version: "3"
 services:
   zookeeper:
     image: 'bitnami/zookeeper:3.9.2'
