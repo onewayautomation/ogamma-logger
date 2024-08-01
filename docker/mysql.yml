@@ -1,10 +1,9 @@
-version: '3'
 services:
 
 # MySQL database
-   
+
   mysql:
-    image: 'mysql:8.0.21'
+    image: 'mysql:latest'
     ports:
       - '3306:3306'
     hostname: mysql
@@ -14,10 +13,9 @@ services:
       - MYSQL_ROOT_PASSWORD=ogamma123 #TODO
 
     command: --default-authentication-plugin=mysql_native_password
-    
+
     networks:
       - ogamma-logger
-      
+
 networks:
   ogamma-logger: null
-
