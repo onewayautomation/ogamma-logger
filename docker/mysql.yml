@@ -3,7 +3,7 @@ services:
 # MySQL database
 
   mysql:
-    image: 'mysql:latest'
+    image: 'mysql:9.0.1'
     ports:
       - '3306:3306'
     hostname: mysql
