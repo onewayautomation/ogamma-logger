@@ -1,15 +1,13 @@
-version: '3'
 services:
 # MQTT Broker Eclipse Mosquitto   
   mqtt:
-    image: 'eclipse-mosquitto:2.0.10'
+    image: 'eclipse-mosquitto:2.0.18'
     ports:
       - '1883:1883'
       - '9001:9001'
     networks:
-      - ogamma-logger    
+      - ogamma-logger
     volumes:
       - './mqtt:/mosquitto/config'
 networks:
   ogamma-logger: null
-

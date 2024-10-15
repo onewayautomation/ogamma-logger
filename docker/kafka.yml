@@ -1,7 +1,6 @@
-version: "3"
 services:
   zookeeper:
-    image: 'bitnami/zookeeper:latest'
+    image: 'bitnami/zookeeper:3.9.2'
     ports:
       - '2181:2181'
     environment:
@@ -11,7 +10,7 @@ services:
     networks:
       - ogamma-logger      
   kafka:
-    image: 'bitnami/kafka:latest'
+    image: 'bitnami/kafka:3.4.1'
     ports:
       - '9092:9092'
     environment:
