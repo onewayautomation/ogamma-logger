@@ -1,7 +1,7 @@
 services:
       
   ogamma-logger:
-    image: 'ogamma/logger:4.0.3'
+    image: 'ogamma/logger:4.0.5'
     restart: always
 
     environment:

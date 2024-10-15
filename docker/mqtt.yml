@@ -1,7 +1,7 @@
 services:
 # MQTT Broker Eclipse Mosquitto   
   mqtt:
-    image: 'eclipse-mosquitto:2.0.18'
+    image: 'eclipse-mosquitto:2.0.19'
     ports:
       - '1883:1883'
       - '9001:9001'
