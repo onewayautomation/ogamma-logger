@@ -5,7 +5,7 @@
 * **Store** that data in time-series database:
   * ``TimescaleDB`` (PostgreSQL database optimized to store time-series data);
   * ``PostgreSQL`` regular version;
-  * ``InfluxDB`` (versions 1.7, 1.8 or 2.0);
+  * ``InfluxDB`` (versions 1.7, 1.8 or 2.x);
   * ``Confluent: Cloud and Enterprise``;
   * ``Apache Kafka``;
   * ``Microsoft SQL Server``;
@@ -24,7 +24,7 @@ Each instance of *ogamma* Visual Logger can implement only one role or all of th
 
 Multiple instances can run in parallel in different roles, making horizontal scaling easy.
 
-Note that to enable all the features third party components are required.  The easiest way to setup and run *ogamma* Visual Logger and dependency services is to use Docker images, which can be easily pulled and then started with single command ``docker-compose up``, by using of the ``docker-compose.yml`` file which is available at this repository: https://github.com/onewayautomation/ogamma-logger/blob/master/docker/docker-compose.yml
+Note that to enable all the features third party components are required.  The easiest way to setup and run *ogamma* Visual Logger and dependency services is to use Docker images, which can be easily pulled and then started with single command ``docker-compose up``, by using of the ``docker-compose.yml`` file which is available at this repository: https://github.com/onewayautomation/ogamma-logger/blob/master/docker/docker-compose.yml Note that .yml files have specific version numbers of images. If you have containers running older versions of images, after updating of .yml files they might stop working due to issues with upgrading of data volumes. 
 
 # Context Diagram
 ![*ogamma* Visual Logger - Context Diagram](https://onewayautomation.com/images/ContextDiagram.png)
@@ -33,11 +33,12 @@ Note that to enable all the features third party components are required.  The e
 
 Docker image is available at: https://hub.docker.com/r/ogamma/logger.
 
-File ``docker/docker-compose.yml`` allows to pull *ogamma* Visual Logger image and additionally all required dependency images:
+File ``docker/docker-compose.yml`` allows to pull *ogamma* Visual Logger image. The folder ``docker`` has also .yml files for other images (time-series databases), that can be started independently, by passing file name in the command ``docker compose -f <file-name> ``:
 * Databases (TimescaleDB, InfluxDB versions 1.x and 2.x, Apache Kafka);
 * PgAdmin, to manage database PostgreSQL;
 * Grafana, optional, to visualize data;
 * Sample OPC UA Server from Microsoft.
+* MQTT brocker.
 
 ## Prerequisites.
 
@@ -48,22 +49,23 @@ There is only one: Docker Desktop, available to download here https://www.docker
 * Pull this repository to some local folder;
 * Open shell terminal (PowerShell on Windows, or bash in Linux);
 * Navigate to the folder ``docker`` where file ``docker-compose.yml`` is located;
-* Run command ``docker-compose up``.
+* Run command ``docker-compose up -d``.
+* To start other containers, pass yml file name. For example, to start InfluxDB version 1.8, run command: ``docker compose -f influxdb.yml up -d``.
 
-All container images from Docker Hub will be pulled (this might take few or more minutes, but this step happens only once, when you run this command at the very first time), and all required services will be started.
+The container image from Docker Hub will be pulled (this might take few or more minutes, but this step happens only once, when you run this command at the very first time), and service(s) defined in the yml file will be started.
 
 After that:
 * Web GUI for *ogamma* Visual Logger will be available at http://localhost:4880;
-* Database TimescaleDB - at localhost:5432. (Default user credentials can be found in docker-compose.yml file).
+* Database TimescaleDB - at localhost:5432. (Default user credentials can be found in file timescaledb.yml).
 * PgAdmin - at http://localhost:4888;
 * Grafana - at http://localhost:3000
-* InfluxDB v 2.0 - at http://localhost:8086
-* InfluxDB v 1.7 - at localhost:8084.
+* InfluxDB v 2.x - at http://localhost:8086
+* InfluxDB v 1.x - at localhost:8084.
 * Apache Kafka - at localhost:9092
 
-By default, TimescaleDB is used as timeseries database. In order to use InfluxDB or Kafka, configuration file should be modified accordingly.
+To log data from OPC UA Servers to the specific database, the instance of the ogamma Visual Logger for OPC application needs to be configured. Refer to the User Manual for details. 
 
-# Distribution packages for Windows and Linux (Ubuntu 18.04 and Debian  Stretch).
+# Distribution packages for Windows and Linux.
 
 For links to download installation packages please refer to section ``Deploy`` of the online User Manual: https://onewayautomation.com/visual-logger-docs/html/deploy.html
 
