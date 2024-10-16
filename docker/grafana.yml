@@ -1,8 +1,13 @@
 services:
-#Grafana    
+# Grafana    
   grafana:
-    image: grafana/grafana:11.2.2
+    build: 
+      context: ./grafana
+      # cache_from: []
     restart: always
+    # The image is built using grafana/Dockerfile.
+    # To change the version number, modify line starting by "FROM" in that file
+    # image: grafana/grafana:11.2.2
     environment:
       - GF_SECURITY_ADMIN_PASSWORD=admin
       - GF_INSTALL_PLUGINS=grafana-simple-json-datasource,grafana-influxdb-flux-datasource,natel-discrete-panel,briangann-gauge-panel,aceiot-svg-panel,fatcloud-windrose-panel
