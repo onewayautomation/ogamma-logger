@@ -64,34 +64,36 @@ After sign-in to the service, login at https://remote.macchina.io/my-devices/log
 
 This section is applicable for the case when the Docker host has no access to the Internet to download file ``docker-compose.yml`` and Docker images.
 
-Download files in the host that has access to the Internet:
+- In the host that has access to the Internet, download files from our website:
 
-- File ``docker-compose.yml`` using the command above
-- Create Docker image file ``ovl-latest.tar.gz`` for the OVL using the script below. 
+  - File ``docker-compose.yml``: https://onewayautomation.com/docker/ovl/docker-compose.yml
+  - Docker image archive file : https://onewayautomation.com/docker/ovl/ovl-latest.tar.gz 
+  
+    Alternatively, you can pull the image directly from Docker Hub and create Docker image archive file ``ovl-latest.tar.gz`` for the OVL using the script below.
 
-```
-#!/bin/sh
-# This script pulls docker image of the OVL (ogamma/logger) from Docker Hub and saves it in .tar.gz file.
-imageName=ogamma/logger:latest
-fileName=ovl-latest.tar.gz
-echo "Pulling image $imageName from Doker Hub ..."
-docker pull docker.io/$imageName
-if [ $? == 0 ]; then
-  echo "Saving image $imageName in archive file $fileName..."
-  docker save $imageName | gzip -9 > $fileName
-  if [ $? == 0 ]; then
-    echo "Done"
-    echo "To load the image from file $fileName on another machine offline, run the command:"
-    echo "gunzip -c $fileName | docker load"
-  else
-    echo "Failed to save the image $imageName in file $fileName"
-    exit 2
-  fi
-else
-  echo " Failed to pull the image $imageName"
- exit 1
-fi
-```
+    ```
+    #!/bin/sh
+    # This script pulls docker image of the OVL (ogamma/logger) from Docker Hub and saves it in .tar.gz file.
+    imageName=ogamma/logger:latest
+    fileName=ovl-latest.tar.gz
+    echo "Pulling image $imageName from Doker Hub ..."
+    docker pull docker.io/$imageName
+    if [ $? == 0 ]; then
+      echo "Saving image $imageName in archive file $fileName..."
+      docker save $imageName | gzip -9 > $fileName
+      if [ $? == 0 ]; then
+        echo "Done"
+        echo "To load the image from file $fileName on another machine offline, run the command:"
+        echo "gunzip -c $fileName | docker load"
+      else
+        echo "Failed to save the image $imageName in file $fileName"
+        exit 2
+      fi
+    else
+      echo " Failed to pull the image $imageName"
+     exit 1
+    fi
+    ```
 
   Copy the script content and save it in file ``download-docker-image.sh``, change file mode to executable, and run it.
 
@@ -103,21 +105,23 @@ fi
   ./download-docker-image.sh
   ```
 
-Then copy these 2 files to the Docker host:
+- Then copy these 2 files to the Docker host:
 
   - ``ovl-latest.tar.gz``
   - ``docker-compose.yml``
 
-To load the container image from file in the Docker host, run the command:
+- To load the container image from file in the Docker host, run the command:
 
-```
-gunzip -c $fileName | docker load
-```
+  ```
+  gunzip -c $fileName | docker load
+  ```
 
 Now the OVL image is ready to start it in a Docker container. 
 
 
 ## Start containers:
+
+Navigate to the folder with file ``docker-compose.yml`` and run the command:
 
 ```
 sudo podman-compose up -d
