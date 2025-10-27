@@ -31,8 +31,7 @@ sudo dnf config-manager --enable ol8_developer_EPEL
 sudo dnf install -y podman-compose 
 ```
 
-### Download docker-compose.yml file for OVL
-
+## Download docker-compose.yml file for OVL
 
 ```
 mkdir docker\ovl
@@ -43,9 +42,17 @@ wget https://onewayautomation.com/docker/ovl/docker-compose.yml
 
 ### Optional: edit docker-compose.yml file
 
-The docker compose configuration file has 2 services: one for OVL, and second for Macchina Remote Agent. The second service can be used to access OVL configuration remotely, from the Internet. For details about this product refer this page: https://macchina.io/remote.html
+The docker compose configuration file has 2 services: one for OVL, and second, optional, is for Macchina Remote Agent.
+ 
+Review and change as needed settings for the service ``ogamma-logger``.
 
-To sign-up for trial version of the service, visit https://remote.macchina.io/my-devices/signup
+If not required/applicable, comment or remove the second service lines from the file ``docker-compose.yml``.
+
+#### About Macchina Remote Agent.
+
+The Macchina Remote Agent service is optional, can be used to access OVL configuration GUI remotely, from the Internet. Disable it if there is no outgoing traffic enabled in the Docker host machine where the OVL will run, or if you don't need access from the Internet. For details about this product refer its home page at https://macchina.io/remote.html
+
+To sign-up for free trial version of the Machchina Remote Agent service, visit https://remote.macchina.io/my-devices/signup
 
 After sign-in to the service, login at https://remote.macchina.io/my-devices/login Then add new device, and update environment variables in the docker-compose.yml file with values from Macchina service page:
 
@@ -53,13 +60,72 @@ After sign-in to the service, login at https://remote.macchina.io/my-devices/log
   - WEBTUNNEL_DEVICE_ID
   - WEBTUNNEL_DEVICE_NAME
 
-Now start containers:
+## Special case: offline setup.
+
+This section is applicable for the case when the Docker host has no access to the Internet to download file ``docker-compose.yml`` and Docker images.
+
+Download files in the host that has access to the Internet:
+
+- File ``docker-compose.yml`` using the command above
+- Create Docker image file ``ovl-latest.tar.gz`` for the OVL using the script below. 
+
+```
+#!/bin/sh
+# This script pulls docker image of the OVL (ogamma/logger) from Docker Hub and saves it in .tar.gz file.
+imageName=ogamma/logger:latest
+fileName=ovl-latest.tar.gz
+echo "Pulling image $imageName from Doker Hub ..."
+docker pull docker.io/$imageName
+if [ $? == 0 ]; then
+  echo "Saving image $imageName in archive file $fileName..."
+  docker save $imageName | gzip -9 > $fileName
+  if [ $? == 0 ]; then
+    echo "Done"
+    echo "To load the image from file $fileName on another machine offline, run the command:"
+    echo "gunzip -c $fileName | docker load"
+  else
+    echo "Failed to save the image $imageName in file $fileName"
+    exit 2
+  fi
+else
+  echo " Failed to pull the image $imageName"
+ exit 1
+fi
+```
+
+  Copy the script content and save it in file ``download-docker-image.sh``, change file mode to executable, and run it.
+
+  Alternatively, download the script file and run it using commands:
+  
+  ```
+  wget https://onewayautomation.com/docker/ovl/download-docker-image.sh
+  chmod +x download-docker-image.sh
+  ./download-docker-image.sh
+  ```
+
+Then copy these 2 files to the Docker host:
+
+  - ``ovl-latest.tar.gz``
+  - ``docker-compose.yml``
+
+To load the container image from file in the Docker host, run the command:
+
+```
+gunzip -c $fileName | docker load
+```
+
+Now the OVL image is ready to start it in a Docker container. 
+
+
+## Start containers:
 
 ```
 sudo podman-compose up -d
 ```
 
-The OVL configuration GUI will be available at port 4880 of the host machine. Default credentials are ``admin/password``. To access the GUI remotely, on Macchina page click on the link with device name.
+The OVL configuration GUI will be available at http port 4880 of the host machine. Default credentials are ``admin/password``. 
+
+Optional if the Macchina Reote agent is enabled: to access the GUI remotely, on Macchina page click on the link with device name.
 
 For further steps on configuration of the OVL, please refer online User Manual at https://onewayautomation.com/visual-logger-docs/html/
 
