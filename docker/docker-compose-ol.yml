@@ -1,0 +1,55 @@
+# To use on Oracle Linux 8.
+# Includes 2 services: ogamma Visual Logger for OPC and High Availability Node Manager
+services:
+
+# ogamma Visual Logger for OPC
+  ogamma-logger:
+    image: 'docker.io/ogamma/logger:4.2.0'
+    restart: always
+
+    environment:
+# By default configuration file ./data/config.json is used. Can be changed by environment variable:    
+      - OVL_CONFIG_FILE=./data/config.json
+# Do not use default credentials in production!
+      - OVL_USER_ID=admin
+      - OVL_USER_PASSWORD=password
+      - OVL_PROTOCOL=https
+      - OVL_PORT=8443
+    ports:
+      - '4880:4880'
+      - '8443:8443'
+    hostname: ogamma-logger
+    volumes:
+      - 'ovl-data:/home/ogamma/logger/data'
+    networks:
+      - ogamma-logger
+
+# High Availability Node Manager
+  ha-node:
+    image: 'docker.io/ogamma/ha-node:1.0.0'
+    restart: always
+
+    environment:
+      # Each HA cluster should have unique cluster id in the network scope.
+      - HA_CLUSTER_ID=ha-cluster
+      # Eech node in a cluster should have uniqie node id:
+      - HA_NODE_ID=ha-node-2
+      # The node with highest priority becomes Active when both nodes are healthy.
+      - HA_PRIORITY=90
+      # Multicast settings. Must be the same in all nodes of a cluster.
+      - HA_MC_GROUP=224.0.0.1
+      - HA_MC_PORT=9999
+      # Adjust Health Check URL if OVL_PROTOCOL and OVL_PORT env. variables for the ogamma-logger service changed.
+      - HA_HEALTH_CHECK_URL=https://ogamma-logger:8443/health
+      - HA_HEALTH_CHECK_ENABLED=ON
+    hostname: ha-node
+    volumes:
+      # The same volume as for the ogamma-logger service us used, 
+      # to share files under ./data/ha-ipc
+      - 'ovl-data:/var/lib/ha-node/data:rw'
+    networks:
+      - ogamma-logger
+networks:
+  ogamma-logger: null
+volumes:
+  ovl-data: {}
