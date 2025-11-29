@@ -27,7 +27,7 @@ Multiple instances can run in parallel in different roles, making horizontal sca
 Note that to enable all the features third party components are required.  The easiest way to setup and run *ogamma* Visual Logger and dependency services is to use Docker images, which can be easily pulled and then started with single command ``docker-compose up``, by using of the ``docker-compose.yml`` file which is available at this repository: https://github.com/onewayautomation/ogamma-logger/blob/master/docker/docker-compose.yml Note that .yml files have specific version numbers of images. If you have containers running older versions of images, after updating of .yml files they might stop working due to issues with upgrading of data volumes. 
 
 # Context Diagram
-![*ogamma* Visual Logger - Context Diagram](https://onewayautomation.com/images/ContextDiagram.png)
+![*ogamma* Visual Logger - Context Diagram](https://onewayautomation.com/wp-content/uploads/VisualLoggerContextDiagram2.png)
 
 # Getting Started with Docker image.
 
@@ -76,3 +76,17 @@ For more information, please refer to online User Manual available at https://on
 You can see Visual Logger in action in youtube video at https://www.youtube.com/watch?v=mY9Wh8wAKZg&t=215s, where it is used to explain OPC UA terms such as publishing interval, sampling interval and queue size for monitored items.
 
 Introduction video with more detailed instructions is available on youtube at https://youtu.be/yZdsyVz7hw0 (for older version, needs update).
+
+# Breaking change in Docker container version 4.2.0
+
+In versions pioir to version 4.2.0 the Visual Logger Docker container was running under the ``root`` user. In version 4.2.0 it runs under user ``ogamma``. As a result, data files of the older version volume that had a root user as owner, not accessible in the new version.
+
+To fix this permission issue, start the container once using configuration file ``docker-compose-migrate-to-4.2.0.yml``, running this command: 
+
+```
+docker compose -f docker-compose-migrate-to-4.2.0.yml up
+```
+
+It should print in the console output this message: `` Ownership of the folder /home/ogamma/logger changed to ogamma``
+
+

@@ -1,0 +1,49 @@
+# This docker-compose configuration file is used to migrate data volume of existing pre-4.2.0 versions of the ogamma Visual Logger for OPC.
+# One of the changes in version 4.2.0 is that now its Docker container runs under user "ogamma". Before it was running uder root user.
+# As a result, data files of the older version volume that had a root user as owner, not accessible in the nwe version.
+# To fix this permissoin issue, using this file, container starts and runs as a root user and changes ownership of the data folder /home/ogamma/logger to the user "ogamma". 
+# Run the container using this file once, and then continue to use older version of the file docker-compose.yml as is:
+#
+# docker compose -f docker-compose-migrate-to-4.2.0.yml up
+#
+
+services:
+  ogamma-logger:
+    image: 'ogamma/logger:4.2.0'
+    restart: no
+    
+    environment:    
+# By default configuration file ./data/config.json is used. Can be changed by environment variable:    
+      - OVL_CONFIG_FILE=./data/config.json
+# Do not use default credentials in production!
+      - OVL_USER_ID=admin
+      - OVL_USER_PASSWORD=password
+      - OVL_PYTHON_START_DEBUGGER=ON
+      - OVL_PYTHON_DEBUG_PORT=5678
+      - OVL_PYTHON_WAIT_FOR_CLIENT=OFF
+      # Value 0.0.0.0 means listen on all network interfaces, with any IP address. Note: must have no quotes!
+      - OVL_PYTHON_DEBUG_HOST=0.0.0.0
+
+    ports:
+      # 4880 is GUI endpoint port:
+      - '4880:4880'
+      # 5678 is Python debug server port, set by environment variable OVL_PYTHON_DEBUG_PORT
+      # - '5678:5678'
+    hostname: ogamma-logger
+    volumes:
+      - './data:/home/ogamma/logger/data'
+    # Temporarily override the user and command to run at container start-up, to change owner of the work directory to user "ogamma" of the group "ogamma":
+    user: root
+    entrypoint: >
+      sh -c "
+        chown -R ogamma:ogamma /home/ogamma/logger && 
+        echo 'Ownership of the folder /home/ogamma/logger changed to ogamma'
+        # tail -f /dev/null
+      "
+    networks:
+      - ogamma-logger
+ 
+networks:
+  ogamma-logger: {}
+    #driver: bridge
+
