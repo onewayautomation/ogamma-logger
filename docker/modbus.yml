@@ -1,0 +1,32 @@
+version: '3'
+services:
+# ogamma Modbus OPC UA Server
+  modbus-opcua-server:
+    image: 'ogamma/modbus-opcua-server'
+    restart: always
+    hostname: modbus-opcua-server
+    
+    # Option "priviliged" facilitates access to serial ports:
+    privileged: true
+    
+    ports:
+      - '4848:4848'
+#Host port: container port.
+    environment:
+      - OMOUAS_PORT=4848
+      - OMOUAS_HOST=modbus-opcua-server
+      
+      # In production installation, set next 2 options to false!!! Here set to "true" for easy connecting!
+      - OMOUAS_ACCEPT_ANY_CERTIFICATE=true
+      - OMOUAS_ENABLE_NONE_SECURE_ENDPOINT=true
+      
+    networks:
+      - ogamma-logger
+      
+    # Note: use different host folder for the volume than for other containers (specially must be differnet than for ogamma Visual Logger for OPC)!
+    volumes:
+      - './data-modbus:/opt/ogamma/modbus-opcua-server/data'
+
+networks:
+  ogamma-logger: null
+

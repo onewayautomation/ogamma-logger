@@ -1,0 +1,558 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OpcServerConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <UaServerConfig>
+        <!--Trace configuration
+            This part of the configuration defines the trace settings for OPC UA Stack and OPC UA Application.-->
+        <Trace>
+            <!--Enable UA stack trace true/false-->
+            <UaStackTraceEnabled>false</UaStackTraceEnabled>
+            <!--UA stack trace level. Possible values NONE, ERROR, WARNING, SYSTEM, INFO, DEBUG, CONTENT, ALL
+                NONE    - No Trace
+                ERROR   - Critical errors (unexpected and/or requiring external actions) which require attention
+                WARNING - Non-critical faults which should not go unnoticed but are handled internally
+                SYSTEM  - Rare major events (good cases) like initializations, shut-down, etc.
+                INFO    - Regular good case events like connects, renews
+                DEBUG   - Used for debugging purposes
+                CONTENT - Used to add additional content (i.e. whole message bodies) to debug traces
+                ALL     - All
+            -->
+            <UaStackTraceLevel>ALL</UaStackTraceLevel>
+            <!--Enable UA server application trace true/false-->
+            <UaAppTraceEnabled>false</UaAppTraceEnabled>
+            <!--UA server application trace level. Possible values NoTrace, Errors, Warning, Info, InterfaceCall, CtorDtor, ProgramFlow, Data
+                NoTrace       - No Trace
+                Errors        - Unexpected errors
+                Warning       - Unexpected behaviour that is not an error
+                Info          - Information about important activities like connection establishment
+                InterfaceCall - Calls to module interfaces
+                CtorDtor      - Creation and destruction of objects
+                ProgramFlow   - Internal program flow
+                Data          - Data
+            -->
+            <UaAppTraceLevel>Data</UaAppTraceLevel>
+            <!--Maximum number of trace entries in one file-->
+            <UaAppTraceMaxEntries>100000</UaAppTraceMaxEntries>
+            <!--Maximum number of backup files-->
+            <UaAppTraceMaxBackup>5</UaAppTraceMaxBackup>
+            <!--Do not flush the file after each trace entry. The trace file gets flushed automatically from time to time anyway.
+                - For maximum trace performance you should set this option to true.
+                - If you have issues with missing trace entries in case of an application crash, you should set this option to false. -->
+            <UaAppTraceDisableFlush>false</UaAppTraceDisableFlush>
+            <!--Trace file-->
+            <UaAppTraceFile>C:\ProgramData\UnifiedAutomation\logs\UaCPPServer/UaServerCPP.log</UaAppTraceFile>
+            <!--Trace event options. Possible values Disabled, History, HistoryAndEvents-->
+            <TraceEvents>History</TraceEvents>
+            <!--Enable PubSub stack trace true/false-->
+            <PubSubStackTraceEnabled>false</PubSubStackTraceEnabled>
+        </Trace>
+        <!--Trace configuration end-->
+
+        <!--Certificate store used for PKI certificate handling. Different Endpoints may have different trust lists.-->
+        <DefaultApplicationCertificateStore>
+            <!--The maximum size of the TrustList in bytes. 0 means no limit.-->
+            <MaxTrustListSize>0</MaxTrustListSize>
+            <!--For CA signed certificates this flag controls if server shall send the complete certificate chain instead of just sending the certificate.
+                This affects the GetEndpoints and CreateSession service.-->
+            <SendCertificateChain>true</SendCertificateChain>
+            <!--File based certificate store used with OpenSSL
+                C:\ProgramData\UnifiedAutomation\UaCPPServer can be used as placeholder for the configuration directory path.
+                [ApplicationPath] can be used as placeholder for the application path.-->
+            <OpenSSLStore>
+                <CertificateTrustListLocation>C:\ProgramData\UnifiedAutomation\UaCPPServer/pkiserver/trusted/certs/</CertificateTrustListLocation>
+                <CertificateRevocationListLocation>C:\ProgramData\UnifiedAutomation\UaCPPServer/pkiserver/trusted/crl/</CertificateRevocationListLocation>
+                <IssuersCertificatesLocation>C:\ProgramData\UnifiedAutomation\UaCPPServer/pkiserver/issuers/certs/</IssuersCertificatesLocation>
+                <IssuersRevocationListLocation>C:\ProgramData\UnifiedAutomation\UaCPPServer/pkiserver/issuers/crl/</IssuersRevocationListLocation>
+            </OpenSSLStore>
+
+            <!--Windows based certificate store.
+                - <StoreLocation> location of the store. Valid values are LocalMachine and CurrentUser
+                - <StoreName> is the name of the certificate store in the local computer
+                - <IssuersStoreName> is the name of the store for CA certificates used to validate a trust chain. When setting an issuer store name make sure the location exists in the store.
+            <WindowsStore>
+                <StoreLocation>LocalMachine</StoreLocation>
+                <StoreName>UnifiedAutomationUaServerCPP</StoreName>
+                <IssuersStoreName>UnifiedAutomationUaServerCPP</IssuersStoreName>
+            </WindowsStore> -->
+            <!--Application instance certificate for the Server.-->
+            <ServerCertificate>
+                <!--File based certificate store used with OpenSSL
+                    C:\ProgramData\UnifiedAutomation\UaCPPServer can be used as placeholder for the configuration directory path.
+                    [ApplicationPath] can be used as placeholder for the application path.-->
+                <OpenSSLStore>
+                    <ServerCertificate>C:\ProgramData\UnifiedAutomation\UaCPPServer/pkiserver/own/certs/uaservercpp.der</ServerCertificate>
+                    <ServerPrivateKey>C:\ProgramData\UnifiedAutomation\UaCPPServer/pkiserver/own/private/uaservercpp.pem</ServerPrivateKey>
+                </OpenSSLStore>
+
+                <!--Windows based certificate store.
+                    - <StoreLocation> location of the store. Valid values are LocalMachine and CurrentUser
+                    - <StoreName> is the name of the certificate store in the local computer
+                    - <ServerCertificateThumbprint> is the thumbprint of the server certificate used to load from store
+                <WindowsStore>
+                    <StoreLocation>LocalMachine</StoreLocation>
+                    <StoreName>UnifiedAutomationUaServerCPP</StoreName>
+                    <ServerCertificateThumbprint></ServerCertificateThumbprint>
+                </WindowsStore> -->
+
+                <!--Enable server certificate creation if certificate is not available; true/false-->
+                <GenerateCertificate>true</GenerateCertificate>
+                <!--Settings for a certificate that is generated by the server-->
+                <CertificateSettings>
+                    <!--Name of the application - [ServerName] is the default value to use the configured server name-->
+                    <CommonName>[ServerName]</CommonName>
+                    <!--DomainComponent - [NodeName] is the default value to use the hostname of the machine -->
+                    <DomainComponent>[NodeName]</DomainComponent>
+                    <!--Name of the organization using the OPC UA server-->
+                    <Organization>Organization</Organization>
+                    <!--Name of the organization unit using the OPC UA server-->
+                    <OrganizationUnit>Unit</OrganizationUnit>
+                    <!--Name of the location where the OPC UA server is running -->
+                    <Locality>LocationName</Locality>
+                    <!--State where the OPC UA server is running -->
+                    <State></State>
+                    <!--Two letter code for country where the OPC UA server is running, e.g. DE or US-->
+                    <Country>DE</Country>
+                    <!--The number of years the certificate is valid for. The maximum accepted number is 20,
+                        but it is strongly recommended to use a shorter time. -->
+                    <YearsValidFor>5</YearsValidFor>
+                    <!--Key length of the certificate to create. Valid values are 1024, 2048 for RsaMin and 2048, 3072 and 4096 for RsaSha256-->
+                    <KeyLength>2048</KeyLength>
+                    <!--Defines the algorithm used to sign the certificate. Valid values are RsaMin and RsaSha256.
+                        Applications that support the Basic128Rsa15 and Basic256 profiles need a Certificate of type RsaMin.
+                        Applications that support the Basic256Sha256 profile need a Certificate of type RsaSha256.
+                        In this version of the SDK it is not possible to support multiple certificates for one Endpoint,
+                        thus it is not possible to support the RsaMin and the RsaSha256 profile at the same time.-->
+                    <CertificateType>RsaSha256</CertificateType>
+                    <!-- An application instance certificate needs to provide one or more DNSNames and/or IPAddresses at which the Endpoint can be reached. This information is added to the SubjectAlternativeName of the certificate.
+                    If this parameter is not set, the [NodeName] is used by default.-->
+                    <!-- Example for a list with 2 DNSNames plus 2 IPAddresses
+                    <IPAddress>2a00:1158:400:407:0:0:0:1b2</IPAddress>
+                    <IPAddress>213.95.4.190</IPAddress>
+                    <DNSName>demo.unifiedautomation.com</DNSName>
+                    <DNSName>[NodeName]</DNSName> -->
+                    <DNSName>[NodeName]</DNSName>
+                </CertificateSettings>
+            </ServerCertificate>
+        </DefaultApplicationCertificateStore>
+
+        <!--Folder used to store rejected client certificates. Administrators can copy files from here to the trust list.-->
+        <RejectedCertificatesDirectory>C:\ProgramData\UnifiedAutomation\UaCPPServer/pkiserver/rejected</RejectedCertificatesDirectory>
+        <!--Maximum number of certificates stored in the rejected directory.-->
+        <RejectedCertificatesCount>100</RejectedCertificatesCount>
+
+        <!-- By default deprecated SecurityPolicies are rejected by the SDK when loading the configuration.
+             For backwards compatibility with old applications that behavior can be overridden.
+             Please consider carefully before turning this feature on.-->
+        <AllowDeprecatedSecurityPolicies>false</AllowDeprecatedSecurityPolicies>
+
+        <!--Endpoint configuration
+            This part of the configuration defines the OPC UA communication endpoints
+            for the server and their security configurations-->
+        <UaEndpoint>
+            <SerializerType>Binary</SerializerType>
+            <!-- URL of the Endpoint
+                 This URL is used for Discovery and to open the Endpoints in the UA stack if no StackUrl is configured.
+                 [NodeName] can be used as placeholder for the computer name. -->
+            <Url>opc.tcp://[NodeName]:48256</Url>
+            <!-- Optional URL that allows to define a specific address the stack should use to bind to.
+                Can be used to bind the endpoint to a specific network card or to localhost only.
+            <StackUrl>opc.tcp://192.168.0.15:48256</StackUrl>
+            -->
+            <!-- It is up to an administrator to configure the actual exposed SecurityPolicies.
+                 This SecurityPolicy should be disabled for most use cases.
+            -->
+            <SecuritySetting>
+                <SecurityPolicy>http://opcfoundation.org/UA/SecurityPolicy#None</SecurityPolicy>
+                <MessageSecurityMode>None</MessageSecurityMode>
+            </SecuritySetting>
+            <!-- The SecurityPolicy Basic128Rsa15 is deprecated and is no longer considered secure.
+                 It is up to an administrator to enable it for backward compatibility.
+            -->
+            <!-- <SecuritySetting>
+                <SecurityPolicy>http://opcfoundation.org/UA/SecurityPolicy#Basic128Rsa15</SecurityPolicy>
+                <MessageSecurityMode>Sign</MessageSecurityMode>
+                <MessageSecurityMode>SignAndEncrypt</MessageSecurityMode>
+            </SecuritySetting> -->
+            <!-- The SecurityPolicy Basic256 is deprecated and is no longer considered secure.
+                 It is up to an administrator to enable it for backward compatibility.
+            -->
+            <!-- <SecuritySetting>
+                <SecurityPolicy>http://opcfoundation.org/UA/SecurityPolicy#Basic256</SecurityPolicy>
+                <MessageSecurityMode>Sign</MessageSecurityMode>
+                <MessageSecurityMode>SignAndEncrypt</MessageSecurityMode>
+            </SecuritySetting> -->
+            <SecuritySetting>
+                <SecurityPolicy>http://opcfoundation.org/UA/SecurityPolicy#Basic256Sha256</SecurityPolicy>
+                <MessageSecurityMode>Sign</MessageSecurityMode>
+                <MessageSecurityMode>SignAndEncrypt</MessageSecurityMode>
+            </SecuritySetting>
+            <SecuritySetting>
+                <SecurityPolicy>http://opcfoundation.org/UA/SecurityPolicy#Aes128_Sha256_RsaOaep</SecurityPolicy>
+                <MessageSecurityMode>Sign</MessageSecurityMode>
+                <MessageSecurityMode>SignAndEncrypt</MessageSecurityMode>
+            </SecuritySetting>
+            <SecuritySetting>
+                <SecurityPolicy>http://opcfoundation.org/UA/SecurityPolicy#Aes256_Sha256_RsaPss</SecurityPolicy>
+                <MessageSecurityMode>Sign</MessageSecurityMode>
+                <MessageSecurityMode>SignAndEncrypt</MessageSecurityMode>
+            </SecuritySetting>
+            <!-- Flag indicating if the endpoint is provided in GetEndpoints and is therefore visible to a client. Default is true. -->
+            <IsVisible>true</IsVisible>
+            <!-- Flag indicating if the endpoint URL is provided as discovery URL. Default is true. -->
+            <IsDiscoveryUrl>true</IsDiscoveryUrl>
+            <!-- This option can be activated if certificates are used only for message security but not for application authentication.
+                If set to true, all client certificates will be accepted automatically and they are not stored.
+                It is strongly recommended to use this option only together with user authentication. -->
+            <AutomaticallyTrustAllClientCertificates>true</AutomaticallyTrustAllClientCertificates>
+            <!-- For calculating the server signature, the server needs to append the client certificate to the client nonce.
+                If the client sends a certificate chain, the server should only use the leaf certificate to calculate the server signature.
+                With this setting, the server uses the complete certificate chain instead. This is not the recommended behaviour.
+                Only set this flag to work around interoperability issues with misbehaving clients. -->
+            <CreateSignatureWithChain>false</CreateSignatureWithChain>
+            <!-- Some of the OPC UA security checks are optional in OPC UA or cause interoperability issues with older OPC UA clients
+                 and can be disabled by an administrator of the OPC UA server through the following configuration options. -->
+            <SecurityCheckOverwrites>
+                <!-- Flag used to disable the client certificate validation error BadCertificateTimeInvalid. Default is false. -->
+                <DisableErrorCertificateTimeInvalid>false</DisableErrorCertificateTimeInvalid>
+                <!-- Flag used to disable the client certificate validation error BadCertificateIssuerTimeInvalid. Default is false. -->
+                <DisableErrorCertificateIssuerTimeInvalid>false</DisableErrorCertificateIssuerTimeInvalid>
+                <!-- Flag used to disable the client certificate validation error BadCertificateRevocationUnknown. Default is false. -->
+                <DisableErrorCertificateRevocationUnknown>false</DisableErrorCertificateRevocationUnknown>
+                <!-- Flag used to disable the client certificate validation error BadCertificateIssuerRevocationUnknown. Default is false. -->
+                <DisableErrorCertificateIssuerRevocationUnknown>false</DisableErrorCertificateIssuerRevocationUnknown>
+                <!-- Flag used to disable the client certificate validation error BadCryptoKeyTooShort
+                     This is a security relevant check and should never be disabled except for a temporary workaround if absolutely necessary.
+                     Default value is OpcUa_False.-->
+                <DisableErrorCertificateKeyTooShort>false</DisableErrorCertificateKeyTooShort>
+                <!-- Flag used to disable the client certificate validation error BadCryptoKeyTooLong
+                     A key longer than defined by the security policy is not a security problem but against the standard.
+                     Default value is OpcUa_False. -->
+                <DisableErrorCertificateKeyTooLong>false</DisableErrorCertificateKeyTooLong>
+                <!-- Flag used to disable the ApplicationUri match check between client certificate and parameter in CreateSession.
+                     The check is required for compliant OPC UA servers but older clients may provide a wrong ApplicationUri.
+                     Default is false. -->
+                <DisableApplicationUriCheck>false</DisableApplicationUriCheck>
+                <!-- Flag used to disable the client nonce length  check in CreateSession. The check is required for compliant OPC UA
+                     servers but older clients may provide a client nonce that is shorter than the required 32 bytes. Default is false. -->
+                <DisableNonceLengthCheck>false</DisableNonceLengthCheck>
+                <!-- Flag used to disable the UserToken PolicyId check in ActivateSession.
+                     The check is required for compliant OPC UA servers but older clients may not provide the UserToken PolicyId.
+                     Default is false. -->
+                <DisableUserTokenPolicyIdCheck>false</DisableUserTokenPolicyIdCheck>
+                <!-- Flag used to disable the client certificate validation error BadSignatureAlgorithmNotAllowed.
+                     This is a security relevant check and should never be disabled except for a temporary workaround if absolutely necessary.
+                     Default is false. -->
+                <DisableCertificateSignatureAlgorithmCheck>false</DisableCertificateSignatureAlgorithmCheck>
+                <!-- Flag used to disable the client certificate validation error BadCertificateUseNotAllowed.
+                     These checks include checking for the SubjectAlternativeName, the KeyUsage and ExtendedKeyUsage of the certificate.
+                     These are security relevant checks and should not be disabled except for a temporary workaround if absolutely necessary.
+                     Default value is OpcUa_False. -->
+                <DisableCertificateUsageCheck>false</DisableCertificateUsageCheck>
+            </SecurityCheckOverwrites>
+            <!-- Optional list of clients operating with an reverse connect from the server.-->
+            <ReverseConnect>
+                <!--<Url>opc.tcp://localhost:48060</Url>
+                <Url>opc.tcp://localhost:48061</Url>-->
+            </ReverseConnect>
+            <!-- Optional list of alternative endpoint URLs known to the server.
+                 Such URLs would be used by clients who connect through a proxy or NAT.
+                 The configured URLs would be handled by the server in GetEndpoints and CreateSession. -->
+            <AlternativeEndpointUrls>
+                <!-- <Url>opc.tcp://PC1:48011/Server1</Url> -->
+            </AlternativeEndpointUrls>
+        </UaEndpoint>
+
+        <!--
+            Uncomment the next block (UaEndpoint) to enable the HTTPS based profiles.
+            This profile works but is not officially supported in this version of the SDK.
+            This is the HTTP based protocol that will be supported by embedded devices.
+            The HTTPS profile is not completely tested, so you can use it on your own risk.
+        -->
+        <!--<UaEndpoint>
+            <SerializerType>Binary</SerializerType>
+            <Url>https://[NodeName]:48011</Url>
+            <SecuritySetting>
+                <SecurityPolicy>http://opcfoundation.org/UA/SecurityPolicy#None</SecurityPolicy>
+                <MessageSecurityMode>None</MessageSecurityMode>
+            </SecuritySetting>
+            <IsVisible>true</IsVisible>
+            <IsDiscoveryUrl>true</IsDiscoveryUrl>
+            <AutomaticallyTrustAllClientCertificates>false</AutomaticallyTrustAllClientCertificates>
+            <CertificateStore>
+                <OpenSSLStore>
+                    <CertificateTrustListLocation>C:\ProgramData\UnifiedAutomation\UaCPPServer/pkiserver/trusted/certs/</CertificateTrustListLocation>
+                    <CertificateRevocationListLocation>C:\ProgramData\UnifiedAutomation\UaCPPServer/pkiserver/trusted/crl/</CertificateRevocationListLocation>
+                    <ServerCertificate>C:\ProgramData\UnifiedAutomation\UaCPPServer/pkiserver/own/certs/uaservercpp.der</ServerCertificate>
+                    <ServerPrivateKey>C:\ProgramData\UnifiedAutomation\UaCPPServer/pkiserver/own/private/uaservercpp.pem</ServerPrivateKey>
+                </OpenSSLStore>
+                <GenerateCertificate>false</GenerateCertificate>
+            </CertificateStore>
+        </UaEndpoint>-->
+        <!--Endpoint configuration end-->
+
+        <!--Provisioning mode settings-->
+        <ProvisioningModeSettings>
+          <IsActive>false</IsActive>
+          <DeactivateAfterInitialConfiguration>true</DeactivateAfterInitialConfiguration>
+        </ProvisioningModeSettings>
+
+        <!--Maximum age of a request the server allows. Default value 0 is unlimited-->
+        <MaxRequestAge>0</MaxRequestAge>
+
+        <!--Maximum number of sessions the server allows to create. Default value 0 is unlimited-->
+        <MaxSessionCount>100</MaxSessionCount>
+        <!--Maximum number of sessions the server allows per Client, 0 is unlimited-->
+        <MaxSessionsPerClient>0</MaxSessionsPerClient>
+        <!--Minimum time-out in ms for a sessions the server allows to set. Default value 0 is unlimited-->
+        <MinSessionTimeout>10000</MinSessionTimeout>
+        <!--Maximum time-out in ms for a sessions the server allows to set. Default value 0 is unlimited-->
+        <MaxSessionTimeout>3600000</MaxSessionTimeout>
+
+        <!--Maximum number of Browse Continuation Points managed by a session. Default value 0 is using internal default settings-->
+        <MaxBrowseContinuationPoints>0</MaxBrowseContinuationPoints>
+        <!--Maximum number of Browse results for one browse operation. Default value 0 is using internal default settings-->
+        <MaxBrowseResults>0</MaxBrowseResults>
+        <!--Maximum number of nodes to browse the server will accept. Default value 0 is unlimited-->
+        <MaxNodesToBrowse>0</MaxNodesToBrowse>
+        <!--Maximum number of nodes to use in a TranslateBrowsePathsToNodeIds service request. Default value 0 is unlimited-->
+        <MaxNodesPerTranslateBrowsePathsToNodeIds>0</MaxNodesPerTranslateBrowsePathsToNodeIds>
+
+        <!--Maximum number of nodes accepted by server for HistoryRead service for Raw, Modified, Processed and AtTime. Default value 0 is unlimited-->
+        <MaxNodesPerHistoryReadData>0</MaxNodesPerHistoryReadData>
+        <!--Maximum number of nodes accepted by server for HistoryRead service for Events. Default value 0 is unlimited-->
+        <MaxNodesPerHistoryReadEvents>0</MaxNodesPerHistoryReadEvents>
+        <!--Maximum number of nodes accepted by server for HistoryUpdate service for Data. Default value 0 is unlimited-->
+        <MaxNodesPerHistoryUpdateData>0</MaxNodesPerHistoryUpdateData>
+        <!--Maximum number of nodes accepted by server for HistoryUpdate service for Events. Default value 0 is unlimited-->
+        <MaxNodesPerHistoryUpdateEvents>0</MaxNodesPerHistoryUpdateEvents>
+
+        <!--Maximum number of History Continuation Points managed by a session. Default value 0 is using internal default settings-->
+        <MaxHistoryContinuationPoints>0</MaxHistoryContinuationPoints>
+
+        <!--Minimum publishing interval in milliseconds the server allows-->
+        <MinPublishingInterval>50</MinPublishingInterval>
+        <!--Maximum publishing interval in milliseconds the server allows. Default value 0 is no limitation-->
+        <MaxPublishingInterval>0</MaxPublishingInterval>
+        <!--Minimum KeepAlive interval  in milliseconds the server allows-->
+        <MinKeepAliveInterval>5000</MinKeepAliveInterval>
+        <!--Minimum Subscription lifetime in milliseconds the server allows-->
+        <MinSubscriptionLifetime>10000</MinSubscriptionLifetime>
+        <!--Maximum Subscription lifetime in milliseconds the server allows. Default value 0 is no limitation-->
+        <MaxSubscriptionLifetime>0</MaxSubscriptionLifetime>
+        <!--Maximum number of messages in the republish queue the server allows per Subscription.-->
+        <MaxRetransmissionQueueSize>20</MaxRetransmissionQueueSize>
+        <!--Maximum number of notifications per Publish the server allows. Default value 0 is no limitation-->
+        <MaxNotificationsPerPublish>0</MaxNotificationsPerPublish>
+        <!--Maximum size of monitored item data queues.-->
+        <MaxDataQueueSize>100</MaxDataQueueSize>
+        <!--Maximum size of monitored item event queues.-->
+        <MaxEventQueueSize>10000</MaxEventQueueSize>
+        <!--Maximum number of subscriptions the server allows to create. Default value 0 is unlimited-->
+        <MaxSubscriptionCount>0</MaxSubscriptionCount>
+        <!--Maximum number of subscriptions the server allows to create per Session. Default value 0 is unlimited-->
+        <MaxSubscriptionsPerSession>100</MaxSubscriptionsPerSession>
+        <!--Maximum number of monitored items the server allows to create. Default value 0 is unlimited-->
+        <MaxMonitoredItemCount>0</MaxMonitoredItemCount>
+        <!--Maximum number of monitored items per subscriptions the server allows to create. Default value 0 is unlimited-->
+        <MaxMonitoredItemPerSubscriptionCount>0</MaxMonitoredItemPerSubscriptionCount>
+        <!--Maximum number of monitored items per session the server allows to create. Default value 0 is unlimited-->
+        <MaxMonitoredItemPerSessionCount>0</MaxMonitoredItemPerSessionCount>
+
+        <!--Minimum sample interval supported by the server-->
+        <MinSupportedSampleRate>0</MinSupportedSampleRate>
+
+        <DurableSubscription>
+            <!-- Flag indicating if durable subscription support is enabled -->
+            <Enabled>true</Enabled>
+            <!--Storage directory for durable subscription configurations
+                C:\ProgramData\UnifiedAutomation\UaCPPServer can be used as placeholder for the configuration directory path.
+                [ApplicationPath] can be used as placeholder for the application path.-->
+            <StorageDirectory>C:\ProgramData\UnifiedAutomation\UaCPPServer/durablesubscriptions</StorageDirectory>
+            <!-- Maximum Durable Subscription lifetime in hours the server allows -->
+            <MaxSubscriptionLifetimeInHours>100</MaxSubscriptionLifetimeInHours>
+            <!-- Maximum size of a durable monitored item queue the server allows -->
+            <MaxMonitoredItemQueueSize>0</MaxMonitoredItemQueueSize>
+            <!-- Size of the live value queue for a durable monitored item in normal operation. The default value is 100. The minimum value is 10. -->
+            <LiveQueueSize>100</LiveQueueSize>
+        </DurableSubscription>
+
+        <!--Settings for the sampling engine.-->
+        <AvailableSamplingRates>
+            <SamplingRate>0</SamplingRate>
+            <SamplingRate>50</SamplingRate>
+            <SamplingRate>100</SamplingRate>
+            <SamplingRate>250</SamplingRate>
+            <SamplingRate>500</SamplingRate>
+            <SamplingRate>1000</SamplingRate>
+            <SamplingRate>2000</SamplingRate>
+            <SamplingRate>5000</SamplingRate>
+            <SamplingRate>10000</SamplingRate>
+        </AvailableSamplingRates>
+
+        <!--Settings for the available LocaleIds known to be supported by the server.-->
+        <AvailableLocaleIds>
+            <LocaleId>en</LocaleId>
+        </AvailableLocaleIds>
+
+        <!--Settings for the available UA profiles known to be supported by the server.-->
+        <AvailableServerProfiles>
+            <ServerProfileUri>http://opcfoundation.org/UAProfile/Server/StandardUA</ServerProfileUri>
+            <ServerProfileUri>http://opcfoundation.org/UAProfile/Server/DataAccess</ServerProfileUri>
+            <ServerProfileUri>http://opcfoundation.org/UAProfile/Server/Methods</ServerProfileUri>
+            <ServerProfileUri>http://opcfoundation.org/UAProfile/Server/NodeManagement</ServerProfileUri>
+            <ServerProfileUri>http://opcfoundation.org/UAProfile/Server/StandardEventSubscription</ServerProfileUri>
+        </AvailableServerProfiles>
+
+        <!--Settings for the Server capabilities defined in OPC UA Part 12.-->
+        <ServerCapabilities>
+            <ServerCapability>DA</ServerCapability>
+            <ServerCapability>HD</ServerCapability>
+            <ServerCapability>AC</ServerCapability>
+            <ServerCapability>HE</ServerCapability>
+            <ServerCapability>RCP</ServerCapability>
+        </ServerCapabilities>
+
+        <!--Flag indicating if audit events are activated-->
+        <IsAuditActivated>false</IsAuditActivated>
+
+        <!--Settings for the thread pools used in the server application-->
+        <ThreadPoolSettings>
+            <MinSizeTransactionManager>1</MinSizeTransactionManager>
+            <MaxSizeTransactionManager>10</MaxSizeTransactionManager>
+            <MinSizeSubscriptionManager>1</MinSizeSubscriptionManager>
+            <MaxSizeSubscriptionManager>10</MaxSizeSubscriptionManager>
+        </ThreadPoolSettings>
+
+        <!--Build information for the server application software-->
+        <ProductUri>urn:UnifiedAutomation:UaServerCpp</ProductUri>
+        <ManufacturerName>Unified Automation GmbH</ManufacturerName>
+        <ProductName>C++ SDK OPC UA Demo Server</ProductName>
+        <SoftwareVersion>1.7.3</SoftwareVersion>
+        <BuildNumber>505</BuildNumber>
+        <!--Build information end-->
+
+        <!--Server instance information defined for the server installation.
+            [NodeName] can be used as placeholder for the computer name. -->
+        <ServerUri>urn:[NodeName]:UnifiedAutomation:UaServerCpp</ServerUri>
+        <ServerName>UaServerCpp@[NodeName]</ServerName>
+        <!--Server instance information end-->
+
+        <!--Configuration for supported user identity tokens-->
+        <UserIdentityTokens>
+            <!--Enable anonymous login true/false-->
+            <EnableAnonymous>true</EnableAnonymous>
+            <!--Enable user/password login true/false-->
+            <EnableUserPw>true</EnableUserPw>
+            <!--Enable certificate based user login true/false-->
+            <EnableCertificate>true</EnableCertificate>
+            <!--The security policy to use when encrypting or signing the UserIdentityToken when it is passed to the server.
+                This security policy is only applied for None Endpoints. For other Endpoints we use the security policy of the Endpoint.-->
+            <SecurityPolicy>http://opcfoundation.org/UA/SecurityPolicy#Basic256Sha256</SecurityPolicy>
+            <!--Configuration for file based certificate store to handle user certificates.-->
+            <DefaultUserCertificateStore>
+                <CertificateTrustListLocation>C:\ProgramData\UnifiedAutomation\UaCPPServer/pkiuser/trusted/certs/</CertificateTrustListLocation>
+                <CertificateRevocationListLocation>C:\ProgramData\UnifiedAutomation\UaCPPServer/pkiuser/trusted/crl/</CertificateRevocationListLocation>
+                <IssuersCertificatesLocation>C:\ProgramData\UnifiedAutomation\UaCPPServer/pkiuser/issuers/certs/</IssuersCertificatesLocation>
+                <IssuersRevocationListLocation>C:\ProgramData\UnifiedAutomation\UaCPPServer/pkiuser/issuers/crl/</IssuersRevocationListLocation>
+            </DefaultUserCertificateStore>
+            <!--Folder used to store rejected user certificates.-->
+            <RejectedUserCertificatesDirectory>C:\ProgramData\UnifiedAutomation\UaCPPServer/pkiuser/rejected/</RejectedUserCertificatesDirectory>
+            <!--Maximum number of certificates stored in the rejected directory.-->
+            <RejectedUserCertificatesCount>100</RejectedUserCertificatesCount>
+        </UserIdentityTokens>
+        <!--User identity token configuration end-->
+
+        <!--Discovery configuration
+            Configuration for registration with discovery server(s)-->
+        <DiscoveryRegistration>
+            <!--Flag indicating if the certificates should be exchanged with the windows certificate store -->
+            <AutomaticCertificateExchange>false</AutomaticCertificateExchange>
+            <!--Path of the local discovery server trust list. This is where the server copies it's certificate to
+                if the file based store of the new LDS is used. -->
+            <DiscoveryServerTrustListLocation></DiscoveryServerTrustListLocation>
+            <!--Store name used for the local discovery server in the windows certificate store -->
+            <DiscoveryServerStoreName>UA Applications</DiscoveryServerStoreName>
+            <!--Certificate name of the local discovery server in the windows certificate store -->
+            <DiscoveryServerCertificateName>UA Local Discovery Server</DiscoveryServerCertificateName>
+            <!--Interval in milliseconds for registration with discovery server(s) -->
+            <RegistrationInterval>30000</RegistrationInterval>
+            <!--List of discovery servers to register with.
+                If the list is empty, no registration is executed.
+                Default is opc.tcp://localhost:4840 for the local discovery server.
+                Additional remote discovery servers can be added
+            <Url>opc.tcp://127.0.0.1:4840</Url>-->
+        </DiscoveryRegistration>
+        <!--Discovery configuration end-->
+
+        <!--Serializer configuration
+          This part of the configuration defines the OPC UA Stack serializer settings.
+          These are the Security constraints for the serializer. Set this values carefully.-->
+        <Serializer>
+            <!--The largest size for a memory block the serializer can do when deserializing a message-->
+            <MaxAlloc>33554432</MaxAlloc>
+            <!--The largest string accepted by the serializer-->
+            <MaxStringLength>16646145</MaxStringLength>
+            <!--The largest byte string accepted by the serializer-->
+            <MaxByteStringLength>16646145</MaxByteStringLength>
+            <!--Maximum number of elements in an array accepted by the serializer-->
+            <MaxArrayLength>65536</MaxArrayLength>
+            <!--The maximum number of bytes per message in total-->
+            <MaxMessageSize>33554432</MaxMessageSize>
+        </Serializer>
+        <!--Serializer configuration end-->
+
+        <!--Settings for the thread pools used in the OPC UA Stack-->
+        <StackThreadPoolSettings>
+            <!--Controls whether the secure listener uses a thread pool to dispatch received requests-->
+            <Enabled>true</Enabled>
+            <!--The minimum number of threads in the thread pool-->
+            <MinThreads>5</MinThreads>
+            <!--The maximum number of threads in the thread pool-->
+            <MaxThreads>5</MaxThreads>
+            <!--The length of the queue with jobs waiting for a free thread-->
+            <MaxJobs>20</MaxJobs>
+            <!--If MaxJobs is reached the add operation can block or return an error-->
+            <BlockOnAdd>true</BlockOnAdd>
+            <!--If the add operation blocks on a full job queue, this value sets the maximum waiting time. 0 is infinite-->
+            <Timeout>0</Timeout>
+        </StackThreadPoolSettings>
+
+        <!--Provides the redundancy settings for the server-->
+        <RedundancySettings>
+            <!--Redundancy support options are None, Cold, Warm, Hot and Transparent. Transparent requires special module. -->
+            <RedundancySupport>None</RedundancySupport>
+            <!--List of server URIs for the servers in the NonTransparent redundant set.
+            <ServerUri>urn:MyServer:UnifiedAutomation:RedundancySample</ServerUri>
+            <ServerUri>urn:PC1:UnifiedAutomation:RedundancySample</ServerUri>
+            <ServerUri>urn:PC2:UnifiedAutomation:RedundancySample</ServerUri> -->
+        </RedundancySettings>
+
+        <!--Allows configuration of servers returned in FindServers by the server
+            This is required for the redundancy configuration to provide the discovery URLs for the configured ServerUris of
+            the redundant servers in a non transparent redundancy set. The own server mus be excluded from the list.
+            <AdditionalServerEntries><ApplicationDescription><ApplicationUri> must match <RedundancySettings><ServerUri>
+            This can also be used to configure other servers on the same system if this server is running on Port 4840.
+            Options for <ApplicationType> are Server or ClientAndServer
+        <AdditionalServerEntries>
+            <ApplicationDescription>
+                <ApplicationUri>urn:PC1:UnifiedAutomation:RedundancySample</ApplicationUri>
+                <ProductUri>urn:UnifiedAutomation:RedundancySample</ProductUri>
+                <ApplicationName>RedundancySample@PC1</ApplicationName>
+                <ApplicationType>Server</ApplicationType>
+                <DiscoveryUrl>opc.tcp://PC1:48256</DiscoveryUrl>
+                <DiscoveryUrl>https://PC1:48011</DiscoveryUrl>
+            </ApplicationDescription>
+            <ApplicationDescription>
+                <ApplicationUri>urn:PC2:UnifiedAutomation:RedundancySample</ApplicationUri>
+                <ProductUri>urn:UnifiedAutomation:RedundancySample</ProductUri>
+                <ApplicationName>RedundancySample@PC2</ApplicationName>
+                <ApplicationType>Server</ApplicationType>
+                <DiscoveryUrl>opc.tcp://PC2:48256</DiscoveryUrl>
+                <DiscoveryUrl>https://PC2:48011</DiscoveryUrl>
+            </ApplicationDescription>
+        </AdditionalServerEntries>-->
+
+    </UaServerConfig>
+    <General>
+    </General>
+</OpcServerConfig>
+

@@ -1,0 +1,23 @@
+{
+  "collectorConfigurationName": "Test Configuration",
+  "databaseType": "SQLite",
+  "sqliteDatabaseName": "../data/config.db",
+
+  "psqlDatabaseName1": "ogammaloggerconfig",
+  "psqlUserName": "ogamma",
+  "psqlPassword": "ogamma",
+  "psqlHost": "localhost",
+  "psqlPort": 5432,
+
+  "serverHostName": "OWAS",
+  "serverIpAddress": "192.168.1.79",
+  "serverPortNumber": 48010,
+  "securityMode": 1,
+  "numberOfServers": 50,
+  "serverOptionsFileName": "server-options.json",
+
+  "numberOfVariables": 100,
+  "variablesPerPartition": 1,
+  "samplingInterval": 1000,
+  "publishingInterval": 1000
+}

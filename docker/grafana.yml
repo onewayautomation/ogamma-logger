@@ -2,11 +2,11 @@ version: '3'
 services:
 #Grafana    
   grafana:
-    image: grafana/grafana:7.1.5
+    image: grafana/grafana:10.2.3
     restart: always
     environment:
       - GF_SECURITY_ADMIN_PASSWORD=admin
-      - GF_INSTALL_PLUGINS=grafana-simple-json-datasource,grafana-influxdb-flux-datasource,natel-discrete-panel
+      - GF_INSTALL_PLUGINS=grafana-simple-json-datasource,grafana-influxdb-flux-datasource,natel-discrete-panel,briangann-gauge-panel,aceiot-svg-panel,fatcloud-windrose-panel
     ports:
       - '3000:3000'
     volumes:

@@ -1,0 +1,21 @@
+{
+  "collectorConfigurationName": "Test Configuration",
+  "databaseType": "PostgreSQL",
+  "psqlDatabaseName": "ogammaloggerconfig",
+  "psqlUserName": "ogamma",
+  "psqlPassword": "ogamma",
+  "psqlHost": "192.168.1.80",
+  "psqlPort": 5432,
+
+  "serverHostName": "OWAS",
+  "serverIpAddress": "192.168.1.79",
+  "serverPortNumber": 48010,
+  "securityMode": 3,
+  "numberOfServers": 2,
+  "serverOptionsFileName": "server-options.json",
+
+  "numberOfVariables": 100000,
+  "variablesPerPartition": 1000,
+  "samplingInterval": 5000,
+  "publishingInterval": 5000
+}

@@ -1,0 +1,4 @@
+acl hivemq.cloud dstdomain -n eec77a9e8ddd495b9df6d981c2d2be13.s2.eu.hivemq.cloud
+acl pkiRestUrlPath urlpath_regex ^/rest(|\/.*)$
+url_rewrite_program /etc/squid/urlrewrite.pl
+url_rewrite_access allow hivemq.cloud pkiRestUrlPath

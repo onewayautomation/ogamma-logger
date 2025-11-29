@@ -1,22 +1,25 @@
 version: '3'
 services:
-# TimescaleDB (PostgreSQL, optimized to store time-series data).
-  tsdb:
-    image: timescale/timescaledb:1.7.4-pg11
+
+# TimescaleDB (PostgreSQL, optimized to store time-series data). 
+  tsdboss:
+    #image: timescale/timescaledb:2.10.1-pg14-oss
+    image: timescale/timescaledb:latest-pg15-oss
+    hostname: tsdboss
     environment:
       - POSTGRES_USER=ogamma
       - POSTGRES_PASSWORD=ogamma
       - POSTGRES_DB=ogammalogger
     volumes:
-      - 'ogamma-logger-tsdb-data:/var/lib/postgresql/data'
+      - 'ogamma-logger-tsdb-data-oss:/var/lib/postgresql/data'
     ports:
       - '5432:5432'
     networks:
-      - ogamma-logger
+      - ogamma-logger    
       
 # Web based management tool.       
   pgadmin:
-    image: dpage/pgadmin4:4.26
+    image: dpage/pgadmin4:8.0
     environment:
       - PGADMIN_DEFAULT_EMAIL=admin@ogamma.io
       - PGADMIN_DEFAULT_PASSWORD=admin
@@ -26,10 +29,16 @@ services:
     ports:
       - "4888:4888"
     networks:
-      - ogamma-logger      
-
+      - ogamma-logger  
+      - keycloak
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+      
 networks:
   ogamma-logger: null
+  keycloak: {}
 volumes:
+  ogamma-logger-psql-ext-data: {}
   ogamma-logger-tsdb-data: {}
+  ogamma-logger-tsdb-data-oss: {}
   ogamma-logger-pgadmin: {}

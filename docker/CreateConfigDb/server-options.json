@@ -1,0 +1,79 @@
+{
+  "publishRequestQueueSize": 5,
+  "securityTokenLifetime": 600000,
+  "maxReferencesPerNode": 0,
+  "certificateValidationRules": {
+    "suppressSecurityPolicyCheck": true,
+    "suppressValidityPeriodError": false,
+    "suppressCertificateUsageError": false,
+    "suppressFindRevocationListError": true,
+    "suppressHostNameMisMatch": true,
+    "checkOnlyHostNamePartInDns": true,
+    "allowOnlyHostNameInUri": true
+  },
+  "browseTotalReferences": 10000,
+  "browseTotalTimeout": 20000,
+  "sessionTimeout": 1200000,
+  "delayBeforeReconnect": 1,
+  "reconnectInterval": 30000,
+  "readServerStateInterval": 3000,
+  "timeoutReadServerState": 30000,
+  "requestTimeouts": {
+    "openSecureChannel": 2000,
+    "discovery": 2000,
+    "browse": 5000,
+    "createSession": 2000,
+    "activateSession": 2000,
+    "createSubscription": 2000,
+    "createMonitoredItems": 2000,
+    "read": 2000,
+    "write": 2000,
+    "closeSession": 2000,
+    "other": 2000
+  },
+  "dnsMap": [
+    {
+      "from": "opcuaserver.com",
+      "to": "75.152.105.54"
+    }
+  ],
+  "urlMap": [
+    {
+      "from": "opc.tcp://opcplc:50000/",
+      "to": "opc.tcp://locale:50001/"
+    }
+  ],
+  "supportsAbsoluteDeadband": true,
+  "supportsPercentDeadband": true,
+  "readTypeDefinitionsOnConnect": false,
+  "readXmlTypeDictionaryOnConnect": false,
+  "maxSubtypeDepth": 10,
+  "ignoreTypeDefinitionReadErrors": true,
+  "timeoutGetServerInfo": 5000,
+  "sendBufferSize": 65536,
+  "receiveBufferSize": 65536,
+  "maxSendMessageSize": 16777215,
+  "maxReceiveMessageSize": 16777215,
+  "maxSendChunkCount": 0,
+  "maxReceiveChunkCount": 0,
+  "maxMonitoredItemsPerSubscription": 5000,
+  "monitorStaleTransactions": false,
+  "readValuesInterval": 1,
+  "maxNodesPerReadRequest": 0,
+  "readValuesMaxAge": 100,
+  "identityTokenType": 0,
+  "userName": "admin",
+  "password": "78IkAEi+sIfUcDf+6tt0vWocjTrcvQh9dfBUsvoePAm6rVTtY/BJO+NCAPmbQFWR\nIg==",
+  "methods": [
+    {
+      "objectNodeId": "ns=2;s=Demo.Massfolder_Dynamic",
+      "methodNodeId": "ns=2;s=Demo.Massfolder_Dynamic.AddNodes",
+      "inputArguments": [
+        {
+          "dataType": "UInt32",
+          "value": 100000
+        }
+      ]
+    }
+  ]
+}

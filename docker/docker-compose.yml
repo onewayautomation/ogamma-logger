@@ -1,27 +1,45 @@
-version: '3'
 services:
-      
   ogamma-logger:
-    image: 'ogamma/logger:2.0.2'
+    image: 'ogamma/logger:4.2.0'
     restart: always
-# By default configuration file ./data/config is used. Can be changed by environment variable.    
-    environment:
+    
+    environment:    
+# By default configuration file ./data/config.json is used. Can be changed by environment variable:    
       - OVL_CONFIG_FILE=./data/config.json
-
-    ports:
-      - '4880:4880'
-# for troubleshooting SSH port can be exposed.      
-#      - '4822:22'
+# Do not use default credentials in production!
+      - OVL_USER_ID=admin
+      - OVL_USER_PASSWORD=password
+      - OVL_PYTHON_START_DEBUGGER=ON
+      - OVL_PYTHON_DEBUG_PORT=5678
+      - OVL_PYTHON_WAIT_FOR_CLIENT=OFF
+      # Value 0.0.0.0 means listen on all network interfaces, with any IP address. Note: must have no quotes!
+      - OVL_PYTHON_DEBUG_HOST=0.0.0.0
       
+    #network_mode: "host"  # Use host's network namespace
+    #cap_add:
+    #  - NET_ADMIN
+    #  - NET_BROADCAST
+    #  - NET_RAW
+      
+    ports:
+      # 4880 is GUI endpoint port:
+      - '4880:4880'
+      # 5678 is Python debug server port, set by environment variable OVL_PYTHON_DEBUG_PORT
+      # - '5678:5678'
     hostname: ogamma-logger
     volumes:
       - './data:/home/ogamma/logger/data'
-
+    # Temporarily override the user and command to run at container start-up, to change owner of the work directory to user "ogamma" of the group "ogamma":
+    #user: root
+    #entrypoint: >
+    #  sh -c "
+    #    chown -R ogamma:ogamma /home/ogamma/logger && 
+    #    tail -f /dev/null
+    #  "
     networks:
       - ogamma-logger
-    extra_hosts:
-      - '${HOST_NAME:-opcuaserver.com}:${HOST_IP_ADDRESS:-75.152.105.54}'
  
 networks:
-  ogamma-logger: null
+  ogamma-logger: {}
+    #driver: bridge
 

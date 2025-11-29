@@ -1,0 +1,16 @@
+{
+  "collectorConfigurationName": "150 K Variables",
+  "databaseType": "SQLite",
+  "sqliteDatabaseName": "../data/config.db",
+  "serverHostName": "OWAS",
+  "serverIpAddress": "192.168.1.15",
+  "serverPortNumber": 48010,
+  "securityMode": 3,
+  "numberOfServers": 2,
+  "serverOptionsFileName": "server-options.json",
+
+  "numberOfVariables": 75000,
+  "variablesPerPartition": 1,
+  "samplingInterval": 5000,
+  "publishingInterval": 15000
+}

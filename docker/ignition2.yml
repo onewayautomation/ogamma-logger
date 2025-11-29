@@ -1,0 +1,29 @@
+services:
+  gw2:
+    cap_add:
+      - NET_ADMIN
+    image: inductiveautomation/ignition:latest
+    volumes:
+      - gw2-data:/usr/local/bin/ignition/data
+      - gw2-jdbc:/usr/local/bin/ignition/user-lib/jdbc
+    command: |
+      -n Ignition-gw2
+      -a ${DOCKER_GATEWAY_HOST:-host.docker.internal}
+      -h 31802
+      -s 32802
+      -m 1024 
+    ports:
+      - 31802:8088
+      - 32802:8043
+      - 33802:8060
+      - 62543:62543
+      - 35802:8000
+    environment:
+      TZ: America/New_York
+    networks:
+      - ogamma-logger
+networks:
+  ogamma-logger: null
+volumes:
+  gw2-data: {}
+  gw2-jdbc: {}

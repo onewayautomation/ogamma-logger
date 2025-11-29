@@ -1,0 +1,12 @@
+postgresql-66e7cbe4-o6a9ecae1.database.cloud.ovh.net
+port: 20184
+avnadmin
+YO61Kzx9RS7ZrBwsUJy4
+
+
+CREATE EXTENSION IF NOT EXISTS timescaledb;
+
+OTICE:  extension "timescaledb" already exists, skipping
+CREATE EXTENSION
+
+Query returned successfully in 717 msec.

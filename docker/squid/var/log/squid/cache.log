@@ -1,0 +1,840 @@
+2022/07/22 07:23:12| Current Directory is /
+2022/07/22 07:23:12| Creating missing swap directories
+2022/07/22 07:23:12| No cache_dir stores are configured.
+2022/07/22 07:23:12| Removing PID file (/run/squid.pid)
+2022/07/22 07:23:12| Current Directory is /
+2022/07/22 07:23:12| Starting Squid Cache version 5.2 for x86_64-pc-linux-gnu...
+2022/07/22 07:23:12| Service Name: squid
+2022/07/22 07:23:12| Process ID 13
+2022/07/22 07:23:12| Process Roles: master worker
+2022/07/22 07:23:12| With 1048576 file descriptors available
+2022/07/22 07:23:12| Initializing IP Cache...
+2022/07/22 07:23:12| DNS Socket created at 0.0.0.0, FD 8
+2022/07/22 07:23:12| Adding nameserver 192.168.65.5 from /etc/resolv.conf
+2022/07/22 07:23:12| Logfile: opening log daemon:/var/log/squid/access.log
+2022/07/22 07:23:12| Logfile Daemon: opening log /var/log/squid/access.log
+2022/07/22 07:23:12| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
+2022/07/22 07:23:12| Store logging disabled
+2022/07/22 07:23:12| Swap maxSize 0 + 262144 KB, estimated 20164 objects
+2022/07/22 07:23:12| Target number of buckets: 1008
+2022/07/22 07:23:12| Using 8192 Store buckets
+2022/07/22 07:23:12| Max Mem  size: 262144 KB
+2022/07/22 07:23:12| Max Swap size: 0 KB
+2022/07/22 07:23:12| Using Least Load store dir selection
+2022/07/22 07:23:12| Current Directory is /
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:12| storeDirWriteCleanLogs: Starting...
+2022/07/22 07:23:12|   Finished.  Wrote 0 entries.
+2022/07/22 07:23:12|   Took 0.00 seconds (  0.00 entries/sec).
+2022/07/22 07:23:12| FATAL: mimeLoadIcon: cannot parse internal URL: http://a3f1b78618d4:0/squid-internal-static/icons/silk/image.png
+2022/07/22 07:23:12| Squid Cache (Version 5.2): Terminated abnormally.
+CPU Usage: 0.046 seconds = 0.009 user + 0.037 sys
+Maximum Resident Size: 681568 KB
+Page faults with physical i/o: 0
+2022/07/22 07:23:12| Removing PID file (/run/squid.pid)
+2022/07/22 07:23:47| Current Directory is /
+2022/07/22 07:23:47| Creating missing swap directories
+2022/07/22 07:23:47| No cache_dir stores are configured.
+2022/07/22 07:23:47| Removing PID file (/run/squid.pid)
+2022/07/22 07:23:47| Current Directory is /
+2022/07/22 07:23:47| Starting Squid Cache version 5.2 for x86_64-pc-linux-gnu...
+2022/07/22 07:23:47| Service Name: squid
+2022/07/22 07:23:47| Process ID 12
+2022/07/22 07:23:47| Process Roles: master worker
+2022/07/22 07:23:47| With 1048576 file descriptors available
+2022/07/22 07:23:47| Initializing IP Cache...
+2022/07/22 07:23:47| DNS Socket created at 0.0.0.0, FD 8
+2022/07/22 07:23:47| Adding nameserver 192.168.65.5 from /etc/resolv.conf
+2022/07/22 07:23:47| Logfile: opening log daemon:/var/log/squid/access.log
+2022/07/22 07:23:47| Logfile Daemon: opening log /var/log/squid/access.log
+2022/07/22 07:23:47| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
+2022/07/22 07:23:47| Store logging disabled
+2022/07/22 07:23:47| Swap maxSize 0 + 262144 KB, estimated 20164 objects
+2022/07/22 07:23:47| Target number of buckets: 1008
+2022/07/22 07:23:47| Using 8192 Store buckets
+2022/07/22 07:23:47| Max Mem  size: 262144 KB
+2022/07/22 07:23:47| Max Swap size: 0 KB
+2022/07/22 07:23:47| Using Least Load store dir selection
+2022/07/22 07:23:47| Current Directory is /
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| ERROR: No forward-proxy ports configured.
+2022/07/22 07:23:47| storeDirWriteCleanLogs: Starting...
+2022/07/22 07:23:47|   Finished.  Wrote 0 entries.
+2022/07/22 07:23:47|   Took 0.00 seconds (  0.00 entries/sec).
+2022/07/22 07:23:47| FATAL: mimeLoadIcon: cannot parse internal URL: http://a3f1b78618d4:0/squid-internal-static/icons/silk/image.png
+2022/07/22 07:23:47| Squid Cache (Version 5.2): Terminated abnormally.
+CPU Usage: 0.043 seconds = 0.000 user + 0.043 sys
+Maximum Resident Size: 681184 KB
+Page faults with physical i/o: 0
+2022/07/22 07:23:47| Removing PID file (/run/squid.pid)
+2022/07/22 07:36:01| Current Directory is /
+2022/07/22 07:36:01| Creating missing swap directories
+2022/07/22 07:36:01| No cache_dir stores are configured.
+2022/07/22 07:36:01| Removing PID file (/run/squid.pid)
+2022/07/22 07:36:01| Current Directory is /
+2022/07/22 07:36:01| Starting Squid Cache version 5.2 for x86_64-pc-linux-gnu...
+2022/07/22 07:36:01| Service Name: squid
+2022/07/22 07:36:01| Process ID 13
+2022/07/22 07:36:01| Process Roles: master worker
+2022/07/22 07:36:01| With 1048576 file descriptors available
+2022/07/22 07:36:01| Initializing IP Cache...
+2022/07/22 07:36:01| DNS Socket created at 0.0.0.0, FD 8
+2022/07/22 07:36:01| Adding nameserver 192.168.65.5 from /etc/resolv.conf
+2022/07/22 07:36:01| Logfile: opening log daemon:/var/log/squid/access.log
+2022/07/22 07:36:01| Logfile Daemon: opening log /var/log/squid/access.log
+2022/07/22 07:36:01| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
+2022/07/22 07:36:01| Store logging disabled
+2022/07/22 07:36:01| Swap maxSize 0 + 262144 KB, estimated 20164 objects
+2022/07/22 07:36:01| Target number of buckets: 1008
+2022/07/22 07:36:01| Using 8192 Store buckets
+2022/07/22 07:36:01| Max Mem  size: 262144 KB
+2022/07/22 07:36:01| Max Swap size: 0 KB
+2022/07/22 07:36:01| Using Least Load store dir selection
+2022/07/22 07:36:01| Current Directory is /
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| ERROR: No forward-proxy ports configured.
+2022/07/22 07:36:01| storeDirWriteCleanLogs: Starting...
+2022/07/22 07:36:01|   Finished.  Wrote 0 entries.
+2022/07/22 07:36:01|   Took 0.00 seconds (  0.00 entries/sec).
+2022/07/22 07:36:01| FATAL: mimeLoadIcon: cannot parse internal URL: http://a3f1b78618d4:0/squid-internal-static/icons/silk/image.png
+2022/07/22 07:36:01| Squid Cache (Version 5.2): Terminated abnormally.
+CPU Usage: 0.050 seconds = 0.034 user + 0.017 sys
+Maximum Resident Size: 681552 KB
+Page faults with physical i/o: 0
+2022/07/22 07:36:01| Removing PID file (/run/squid.pid)
+2022/07/22 07:57:32| Current Directory is /
+2022/07/22 07:57:32| Creating missing swap directories
+2022/07/22 07:57:32| No cache_dir stores are configured.
+2022/07/22 07:57:32| Removing PID file (/run/squid.pid)
+2022/07/22 07:57:32| Current Directory is /
+2022/07/22 07:57:32| Starting Squid Cache version 5.2 for x86_64-pc-linux-gnu...
+2022/07/22 07:57:32| Service Name: squid
+2022/07/22 07:57:32| Process ID 12
+2022/07/22 07:57:32| Process Roles: master worker
+2022/07/22 07:57:32| With 1048576 file descriptors available
+2022/07/22 07:57:32| Initializing IP Cache...
+2022/07/22 07:57:32| DNS Socket created at 0.0.0.0, FD 8
+2022/07/22 07:57:32| Adding nameserver 192.168.65.5 from /etc/resolv.conf
+2022/07/22 07:57:32| Logfile: opening log daemon:/var/log/squid/access.log
+2022/07/22 07:57:32| Logfile Daemon: opening log /var/log/squid/access.log
+2022/07/22 07:57:32| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
+2022/07/22 07:57:32| Store logging disabled
+2022/07/22 07:57:32| Swap maxSize 0 + 262144 KB, estimated 20164 objects
+2022/07/22 07:57:32| Target number of buckets: 1008
+2022/07/22 07:57:32| Using 8192 Store buckets
+2022/07/22 07:57:32| Max Mem  size: 262144 KB
+2022/07/22 07:57:32| Max Swap size: 0 KB
+2022/07/22 07:57:32| Using Least Load store dir selection
+2022/07/22 07:57:32| Current Directory is /
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| ERROR: No forward-proxy ports configured.
+2022/07/22 07:57:32| storeDirWriteCleanLogs: Starting...
+2022/07/22 07:57:32|   Finished.  Wrote 0 entries.
+2022/07/22 07:57:32|   Took 0.00 seconds (  0.00 entries/sec).
+2022/07/22 07:57:32| FATAL: mimeLoadIcon: cannot parse internal URL: http://a3f1b78618d4:0/squid-internal-static/icons/silk/image.png
+2022/07/22 07:57:32| Squid Cache (Version 5.2): Terminated abnormally.
+CPU Usage: 0.049 seconds = 0.010 user + 0.039 sys
+Maximum Resident Size: 681840 KB
+Page faults with physical i/o: 0
+2022/07/22 07:57:32| Removing PID file (/run/squid.pid)
