@@ -9,3 +9,7 @@ docker/opt2/influxdb2_initialized.txt
 binaries/msodbcsql.msi
 binaries/.wget-hsts
 KnownIssues.md
+oBox/grafana/grafana.ini
+CreateConfigDb/.vs/CreateConfigDb/v17/.suo
+/binaries/VC_redist.x64.exe
+/binaries/wget.exe

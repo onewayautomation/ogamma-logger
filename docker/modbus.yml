@@ -5,15 +5,11 @@ services:
     image: 'ogamma/modbus-opcua-server'
     restart: always
     hostname: modbus-opcua-server
-    
-    # Option "priviliged" facilitates access to serial ports:
-    privileged: true
-    
     ports:
-      - '4848:4848'
+      - '4848:4840'
 #Host port: container port.
     environment:
-      - OMOUAS_PORT=4848
+      - OMOUAS_PORT=4840
       - OMOUAS_HOST=modbus-opcua-server
       
       # In production installation, set next 2 options to false!!! Here set to "true" for easy connecting!

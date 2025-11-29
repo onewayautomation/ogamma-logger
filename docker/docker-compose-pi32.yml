@@ -1,0 +1,24 @@
+version: '3'
+services:
+      
+  ogamma-logger:
+    image: 'ogamma/logger-pi32'
+    restart: always
+# By default configuration file ./data/config is used. Can be changed by environment variable.    
+    environment:
+      - OVL_CONFIG_FILE=./data/config.json
+
+    ports:
+      - '4880:4880'
+    hostname: ogamma-logger
+    volumes:
+      - './data:/home/ogamma/logger/data'
+
+    networks:
+      - ogamma-logger
+    extra_hosts:
+      - '${HOST_NAME:-opcuaserver.com}:${HOST_IP_ADDRESS:-75.152.105.54}'
+ 
+networks:
+  ogamma-logger: null
+

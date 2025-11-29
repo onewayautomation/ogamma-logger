@@ -2,7 +2,7 @@ version: '3'
 services:
 # Microsoft SQL Server
   mssql:
-    image: 'mcr.microsoft.com/mssql/server:latest'
+    image: 'mcr.microsoft.com/mssql/server:2022-CU15-GDR1-ubuntu-22.04'
     ports:
       - '1433:1433'
     hostname: mssql

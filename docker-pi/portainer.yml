@@ -1,14 +1,14 @@
 services:
 # Portainer can be used to manage containers remotely over web GUI.
   portainer:
-    image: 'portainer/portainer-ce:2.23.0'
+    image: 'portainer/portainer-ce:2.34.0-linux-arm64-alpine'
     restart: always
     ports:
       - '9000:9000'
     volumes:
       - 'portainer_data:/data'
       - '/var/run/docker.sock:/var/run/docker.sock'
-
+      
     networks:
       - ogamma-logger
 networks:

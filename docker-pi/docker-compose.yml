@@ -1,0 +1,34 @@
+services:
+  ogamma-logger:
+    image: 'ogamma/logger-pi64:latest'
+    restart: always
+    
+    environment:    
+# By default configuration file ./data/config.json is used. Can be changed by environment variable:    
+      - OVL_CONFIG_FILE=./data/config.json
+
+# Do not use default credentials in production!
+      - OVL_USER_ID=admin
+      - OVL_USER_PASSWORD=password
+
+# Settings to configure remote Python debugger to debug Python scripts used in auto-discovery of OPC UA Servers address space and variables. 
+      - OVL_PYTHON_START_DEBUGGER=OFF
+      - OVL_PYTHON_DEBUG_PORT=5678
+      - OVL_PYTHON_WAIT_FOR_CLIENT=OFF
+      # Value 0.0.0.0 means listen on all network interfaces, with any IP address. Note: must have no quotes!
+      - OVL_PYTHON_DEBUG_HOST=0.0.0.0
+    
+    ports:
+      # 4880 is GUI endpoint port:
+      - '4880:4880'
+      # 5678 is Python debug server port, set by environment variable OVL_PYTHON_DEBUG_PORT
+      - '5678:5678'
+    hostname: ogamma-logger
+    volumes:
+      - './data:/home/ogamma/logger/data'
+
+    networks:
+      - ogamma-logger
+ 
+networks:
+  ogamma-logger: {}

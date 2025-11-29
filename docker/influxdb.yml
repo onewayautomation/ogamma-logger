@@ -1,5 +1,5 @@
-version: '3'
 services:
+  # This is the version before 2.0 (1.x)
   influxdb:
     image: influxdb:1.8.10
     restart: always
@@ -18,14 +18,14 @@ services:
       - '8084:8086'
     networks:
       - ogamma-logger
-      
+
 # Web based management tool for InfluxDB 
   timeseriesadmin:
     image: timeseriesadmin/timeseriesadmin:0.1.13
     ports:
       - '8085:80'
     networks:
-      - ogamma-logger   
+      - ogamma-logger
 networks:
   ogamma-logger: null
 volumes:
