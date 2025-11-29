@@ -1,7 +1,7 @@
 # This docker-compose configuration file is used to migrate data volume of existing pre-4.2.0 versions of the ogamma Visual Logger for OPC.
 # One of the changes in version 4.2.0 is that now its Docker container runs under user "ogamma". Before it was running uder root user.
-# As a result, data files of the older version volume that had a root user as owner, not accessible in the nwe version.
-# To fix this permissoin issue, using this file, container starts and runs as a root user and changes ownership of the data folder /home/ogamma/logger to the user "ogamma". 
+# As a result, data files of the older version volume that had a root user as owner, not accessible in the new version.
+# To fix this permission issue, using this file, container starts and runs as a root user and changes ownership of the data folder /home/ogamma/logger to the user "ogamma". 
 # Run the container using this file once, and then continue to use older version of the file docker-compose.yml as is:
 #
 # docker compose -f docker-compose-migrate-to-4.2.0.yml up
