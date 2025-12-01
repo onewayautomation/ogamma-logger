@@ -4,12 +4,12 @@
 set -e
 
 # ===== Configuration =====
-PARENT_IF="eno1"
+PARENT_IF="enp2s0"
 MACVLAN_IF="macvlan0"
 CON_NAME="macvlan-host"
 
-HOST_IP="192.168.1.129/24"
-CONTAINER_IP="192.168.1.134"
+HOST_IP="192.168.1.134/24"
+CONTAINER_IP="192.168.1.131"
 SUBNET="192.168.1.0/24"
 METRIC="50"
 # =========================
