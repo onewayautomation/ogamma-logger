@@ -22,8 +22,8 @@ services:
       - OVL_USER_PASSWORD=password
 
       # Optional TLS settings:
-      # - OVL_PROTOCOL=https
-      # - OVL_PORT=8443
+      - OVL_PROTOCOL=http
+      - OVL_PORT=4880
 
     ports:
       - "4880:4880"
