@@ -1,0 +1,24 @@
+# Macchina device agent. Allows to access configuration GUI of the OVL remotely.
+# https://remote.macchina.io/my-devices/signup
+  macchina:
+    image: 'docker.io/macchina/device-agent:v2.3.2'
+    restart: always
+
+    environment:
+      # Domain is specific to your account at macchina.
+      - WEBTUNNEL_DOMAIN=[Replace with domain]
+      # To get Device ID, first register it at macchina
+      - WEBTUNNEL_DEVICE_ID=[Replace with device id]
+      # Arbitrary name, just for information
+      - WEBTUNNEL_DEVICE_NAME=OVL-TEST-DEVICE
+      # What host and port number shoudl the requests be redirected to:
+      - WEBTUNNEL_HOST=ogamma-logger
+      - WEBTUNNEL_HTTP_PORT=4880
+      # Reflector URI for the free accounts.
+      - WEBTUNNEL_REFLECTOR_URI=https://reflector.my-devices.net
+      # The Passwword is no required for free accouts.
+      - WEBTUNNEL_PASSWORD=
+    networks:
+      - ogamma-logger
+networks:
+  ogamma-logger: null
