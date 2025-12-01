@@ -21,4 +21,5 @@
     networks:
       - ogamma-logger
 networks:
-  ogamma-logger: null
+  ogamma-logger:
+    driver: bridge

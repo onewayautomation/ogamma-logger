@@ -24,7 +24,7 @@ services:
       - 'ovl-data:/home/ogamma/logger/data'
     networks:
       ogamma-logger-m:
-        ipv4_address: 192.168.1.134
+        ipv4_address: 192.168.1.133
 
 # High Availability Node Manager
   ha-node:
@@ -35,14 +35,14 @@ services:
       # Each HA cluster should have unique cluster id in the network scope.
       - HA_CLUSTER_ID=ha-cluster
       # Eech node in a cluster should have uniqie node id:
-      - HA_NODE_ID=fitlet2
+      - HA_NODE_ID=ha-node-2
       # The node with highest priority becomes Active when both nodes are healthy.
       - HA_PRIORITY=100
       # Multicast settings. Must be the same in all nodes of a cluster.
       - HA_MC_GROUP=224.0.0.1
       - HA_MC_PORT=9999
       # Adjust Health Check URL if OVL_PROTOCOL and OVL_PORT env. variables for the ogamma-logger service changed.
-      - HA_HEALTH_CHECK_URL=http://192.168.1.134:4880/health
+      - HA_HEALTH_CHECK_URL=http://192.168.1.133:4880/health
       - HA_HEALTH_CHECK_ENABLED=ON
       - HA_TTL=4
     hostname: ha-node
@@ -51,19 +51,22 @@ services:
       # to share files under ./data/ha-ipc
       - 'ovl-data:/var/lib/ha-node/data:rw'
     networks:
-      ogamma-logger-m:
-        ipv4_address: 192.168.1.135
+      - ogamma-logger-m:
+        ipv4_address: 192.168.1.134
+      - ogamma-logger:
 
 networks:
   ogamma-logger-m:
     driver: macvlan
     driver_opts:
-      parent: eno1          # <-- change to your host NIC
+      parent: enp2s0          # <-- change to your host NIC
     ipam:
       config:
         - subnet: 192.168.1.0/24
           gateway: 192.168.1.1
           ip_range: 192.168.1.128/25
+  ogamma-logger:
+    driver: bridge
 
 volumes:
   ovl-data: {}
