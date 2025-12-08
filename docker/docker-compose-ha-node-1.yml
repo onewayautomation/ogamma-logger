@@ -9,7 +9,7 @@ services:
   # ogamma Visual Logger for OPC
   # ---------------------------------------------------------------------------
   ogamma-logger:
-    image: "docker.io/ogamma/logger:4.2.0"
+    image: "docker.io/ogamma/logger:4.2.1"
     restart: always
 
     environment:
@@ -35,15 +35,13 @@ services:
       - ovl-data:/home/ogamma/logger/data
 
     networks:
-      ogamma-logger-m:
-        ipv4_address: 192.168.1.131
-      # ogamma-logger: {}
+      ogamma-logger: {}
 
   # ---------------------------------------------------------------------------
   # High Availability Node Manager
   # ---------------------------------------------------------------------------
   ha-node:
-    image: "docker.io/ogamma/ha-node:1.0.0"
+    image: "docker.io/ogamma/ha-node:2.0.0"
     restart: always
 
     environment:
@@ -56,17 +54,17 @@ services:
       # Node with highest priority becomes Active when both nodes are healthy.
       - HA_PRIORITY=100
 
-      # Multicast settings — must match across all HA nodes.
-      - HA_MC_GROUP=224.0.0.1
-      - HA_MC_PORT=9999
-
-      # Health check URL for ogamma-logger.
       # Update if protocol/port changes.
-      - HA_HEALTH_CHECK_URL=http://192.168.1.131:4880/health
+      - HA_HEALTH_CHECK_URL=http://ogamma-logger:4880/health
       - HA_HEALTH_CHECK_ENABLED=ON
 
-      # Multicast TTL (packet hop limit)
-      - HA_TTL=4
+      # Heartbeat database connection settings:
+      - HA_DB_HOSTNAME=192.168.1.79
+      - HA_DB_PORT=5432
+      - HA_DB_USER=ogamma
+      - HA_DB_PWD=ogamma
+      - HA_DB_NAME=ovlha
+      - HA_DB_TABLE_NAME=nodes
 
     hostname: ha-node
 
@@ -75,33 +73,14 @@ services:
       - ovl-data:/var/lib/ha-node/data:rw
 
     networks:
-      ogamma-logger-m:
-        ipv4_address: 192.168.1.132
+      ogamma-logger: {}
 
 # ---------------------------------------------------------------------------
 # Network Definitions
 # ---------------------------------------------------------------------------
 networks:
-  ogamma-logger-m:
-    external: true  # This specifies that the network is defined outside of this docker-compose file.
-
-#  # Macvlan network for assigning direct LAN IPs to the containers.
-#  ogamma-logger-m:
-#    driver: macvlan
-#    driver_opts:
-#      parent: enp2s0
-#    ipam:
-#      config:
-#        - subnet: 192.168.1.0/24
-#          gateway: 192.168.1.1
-#          ip_range: 192.168.1.128/25
-#          aux_addresses:
-#            ovl-reserved: 192.168.1.131
-#            hanode-reserved: 192.168.1.132
-
-#  # Internal bridge network for inter-container communication.
-#  ogamma-logger:
-#    driver: bridge
+  ogamma-logger:
+    driver: bridge
 
 # ---------------------------------------------------------------------------
 # Volumes
