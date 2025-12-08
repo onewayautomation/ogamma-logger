@@ -4,7 +4,7 @@ services:
   mssql:
     image: 'mcr.microsoft.com/mssql/server:2022-CU15-GDR1-ubuntu-22.04'
     ports:
-      - '1433:1433'
+      - '0.0.0.0:1433:1433'
     hostname: mssql
     environment:
       - ACCEPT_EULA=Y
