@@ -3,19 +3,23 @@ services:
 # MySQL database
 
   mysql:
-    image: 'mysql:9.0.1'
+    image: 'mysql:9.5.0'
     ports:
       - '3306:3306'
     hostname: mysql
-#    volumes:
-#      - './data://var/lib/mysql'
+    restart: always
+    volumes:
+      - 'mysql-data:/var/lib/mysql'
     environment:
       - MYSQL_ROOT_PASSWORD=ogamma123 #TODO
 
-    command: --default-authentication-plugin=mysql_native_password
+    # This option is not used and moreover causes error if defined in version 9.x: 
+    # command: --default-authentication-plugin=mysql_native_password
 
     networks:
       - ogamma-logger
 
 networks:
   ogamma-logger: null
+volumes:
+  mysql-data: {}

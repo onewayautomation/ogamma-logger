@@ -1,0 +1,110 @@
+# docker-compose.yml
+# Provides two services:
+#   1. ogamma Visual Logger for OPC
+#   2. High Availability (HA) Node Manager
+
+services:
+
+  # ---------------------------------------------------------------------------
+  # ogamma Visual Logger for OPC
+  # ---------------------------------------------------------------------------
+  ogamma-logger:
+    image: "docker.io/ogamma/logger:4.2.0"
+    restart: always
+
+    environment:
+      # The default configuration file is ./data/config.json.
+      # You may override it by specifying:
+      - OVL_CONFIG_FILE=/home/ogamma/logger/data/config.json
+
+      # WARNING: change default credentials in production!
+      - OVL_USER_ID=admin
+      - OVL_USER_PASSWORD=password
+
+      # Optional TLS settings:
+      # - OVL_PROTOCOL=https
+      # - OVL_PORT=8443
+
+    ports:
+      - "4880:4880"
+      - "8443:8443"
+
+    hostname: ogamma-logger
+
+    volumes:
+      - ovl-data:/home/ogamma/logger/data
+
+    networks:
+      ogamma-logger-m:
+        ipv4_address: 192.168.1.131
+      # ogamma-logger: {}
+
+  # ---------------------------------------------------------------------------
+  # High Availability Node Manager
+  # ---------------------------------------------------------------------------
+  ha-node:
+    image: "docker.io/ogamma/ha-node:1.0.0"
+    restart: always
+
+    environment:
+      # Unique ID for the HA cluster.
+      - HA_CLUSTER_ID=ha-cluster
+
+      # Each node must have a unique node ID.
+      - HA_NODE_ID=ha-node-1
+
+      # Node with highest priority becomes Active when both nodes are healthy.
+      - HA_PRIORITY=100
+
+      # Multicast settings — must match across all HA nodes.
+      - HA_MC_GROUP=224.0.0.1
+      - HA_MC_PORT=9999
+
+      # Health check URL for ogamma-logger.
+      # Update if protocol/port changes.
+      - HA_HEALTH_CHECK_URL=http://192.168.1.131:4880/health
+      - HA_HEALTH_CHECK_ENABLED=ON
+
+      # Multicast TTL (packet hop limit)
+      - HA_TTL=4
+
+    hostname: ha-node
+
+    volumes:
+      # Shared volume for HA IPC files (./data/ha-ipc).
+      - ovl-data:/var/lib/ha-node/data:rw
+
+    networks:
+      ogamma-logger-m:
+        ipv4_address: 192.168.1.132
+
+# ---------------------------------------------------------------------------
+# Network Definitions
+# ---------------------------------------------------------------------------
+networks:
+  ogamma-logger-m:
+    external: true  # This specifies that the network is defined outside of this docker-compose file.
+
+#  # Macvlan network for assigning direct LAN IPs to the containers.
+#  ogamma-logger-m:
+#    driver: macvlan
+#    driver_opts:
+#      parent: enp2s0
+#    ipam:
+#      config:
+#        - subnet: 192.168.1.0/24
+#          gateway: 192.168.1.1
+#          ip_range: 192.168.1.128/25
+#          aux_addresses:
+#            ovl-reserved: 192.168.1.131
+#            hanode-reserved: 192.168.1.132
+
+#  # Internal bridge network for inter-container communication.
+#  ogamma-logger:
+#    driver: bridge
+
+# ---------------------------------------------------------------------------
+# Volumes
+# ---------------------------------------------------------------------------
+volumes:
+  ovl-data: {}

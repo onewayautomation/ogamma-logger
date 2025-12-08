@@ -1,7 +1,7 @@
 services:
   # This is the version before 2.0 (1.x)
   influxdb:
-    image: influxdb:1.8.10
+    image: influxdb:1.12.2
     restart: always
     environment:
       - INFLUXDB_DB=ogammadb

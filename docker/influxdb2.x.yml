@@ -1,6 +1,6 @@
 services:
   influxdb2x:
-    image: influxdb:2.7.10
+    image: influxdb:2.7.12
     volumes:
       - 'ogamma-logger-influxdb2x-data:/var/lib/influxdb2'
     ports:

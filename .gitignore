@@ -9,3 +9,4 @@ oBox/grafana/grafana.ini
 CreateConfigDb/.vs/CreateConfigDb/v17/.suo
 /binaries/VC_redist.x64.exe
 /binaries/wget.exe
+docker/.influxdb2.x.yml.swp
