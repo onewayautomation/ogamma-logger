@@ -9,7 +9,7 @@ services:
   # ogamma Visual Logger for OPC
   # ---------------------------------------------------------------------------
   ogamma-logger:
-    image: "docker.io/ogamma/logger:4.2.1"
+    image: "docker.io/ogamma/logger:4.2.2"
     restart: always
 
     environment:
@@ -67,10 +67,10 @@ services:
       - HA_DB_TABLE_NAME=nodes
 
       # Settings affecting failover:
-      - HA_HEARTBEAT_INTERVAL=1000
-      - HA_HEARTBEAT_TIMEOUT=3000
-      - HA_HEALTH_CHECK_INTERVAL = 500
-      - HA_HEALTH_CHECK_TIMEOUT=500
+      - HA_HEARTBEAT_INTERVAL=500
+      - HA_HEARTBEAT_TIMEOUT=1000
+      - HA_HEALTH_CHECK_INTERVAL = 250
+      - HA_HEALTH_CHECK_TIMEOUT=250
       - HA_MAX_HEALTH_CHECK_FAILURES=2
 
     hostname: ha-node
