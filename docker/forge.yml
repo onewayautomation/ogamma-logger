@@ -1,0 +1,20 @@
+# Docker compose configuration file for demo version of the ProsysOPC UA Forge.
+#
+# Note: to get credentials to login to the private repository 'ogamma.azurecr.io`, please contact support@onewayautomation.com
+# In the email please include your full name, company, title, country, phone number, and optoinally short description of the use case / project.
+# By requesting credentials, you agree to automatically subscribe to receive marketing / newsletter emails 
+# from One-Way Automation and from ProsysOPC, with easy un-subscribe option.
+
+services:
+  forge:
+    image: ogamma.azurecr.io/prosys-opc-ua-forge:latest
+    hostname: forge
+    environment:
+      - JAVA_TOOL_OPTIONS="--add-opens=java.base/java.lang=ALL-UNNAMED -Dapp.home=/data/"
+    user: root
+    ports:
+      - "8080:8080"
+      - "8443:8443"
+      - "56560:56560"
+    volumes:
+      - ./data:/data
