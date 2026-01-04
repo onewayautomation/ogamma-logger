@@ -1,30 +1,27 @@
+# This file is based on the file at Git repository https://github.com/confluentinc/cp-all-in-one.git,
+# cp-all-in-one/docker-compose.yml
+# Changes made:
+# - added volume to persist state of thr "broker" service
+# - the "connect" service modified to run OPC UA Source Connector from One-Way Automation.
+# Note that the OPC UA Source Connector jar file is not included in this repository.
+# It needs to be downloaded from this link:
+#  https://onewayautomation.com/opcua-binaries/OpcUaKafkaSourceConnector-1.0.0-4.2.2.jar/OpcUaKafkaSourceConnector-1.0.0-4.2.2.jar 
+# to the folder custom-connectors.
+
+
 services:
-  zookeeper:
-    image: confluentinc/cp-zookeeper:7.6.0
-    hostname: zookeeper
-    container_name: zookeeper
-    ports:
-      - "2181:2181"
-    environment:
-      ZOOKEEPER_CLIENT_PORT: 2181
-      ZOOKEEPER_TICK_TIME: 2000
-    networks:
-      - ogamma-logger
+
   broker:
-    image: confluentinc/cp-server:7.6.0
+    image: docker.io/confluentinc/cp-server:8.0.0
     hostname: broker
     container_name: broker
-    depends_on:
-      - zookeeper
     ports:
       - "9092:9092"
       - "9101:9101"
     environment:
-      KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://broker:29092,PLAINTEXT_HOST://broker:9092
-      KAFKA_METRIC_REPORTERS: io.confluent.metrics.reporter.ConfluentMetricsReporter
+      KAFKA_NODE_ID: 1
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: 'CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT'
+      KAFKA_ADVERTISED_LISTENERS: 'PLAINTEXT://broker:29092,PLAINTEXT_HOST://localhost:9092'
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
       KAFKA_CONFLUENT_LICENSE_TOPIC_REPLICATION_FACTOR: 1
@@ -32,16 +29,40 @@ services:
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
       KAFKA_JMX_PORT: 9101
-      KAFKA_JMX_HOSTNAME: broker
+      KAFKA_JMX_HOSTNAME: localhost
       KAFKA_CONFLUENT_SCHEMA_REGISTRY_URL: http://schema-registry:8081
+      KAFKA_METRIC_REPORTERS: io.confluent.telemetry.reporter.TelemetryReporter
       CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: broker:29092
       CONFLUENT_METRICS_REPORTER_TOPIC_REPLICAS: 1
+      KAFKA_PROCESS_ROLES: 'broker,controller'
+      KAFKA_CONTROLLER_QUORUM_VOTERS: '1@broker:29093'
+      KAFKA_LISTENERS: 'PLAINTEXT://broker:29092,CONTROLLER://broker:29093,PLAINTEXT_HOST://0.0.0.0:9092'
+      KAFKA_INTER_BROKER_LISTENER_NAME: 'PLAINTEXT'
+      KAFKA_CONTROLLER_LISTENER_NAMES: 'CONTROLLER'
+      KAFKA_LOG_DIRS:  '/var/lib/kafka/data'
       CONFLUENT_METRICS_ENABLE: 'true'
       CONFLUENT_SUPPORT_CUSTOMER_ID: 'anonymous'
-    networks:
-      - ogamma-logger
+      # Replace CLUSTER_ID with a unique base64 UUID using "bin/kafka-storage.sh random-uuid"
+      # See https://docs.confluent.io/kafka/operations-tools/kafka-tools.html#kafka-storage-sh
+      CLUSTER_ID: 'MkU3OEVBNTcwNTJENDM2Qk'
+      KAFKA_CONFLUENT_TELEMETRY_EXPORTER_C3PLUSPLUS_TYPE: "http"
+      KAFKA_CONFLUENT_TELEMETRY_EXPORTER_C3PLUSPLUS_ENABLED: "true"
+      KAFKA_CONFLUENT_TELEMETRY_EXPORTER_C3PLUSPLUS_METRICS_INCLUDE: "io.confluent.kafka.server.request.(?!.*delta).*|io.confluent.kafka.server.server.broker.state|io.confluent.kafka.server.replica.manager.leader.count|io.confluent.kafka.server.request.queue.size|io.confluent.kafka.server.broker.topic.failed.produce.requests.rate.1.min|io.confluent.kafka.server.tier.archiver.total.lag|io.confluent.kafka.server.request.total.time.ms.p99|io.confluent.kafka.server.broker.topic.failed.fetch.requests.rate.1.min|io.confluent.kafka.server.broker.topic.total.fetch.requests.rate.1.min|io.confluent.kafka.server.partition.caught.up.replicas.count|io.confluent.kafka.server.partition.observer.replicas.count|io.confluent.kafka.server.tier.tasks.num.partitions.in.error|io.confluent.kafka.server.broker.topic.bytes.out.rate.1.min|io.confluent.kafka.server.request.total.time.ms.p95|io.confluent.kafka.server.controller.active.controller.count|io.confluent.kafka.server.request.total.time.ms.p999|io.confluent.kafka.server.controller.active.broker.count|io.confluent.kafka.server.request.handler.pool.request.handler.avg.idle.percent.rate.1.min|io.confluent.kafka.server.controller.unclean.leader.elections.rate.1.min|io.confluent.kafka.server.replica.manager.partition.count|io.confluent.kafka.server.controller.unclean.leader.elections.total|io.confluent.kafka.server.partition.replicas.count|io.confluent.kafka.server.broker.topic.total.produce.requests.rate.1.min|io.confluent.kafka.server.controller.offline.partitions.count|io.confluent.kafka.server.socket.server.network.processor.avg.idle.percent|io.confluent.kafka.server.partition.under.replicated|io.confluent.kafka.server.log.log.start.offset|io.confluent.kafka.server.log.tier.size|io.confluent.kafka.server.log.size|io.confluent.kafka.server.tier.fetcher.bytes.fetched.total|io.confluent.kafka.server.request.total.time.ms.p50|io.confluent.kafka.server.tenant.consumer.lag.offsets|io.confluent.kafka.server.log.log.end.offset|io.confluent.kafka.server.broker.topic.bytes.in.rate.1.min|io.confluent.kafka.server.partition.under.min.isr|io.confluent.kafka.server.partition.in.sync.replicas.count|io.confluent.telemetry.http.exporter.batches.dropped|io.confluent.telemetry.http.exporter.items.total|io.confluent.telemetry.http.exporter.items.succeeded|io.confluent.telemetry.http.exporter.send.time.total.millis|io.confluent.kafka.server.controller.leader.election.rate.(?!.*delta).*|io.confluent.telemetry.http.exporter.batches.failed"
+      KAFKA_CONFLUENT_TELEMETRY_EXPORTER_C3PLUSPLUS_CLIENT_BASE_URL: "http://prometheus:9090/api/v1/otlp"
+      KAFKA_CONFLUENT_TELEMETRY_EXPORTER_C3PLUSPLUS_CLIENT_COMPRESSION: "gzip"
+      KAFKA_CONFLUENT_TELEMETRY_EXPORTER_C3PLUSPLUS_API_KEY: "dummy"
+      KAFKA_CONFLUENT_TELEMETRY_EXPORTER_C3PLUSPLUS_API_SECRET: "dummy"
+      KAFKA_CONFLUENT_TELEMETRY_EXPORTER_C3PLUSPLUS_BUFFER_PENDING_BATCHES_MAX: "80"
+      KAFKA_CONFLUENT_TELEMETRY_EXPORTER_C3PLUSPLUS_BUFFER_BATCH_ITEMS_MAX: "4000"
+      KAFKA_CONFLUENT_TELEMETRY_EXPORTER_C3PLUSPLUS_BUFFER_INFLIGHT_SUBMISSIONS_MAX: "10"
+      KAFKA_CONFLUENT_TELEMETRY_METRICS_COLLECTOR_INTERVAL_MS: "60000"
+      KAFKA_CONFLUENT_TELEMETRY_REMOTECONFIG_CONFLUENT_ENABLED: "false"
+      KAFKA_CONFLUENT_CONSUMER_LAG_EMITTER_ENABLED: "true"
+    volumes:
+      - kafka-data:/var/lib/kafka/data
+
   schema-registry:
-    image: confluentinc/cp-schema-registry:7.6.0
+    image: docker.io/confluentinc/cp-schema-registry:8.0.0
     hostname: schema-registry
     container_name: schema-registry
     depends_on:
@@ -52,10 +73,9 @@ services:
       SCHEMA_REGISTRY_HOST_NAME: schema-registry
       SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: 'broker:29092'
       SCHEMA_REGISTRY_LISTENERS: http://0.0.0.0:8081
-    networks:
-      - ogamma-logger
+
   connect:
-    image: cnfldemos/cp-server-connect-datagen:0.6.4-7.6.0
+    image: docker.io/cnfldemos/cp-server-connect-datagen:0.6.7-8.0.0
     hostname: connect
     container_name: connect
     depends_on:
@@ -63,10 +83,11 @@ services:
       - schema-registry
     ports:
       - "8083:8083"
+      - "4880:4880"
+      - "8443:8443"
     environment:
       CONNECT_BOOTSTRAP_SERVERS: 'broker:29092'
       CONNECT_REST_ADVERTISED_HOST_NAME: connect
-      CONNECT_REST_PORT: 8083
       CONNECT_GROUP_ID: compose-connect-group
       CONNECT_CONFIG_STORAGE_TOPIC: docker-connect-configs
       CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR: 1
@@ -78,16 +99,52 @@ services:
       CONNECT_KEY_CONVERTER: org.apache.kafka.connect.storage.StringConverter
       CONNECT_VALUE_CONVERTER: io.confluent.connect.avro.AvroConverter
       CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_URL: http://schema-registry:8081
+      
       # CLASSPATH required due to CC-2422
-      CLASSPATH: /usr/share/java/monitoring-interceptors/monitoring-interceptors-6.2.1.jar
-      CONNECT_PRODUCER_INTERCEPTOR_CLASSES: "io.confluent.monitoring.clients.interceptor.MonitoringProducerInterceptor"
-      CONNECT_CONSUMER_INTERCEPTOR_CLASSES: "io.confluent.monitoring.clients.interceptor.MonitoringConsumerInterceptor"
-      CONNECT_PLUGIN_PATH: "/usr/share/java,/usr/share/confluent-hub-components"
-      CONNECT_LOG4J_LOGGERS: org.apache.zookeeper=ERROR,org.I0Itec.zkclient=ERROR,org.reflections=ERROR
-    networks:
-      - ogamma-logger
+      CLASSPATH: /usr/share/java"
+      #monitoring-interceptors/monitoring-interceptors-8.0.0.jar
+      CONNECT_PRODUCER_INTERCEPTOR_CLASSES: ""
+      #"io.confluent.monitoring.clients.interceptor.MonitoringProducerInterceptor"
+      CONNECT_CONSUMER_INTERCEPTOR_CLASSES: ""
+      #"io.confluent.monitoring.clients.interceptor.MonitoringConsumerInterceptor"
+      
+      #CONNECT_PLUGIN_PATH: "/usr/share/java,/usr/share/confluent-hub-components"
+      CONNECT_PLUGIN_PATH: /home/appuser/custom-connectors
+    volumes:
+    
+      # Volume where OPC UA Kafka Source connector JAR file is stored:
+      - ./custom-connectors:/home/appuser/custom-connectors:z
+      # Volume for OPC UA Source Connector data files:
+      - opcua-connector-data:/home/appuser/opcua:z
+    
+  prometheus:
+    image: docker.io/confluentinc/cp-enterprise-prometheus:2.2.0
+    hostname: cp-enterprise-prometheus
+    container_name: prometheus
+    volumes:
+      - ./vol/config:/mnt/config:z
+    ports:
+      - "9090:9090"
+    environment:
+      CONFIG_PATH: "/mnt/config"
+      SHOULD_LOG_TO_FILE: false
+
+  alertmanager:
+    image: docker.io/confluentinc/cp-enterprise-alertmanager:2.2.0
+    hostname: cp-enterprise-alertmanager
+    container_name: alertmanager
+    depends_on:
+      - prometheus
+    volumes:
+      - ./vol/config:/mnt/config:z
+    ports:
+      - "9093:9093"
+    environment:
+      CONFIG_PATH: "/mnt/config"
+      SHOULD_LOG_TO_FILE: false
+
   control-center:
-    image: confluentinc/cp-enterprise-control-center:7.6.0
+    image: docker.io/confluentinc/cp-enterprise-control-center-next-gen:2.2.0
     hostname: control-center
     container_name: control-center
     depends_on:
@@ -95,23 +152,32 @@ services:
       - schema-registry
       - connect
       - ksqldb-server
+      # - prometheus
+      # - alertmanager
     ports:
       - "9021:9021"
+    volumes:
+      - ./vol/config:/mnt/config
     environment:
       CONTROL_CENTER_BOOTSTRAP_SERVERS: 'broker:29092'
       CONTROL_CENTER_CONNECT_CONNECT-DEFAULT_CLUSTER: 'connect:8083'
+      CONTROL_CENTER_CONNECT_HEALTHCHECK_ENDPOINT: '/connectors'
       CONTROL_CENTER_KSQL_KSQLDB1_URL: "http://ksqldb-server:8088"
       CONTROL_CENTER_KSQL_KSQLDB1_ADVERTISED_URL: "http://localhost:8088"
       CONTROL_CENTER_SCHEMA_REGISTRY_URL: "http://schema-registry:8081"
       CONTROL_CENTER_REPLICATION_FACTOR: 1
-      CONTROL_CENTER_INTERNAL_TOPICS_PARTITIONS: 1
+      CONTROL_CENTER_INTERNAL_TOPICS_PARTITIONS: 12
       CONTROL_CENTER_MONITORING_INTERCEPTOR_TOPIC_PARTITIONS: 1
       CONFLUENT_METRICS_TOPIC_REPLICATION: 1
+      CONTROL_CENTER_PROMETHEUS_ENABLE: false
+      # CONTROL_CENTER_PROMETHEUS_URL: http://prometheus:9090
+      CONTROL_CENTER_PROMETHEUS_RULES_FILE: /mnt/config/trigger_rules-generated.yml
+      CONTROL_CENTER_ALERTMANAGER_URL: http://alertmanager:9093
+      CONTROL_CENTER_ALERTMANAGER_CONFIG_FILE: /mnt/config/alertmanager-generated.yml
       PORT: 9021
-    networks:
-      - ogamma-logger
+
   ksqldb-server:
-    image: confluentinc/cp-ksqldb-server:7.6.0
+    image: docker.io/confluentinc/cp-ksqldb-server:8.0.0
     hostname: ksqldb-server
     container_name: ksqldb-server
     depends_on:
@@ -132,10 +198,9 @@ services:
       KSQL_KSQL_LOGGING_PROCESSING_TOPIC_REPLICATION_FACTOR: 1
       KSQL_KSQL_LOGGING_PROCESSING_TOPIC_AUTO_CREATE: 'true'
       KSQL_KSQL_LOGGING_PROCESSING_STREAM_AUTO_CREATE: 'true'
-    networks:
-      - ogamma-logger
+
   ksqldb-cli:
-    image: confluentinc/cp-ksqldb-cli:7.6.0
+    image: docker.io/confluentinc/cp-ksqldb-cli:8.0.0
     container_name: ksqldb-cli
     depends_on:
       - broker
@@ -143,10 +208,9 @@ services:
       - ksqldb-server
     entrypoint: /bin/sh
     tty: true
-    networks:
-      - ogamma-logger
+
   ksql-datagen:
-    image: confluentinc/ksqldb-examples:7.6.0
+    image: docker.io/confluentinc/ksqldb-examples:8.0.0
     hostname: ksql-datagen
     container_name: ksql-datagen
     depends_on:
@@ -166,10 +230,9 @@ services:
       STREAMS_BOOTSTRAP_SERVERS: broker:29092
       STREAMS_SCHEMA_REGISTRY_HOST: schema-registry
       STREAMS_SCHEMA_REGISTRY_PORT: 8081
-    networks:
-      - ogamma-logger
+
   rest-proxy:
-    image: confluentinc/cp-kafka-rest:7.6.0
+    image: docker.io/confluentinc/cp-kafka-rest:8.0.0
     depends_on:
       - broker
       - schema-registry
@@ -183,7 +246,42 @@ services:
       KAFKA_REST_LISTENERS: "http://0.0.0.0:8082"
       KAFKA_REST_SCHEMA_REGISTRY_URL: 'http://schema-registry:8081'
 
-    networks:
-      - ogamma-logger
-networks:
-  ogamma-logger: null
+  flink-sql-client:
+    image: docker.io/cnfldemos/flink-sql-client-kafka:1.19.1-scala_2.12-java17
+    depends_on:
+      - flink-jobmanager
+    hostname: flink-sql-client
+    container_name: flink-sql-client
+    environment:
+      FLINK_JOBMANAGER_HOST: flink-jobmanager
+
+  flink-jobmanager:
+    image: docker.io/cnfldemos/flink-kafka:1.19.1-scala_2.12-java17
+    hostname: flink-jobmanager
+    container_name: flink-jobmanager
+    ports:
+    - 9081:9081
+    command: jobmanager
+    environment:
+    - |
+      FLINK_PROPERTIES=
+      jobmanager.rpc.address: flink-jobmanager
+      rest.bind-port: 9081
+
+  flink-taskmanager:
+    image: docker.io/cnfldemos/flink-kafka:1.19.1-scala_2.12-java17
+    hostname: flink-taskmanager
+    container_name: flink-taskmanager
+    depends_on:
+    - flink-jobmanager
+    command: taskmanager
+    scale: 1
+    environment:
+    - |
+      FLINK_PROPERTIES=
+      jobmanager.rpc.address: flink-jobmanager
+      taskmanager.numberOfTaskSlots: 10
+
+volumes:
+  kafka-data:
+  opcua-connector-data:

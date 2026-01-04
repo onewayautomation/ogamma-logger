@@ -34,7 +34,8 @@ Note that to enable all the features third party components are required.  The e
 Docker image is available at: https://hub.docker.com/r/ogamma/logger.
 
 File ``docker/docker-compose.yml`` allows to pull *ogamma* Visual Logger image. The folder ``docker`` has also .yml files for other images (time-series databases), that can be started independently, by passing file name in the command ``docker compose -f <file-name> ``:
-* Databases (TimescaleDB, InfluxDB versions 1.x and 2.x, Apache Kafka);
+* Time-series databases (TimescaleDB, InfluxDB versions 1.x and 2.x);
+* Confluent / Apache Kafka;
 * PgAdmin, to manage database PostgreSQL;
 * Grafana, optional, to visualize data;
 * Sample OPC UA Server from Microsoft.
@@ -56,14 +57,27 @@ The container image from Docker Hub will be pulled (this might take few or more 
 
 After that:
 * Web GUI for *ogamma* Visual Logger will be available at http://localhost:4880;
+
+If you start also other services, they will be available at following below URLs:
 * Database TimescaleDB - at localhost:5432. (Default user credentials can be found in file timescaledb.yml).
 * PgAdmin - at http://localhost:4888;
 * Grafana - at http://localhost:3000
 * InfluxDB v 2.x - at http://localhost:8086
-* InfluxDB v 1.x - at localhost:8084.
-* Apache Kafka - at localhost:9092
+* InfluxDB v 1.x - at http://localhost:8084.
+* Apache Kafka - at http://localhost:9092
+* Confluent Control Center - at http://localhost:9021
 
-To log data from OPC UA Servers to the specific database, the instance of the ogamma Visual Logger for OPC application needs to be configured. Refer to the User Manual for details. 
+Note that before starting containers using file ``confluent.yml``, download the OPC UA Kafka Source Connector jar file https://onewayautomation.com/opcua-binaries/OpcUaKafkaSourceConnector-1.0.0-4.2.2.jar/OpcUaKafkaSourceConnector-1.0.0-4.2.2.jar to the folder ``docker/custom-connectors``.
+
+To log data from OPC UA Servers to the specific database, the instance of the ogamma Visual Logger for OPC application needs to be configured. Refer to the online User Manual for details: https://onewayautomation.com/visual-logger-docs/html/
+
+## Docker-compose files to demo High Availability feature
+
+To run 2 instances of the *ogamma* Visual Logger as a member nodes of the High Availability cluster, use docker-compose configuration files ``docker-compose-ha-node-1.yml`` and ``docker-compose-ha-node-2.yml`` respectevely for the node 1 and node 2. 
+
+Note: to configure the application with support of this feature, the application should be installed in 2 instances, both using the same configuration database. Then they both should be configured to use the same ``Collector Configuration`` and the same time-series database in the ``Instance Settings`` dialog window. One of them will be in ``Active`` mode, that is, collecting data from OPC UA Servers. The second stays in  ``Standby`` mode. Using new service HA Node Manager, these nodes shell be communicating with each other, and publishing information about current state of a node periodically. At the same time this service calls new endpoint ``/health`` in the application GUI endpoint to check its state. Based on that state, the node decides if it is expected to be ``Active``, or ``Standby``. If both nodes are healthy, the node with highest priority becomes active. If the active node has issues, second node becomes active. This allows continious data flow with minimal interruption during the failover period: about 2 seconds.
+
+For more details about configuration of the application to run in a High Availability cluster, refer this YouTube video: https://youtu.be/ND5PoKYOgc4
 
 # Distribution packages for Windows and Linux.
 
