@@ -5,7 +5,7 @@
 # - the "connect" service modified to run OPC UA Source Connector from One-Way Automation.
 # Note that the OPC UA Source Connector jar file is not included in this repository.
 # It needs to be downloaded from this link:
-#  https://onewayautomation.com/opcua-binaries/OpcUaKafkaSourceConnector-1.0.0-4.2.2.jar/OpcUaKafkaSourceConnector-1.0.0-4.2.2.jar 
+#  https://onewayautomation.com/opcua-binaries/OpcUaKafkaSourceConnector-1.0.0-4.2.2.jar 
 # to the folder custom-connectors.
 
 
