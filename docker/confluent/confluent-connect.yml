@@ -1,0 +1,45 @@
+
+volumes: 
+  opcua-connector-data: {}
+
+services:
+  connect:
+    image: docker.io/cnfldemos/cp-server-connect-datagen:0.6.7-8.0.0
+    hostname: connect
+    container_name: connect
+    ports:
+      - "8083:8083"
+      - "4880:4880"
+      - "8443:8443"
+    environment:
+      CONNECT_BOOTSTRAP_SERVERS: 'broker:29092'
+      CONNECT_REST_ADVERTISED_HOST_NAME: connect
+      CONNECT_GROUP_ID: compose-connect-group
+      CONNECT_CONFIG_STORAGE_TOPIC: docker-connect-configs
+      CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR: 1
+      CONNECT_OFFSET_FLUSH_INTERVAL_MS: 10000
+      CONNECT_OFFSET_STORAGE_TOPIC: docker-connect-offsets
+      CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR: 1
+      CONNECT_STATUS_STORAGE_TOPIC: docker-connect-status
+      CONNECT_STATUS_STORAGE_REPLICATION_FACTOR: 1
+      CONNECT_KEY_CONVERTER: org.apache.kafka.connect.storage.StringConverter
+      CONNECT_VALUE_CONVERTER: io.confluent.connect.avro.AvroConverter
+      CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_URL: http://schema-registry:8081
+      
+      # CLASSPATH required due to CC-2422
+      CLASSPATH: /usr/share/java"
+      #monitoring-interceptors/monitoring-interceptors-8.0.0.jar
+      CONNECT_PRODUCER_INTERCEPTOR_CLASSES: ""
+      #"io.confluent.monitoring.clients.interceptor.MonitoringProducerInterceptor"
+      CONNECT_CONSUMER_INTERCEPTOR_CLASSES: ""
+      #"io.confluent.monitoring.clients.interceptor.MonitoringConsumerInterceptor"
+      
+      #CONNECT_PLUGIN_PATH: "/usr/share/java,/usr/share/confluent-hub-components"
+      CONNECT_PLUGIN_PATH: /home/appuser/custom-connectors
+    volumes:
+    
+      # Volume where OPC UA Kafka Source connector JAR file is stored:
+      - ../custom-connectors:/home/appuser/custom-connectors:z
+      # Volume for OPC UA Source Connector data files:
+      - opcua-connector-data:/home/appuser/opcua:z
+    

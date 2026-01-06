@@ -1,0 +1,21 @@
+{
+  "name": "opcua-connector",
+  "config": {
+    "connector.class": "com.opcfy.logger.kafka.OpcUaKafkaSourceConnector", 
+    "heartbeats.topic.replication.factor": "1", 
+    "replication.factor": "1",  
+    "source.cluster.alias": "source",  
+    "source.cluster.bootstrap.servers": "redpanda:29092",     
+    "target.cluster.bootstrap.servers": "redpanda:29092",
+    "tasks.max": "1",
+    "tasks.max.enforce": "true",
+    "opcua.connector.work.dir": "/home/redpanda/opcua",
+    "opcua.connector.healthcheck.enabled": "true",
+    "opcua.connector.ha.cluster.enabled": "true",
+    "opcua.connector.ha.db.host.name": "192.168.1.89",
+    "opcua.connector.ha.db.user": "ogamma",
+    "opcua.connector.ha.db.password": "ogamma",
+    "opcua.connector.ha.db.name": "ovlha"
+  }
+}
+

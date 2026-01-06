@@ -1,0 +1,49 @@
+# This file is composed based on this web-page from Readpanda: https://docs.redpanda.com/current/deploy/kafka-connect/deploy-kafka-connect/
+# The base image: redpandadata/connectors:v1.0.48
+# Note: replace IP address of the broker which is configured as 192.168.1.89, to the IP address of the broker in your setup!
+
+volumes:
+  opcua-data: {}
+
+services:
+  connect:
+    image: docker.redpanda.com/redpandadata/connectors:v1.0.48
+    volumes:
+      - ./redpanda-connect-password:/opt/kafka/connect-password
+      # - ./connect-certs:/opt/kafka/connect-certs/user-secret
+      # Volume where OPC UA Kafka Connector jsr file is located:
+      - ../custom-connectors:/opt/kafka/connect-plugins/opcua
+      # Volume where data files and un-zipped runtime files of the OPC UA Kafka connector are stored:
+      - opcua-data:/home/redpanda/opcua
+    hostname: connect
+    ports:
+      - "8084:8083"
+      - "4881:4880"
+    environment:
+      CONNECT_CONFIGURATION: |
+        # key.converter=org.apache.kafka.connect.converters.ByteArrayConverter
+        # value.converter=org.apache.kafka.connect.converters.ByteArrayConverter
+        key.converter=org.apache.kafka.connect.storage.StringConverter
+        value.converter=org.apache.kafka.connect.storage.StringConverter
+        internal.key.converter=org.apache.kafka.connect.json.JsonConverter
+        internal.value.converter=org.apache.kafka.connect.json.JsonConverter
+        group.id=connectors-group
+        offset.storage.topic=_connectors_offsets
+        config.storage.topic=_connectors_configs
+        status.storage.topic=_connectors_status
+        config.storage.replication.factor=-1
+        offset.storage.replication.factor=-1
+        status.storage.replication.factor=-1
+      # Chaange IP address to your broker address:
+      CONNECT_BOOTSTRAP_SERVERS: "192.168.1.89:19092"
+      CONNECT_GC_LOG_ENABLED: "false"
+      CONNECT_HEAP_OPTS: -Xms1G -Xmx1G
+      CONNECT_METRICS_ENABLED: "false"
+      # CONNECT_SASL_MECHANISM: "scram-sha-256"
+      # CONNECT_SASL_USERNAME: "connect-user"
+      # CONNECT_SASL_PASSWORD_FILE: "redpanda-password/password"
+      CONNECT_TLS_ENABLED: "false"
+      # CONNECT_TRUSTED_CERTS: "user-secret/ca.crt"
+      # CONNECT_TLS_AUTH_CERT: "user-secret/client.crt"
+      # CONNECT_TLS_AUTH_KEY: "user-secret/client.key"
+      CONNECT_PLUGIN_PATH: "/opt/kafka/connect-plugins"
