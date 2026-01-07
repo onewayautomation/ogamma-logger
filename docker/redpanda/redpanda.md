@@ -16,6 +16,10 @@ To start the OPC UA Kafka Connector, Docker compose configuration file ``redpand
 
 Note that port number of the connector API endpoint is mapped to the host port ``8084`` instead of default port 8083.
 
+Note that the OPC UA Source Connector jar file is not included in this repository, it needs to be downloaded from this link: https://onewayautomation.com/opcua-binaries/OpcUaKafkaSourceConnector-1.0.0-4.2.2.jar to the sub-folder ``docker/custom-connectors`` of the repository root folder.
+
+To start, in terminal with workign directory set to the sub-folder ``docker`` of the repository folder, run the command:
+
 ```
 docker compose -f redpanda/redpanda-connect.yml up -d
 ```
