@@ -33,11 +33,12 @@ sudo dnf install -y podman-compose
 
 ## Download docker-compose.yml file for OVL
 
-```
-mkdir docker\ovl
-cd docker\ovl
+If you are using this repository, the file can be found at this path relative to the repository root folder: ``docker/oracle-linux/docker-compose.yml``.
 
-wget https://onewayautomation.com/docker/ovl/docker-compose.yml
+It can be also downloaded by the command:
+
+```
+wget https://github.com/onewayautomation/ogamma-logger/blob/master/docker/oracle-linux/docker-compose.yml
 ```
 
 ### Optional: edit docker-compose.yml file
@@ -66,10 +67,8 @@ This section is applicable for the case when the Docker host has no access to th
 
 - In the host that has access to the Internet, download files from our website:
 
-  - File ``docker-compose.yml``: https://onewayautomation.com/docker/ovl/docker-compose.yml
-  - Docker image archive file : https://onewayautomation.com/docker/ovl/ovl-latest.tar.gz 
-  
-    Alternatively, you can pull the image directly from Docker Hub and create Docker image archive file ``ovl-latest.tar.gz`` for the OVL using the script below.
+  - File ``docker-compose.yml``: https://github.com/onewayautomation/ogamma-logger/blob/master/docker/oracle-linux/docker-compose.yml
+  - Create OVL Docker image file using the script below. It pulls the image from Docker Hub and packages it into archive file ``ovl-latest.tar.gz``:
 
     ```
     #!/bin/sh
@@ -105,7 +104,7 @@ This section is applicable for the case when the Docker host has no access to th
   ./download-docker-image.sh
   ```
 
-- Then copy these 2 files to the Docker host:
+- Then copy these 2 files to the Docker host (which if offline):
 
   - ``ovl-latest.tar.gz``
   - ``docker-compose.yml``

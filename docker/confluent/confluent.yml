@@ -2,12 +2,9 @@
 # cp-all-in-one/docker-compose.yml
 # Changes made:
 # - added volume to persist state of thr "broker" service
-# - the "connect" service modified to run OPC UA Source Connector from One-Way Automation.
-# Note that the OPC UA Source Connector jar file is not included in this repository.
-# It needs to be downloaded from this link:
-#  https://onewayautomation.com/opcua-binaries/OpcUaKafkaSourceConnector-1.0.0-4.2.2.jar 
-# to the folder custom-connectors.
-
+# - services are split into 2 files: 
+#   - the "connect" service is moved to the separate file confluent-connect.yml.
+#   - rest of services are in this file confluent.yml
 
 services:
 

@@ -1,3 +1,12 @@
+# This file is based on the file at Git repository https://github.com/confluentinc/cp-all-in-one.git,
+# cp-all-in-one/docker-compose.yml, service "connect"
+# Changes made:
+# - modified to run OPC UA Source Connector from One-Way Automation.
+#  
+# Note that the OPC UA Source Connector jar file is not included in this repository.
+# It needs to be downloaded from this link:
+#  https://onewayautomation.com/opcua-binaries/OpcUaKafkaSourceConnector-1.0.0-4.2.2.jar 
+# to the folder custom-connectors.
 
 volumes: 
   opcua-connector-data: {}

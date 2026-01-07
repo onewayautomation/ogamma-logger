@@ -104,3 +104,14 @@ docker compose -f docker-compose-migrate-to-4.2.0.yml up
 It should print in the console output this message: `` Ownership of the folder /home/ogamma/logger changed to ogamma``
 
 
+# Running Visual Logger as Kafka Connector in Confluent platform
+
+For details, please refer this quick guide: [Running Confluent service in Docker](docker/confluent/confluent.md)
+
+# Running Visual Logger as Kafka Connector in Redpanda
+
+For details, please refer this quick guide: [Setting up Redpanda broker and OPC UA Source Connector](docker/redpanda/redpanda.md)
+
+# Running Visual Logger in Docker container hosted in Oracle Linux
+
+For details please refer [this page](running-on-oracle-linux.md).
