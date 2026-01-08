@@ -4,8 +4,8 @@ Original Docker compose files are based on the file ``cp-all-in-one/docker-compo
 
 Services from the original file ``docker-compose.yml`` were split into 2 files to have ability to start the ``connect`` service independently from the ``broker`` and other services:
 
-  - ``confluent-connector.yml`` with service ``connect``, with modifications run OPC UA Kafka Source Connector from One-Way Automation. Note that the OPC UA Source Connector jar file is not included in this repository, it needs to be downloaded from this link: https://onewayautomation.com/opcua-binaries/OpcUaKafkaSourceConnector-1.0.0-4.2.2.jar to the sub-folder ``docker/custom-connectors`` of the repository root folder.
-  - ``confluent.yml`` with the rest of Docker services. the ``broker`` service is modified to persist its state in Docker volume ``kafks-data``.
+  - ``docker/confluent/confluent-connector.yml`` with service ``connect``, with modifications run OPC UA Kafka Source Connector from One-Way Automation. Note that the OPC UA Source Connector jar file is not included in this repository, it needs to be downloaded from this link: https://onewayautomation.com/opcua-binaries/OpcUaKafkaSourceConnector-1.0.0-4.2.2.jar to the sub-folder ``docker/custom-connectors`` of the repository root folder.
+  - ``docker/confluent/confluent.yml`` with the rest of Docker services. the ``broker`` service is modified to persist its state in Docker volume ``kafks-data``.
 
 These Docker Compose configuration files should be started from working directory set to sub-folder ``docker`` of this Git repository:
 
